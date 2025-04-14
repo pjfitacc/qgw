@@ -1,0 +1,39 @@
+{
+  "name": "qgw",
+  "version": "0.0.0",
+  "description": "Typescript library with functions for the QuantumGateway Integration APIs: https://www.quantumgateway.com/developer.php",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjfitacc/qgw.git"
+  },
+  "keywords": [
+    "quantum-gateway",
+    "payment-processing",
+    "typescript",
+    "library"
+  ],
+  "author": "Philippine Jesuit Foundation Developer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjfitacc/qgw/issues"
+  },
+  "homepage": "https://github.com/pjfitacc/qgw#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  }
+}
