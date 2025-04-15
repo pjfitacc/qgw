@@ -2,7 +2,7 @@ import { Transaction, TransactionResponse } from "./transaction";
 
 export class TransparentDatabaseEngine {
   public gatewayLogin: string;
-  postURL: string = "https://secure.quantumgateway.com/cgi/tqgwdbe.php";
+  static postURL: string = "https://secure.quantumgateway.com/cgi/tqgwdbe.php";
 
   constructor(gatewayLogin: string) {
     this.gatewayLogin = gatewayLogin;

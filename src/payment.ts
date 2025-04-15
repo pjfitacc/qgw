@@ -6,6 +6,7 @@ export type BillingInfo = {
 };
 
 export type CreditCard = {
+  method: "CREDIT_CARD";
   number: string;
   expirationMonth: string;
   expirationYear: string;
@@ -14,6 +15,9 @@ export type CreditCard = {
 };
 
 export type ElectronicFundsTransfer = {
+  method: "EFT";
   aba: string;
   checkingAccountNumber: string;
 };
+
+export type PaymentMethod = CreditCard | ElectronicFundsTransfer;

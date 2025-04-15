@@ -15,6 +15,7 @@ describe("Transaction JSON Conversion", () => {
     };
 
     const payment: CreditCard = {
+      method: "CREDIT_CARD",
       number: "4111111111111111",
       expirationMonth: "12",
       expirationYear: "2030",

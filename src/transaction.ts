@@ -1,4 +1,4 @@
-import { BillingInfo, CreditCard, ElectronicFundsTransfer } from "./payment";
+import { BillingInfo, PaymentMethod } from "./payment";
 import { RecurringOptions } from "./recurring";
 
 export class TransactionResponse {}
@@ -6,14 +6,14 @@ export class TransactionResponse {}
 export class Transaction {
   public amount: number;
   public billingInfo: BillingInfo;
-  public payment: CreditCard | ElectronicFundsTransfer;
+  public payment: PaymentMethod;
   public transactionOptions?: TransactionOptions;
   public recurringOptions?: RecurringOptions;
 
   constructor(
     amount: number,
     billingInfo: BillingInfo,
-    payment: CreditCard | ElectronicFundsTransfer,
+    payment: PaymentMethod,
     transactionOptions?: TransactionOptions,
     recurringOptions?: RecurringOptions
   ) {
