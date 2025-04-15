@@ -1,10 +1,9 @@
+import { BillingInfo, CreditCard } from "../src/payment";
 import {
-  BillingInfo,
-  CreditCard,
-  Transaction,
   TransactionOptions,
   TransactionType,
-} from "../src";
+  Transaction,
+} from "../src/transaction";
 
 describe("Transaction JSON Conversion", () => {
   it("should convert Transaction to JSON and back and be equal", () => {
