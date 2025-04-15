@@ -9,6 +9,7 @@ export class TransparentDatabaseEngine {
   }
 
   sendTransaction(transaction: Transaction): TransactionResponse {
+    // TODO
     if (this.validate(transaction)) {
       return TransactionResponse;
     }
@@ -16,29 +17,35 @@ export class TransparentDatabaseEngine {
   }
 
   validate(transaction: Transaction): boolean {
+    // TODO
     if (transaction.amount) {
       return true;
     }
     return false;
   }
+
+  convertToPayload(transaction: Transaction) {}
 }
 
 export class Transaction {
   public amount: number;
   public billingInfo: BillingInfo;
-  public transactionOptions?: TransactionOptions;
   public payment: CreditCard | ElectronicFundsTransfer;
+  public transactionOptions?: TransactionOptions;
+  public recurringOptions?: RecurringOptions;
 
   constructor(
     amount: number,
     billingInfo: BillingInfo,
     payment: CreditCard | ElectronicFundsTransfer,
-    transactionOptions?: TransactionOptions
+    transactionOptions?: TransactionOptions,
+    recurringOptions?: RecurringOptions
   ) {
     this.amount = amount;
     this.billingInfo = billingInfo;
     this.transactionOptions = transactionOptions;
     this.payment = payment;
+    this.recurringOptions = recurringOptions;
   }
 }
 
@@ -49,6 +56,7 @@ export type BillingInfo = {
   name?: string;
 };
 
+// TODO: Define Default transactionOptions & recurringOptions
 export type TransactionOptions = {
   transactionType?: TransactionType;
   transactionID?: string;
@@ -82,6 +90,11 @@ export type ElectronicFundsTransfer = {
   checkingAccountNumber: string;
 };
 
-export class RecurringTransaction extends Transaction {
-  // TODO
-}
+// TODO: Define Default transactionOptions & recurringOptions
+export type RecurringOptions = {
+  rid: string;
+  initialAmount: number;
+  recurCycles: number;
+  overrideRecurringPrice: boolean;
+  overrideRecurringDay: boolean;
+};
