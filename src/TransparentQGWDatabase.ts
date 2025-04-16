@@ -18,7 +18,7 @@ export class Engine {
     return true;
   }
 
-  convertToPayload(transaction: TransactionRequest): API {
+  convertToPayload(transactionRequest: TransactionRequest): API {
     // TODO
     return {
       gwlogin: "",
