@@ -4,7 +4,7 @@ import {
   TransactionOptions,
   TransactionType,
   Transaction,
-} from "../src/transaction";
+} from "../src/Transaction";
 
 describe("Transaction JSON Conversion", () => {
   it("should convert Transaction to JSON and back and be equal", () => {
