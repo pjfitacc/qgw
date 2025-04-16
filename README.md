@@ -11,3 +11,7 @@ https://app.diagrams.net/#G1n7yJmzmBu5BJtSGhA0Hnnzqs0xykFnUi#%7B%22pageId%22%3A%
 
 This package uses Typescript. This is the tutorial I followed to create it:
 https://pauloe-me.medium.com/typescript-npm-package-publishing-a-beginners-guide-40b95908e69c
+
+Resources referred to when designing the API:
+
+- https://www.pretzellogix.net/2021/12/08/how-to-write-a-python3-sdk-library-module-for-a-json-rest-api/
