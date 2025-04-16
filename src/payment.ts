@@ -1,23 +1,16 @@
-export type BillingInfo = {
-  address: string;
-  zip: string;
-  email: string;
-  name?: string;
-};
-
 export type CreditCard = {
-  method: "CREDIT_CARD";
-  number: string;
-  expirationMonth: string;
-  expirationYear: string;
-  cvv2: string;
-  cvvType: string;
+  trans_method: "CC";
+  ccnum: string;
+  ccmo: string;
+  ccyr: string;
+  CVV2: string;
+  CVVtype: string;
 };
 
 export type ElectronicFundsTransfer = {
-  method: "EFT";
+  trans_method: "EFT";
   aba: string;
-  checkingAccountNumber: string;
+  checkacct: string;
 };
 
 export type PaymentMethod = CreditCard | ElectronicFundsTransfer;

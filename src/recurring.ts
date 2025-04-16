@@ -1,8 +1,7 @@
-// TODO: Define Default transactionOptions & recurringOptions
 export type RecurringOptions = {
-  rid: string;
-  initialAmount: number;
-  recurCycles: number;
-  overrideRecurringPrice: boolean;
-  overrideRecurringDay: boolean;
+  RID?: string;
+  initial_amount?: string;
+  recur_times?: string;
+  override_recur?: "Y" | "N";
+  OverRideRecureDay?: "Y" | "N";
 };
