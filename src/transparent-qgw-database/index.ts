@@ -83,26 +83,26 @@ This DirectAPI type follows the Document's API exactly based on these criteria:
 */
 export type DirectAPI = {
   gwlogin: string;
-  trans_method?: "CC" | "EFT"; // "CC" or "EFT" depending on if class Transaction has CreditCard | ElectronicFundsTransfer type as its payment field.
-  trans_type?: TransactionType; // TransactionOptions.transctionType where transactioType is a TransactionType enum
-  transID?: string; // TransactionOptions.transactionID
+  trans_method?: "CC" | "EFT"; // "CC" or "EFT" depending on if class Payment has CreditCard or ElectronicFundsTransfer type as its payment field.
+  trans_type?: TransactionType; // Options.transctionType where transactioType is a TransactionType enum
+  transID?: string; // Options.transactionID
   ccnum?: string; // CreditCard.number
   ccmo?: string; // CreditCard.expirationMonth
   ccyr?: string; // CreditCard.expirationYear
   aba?: string; // ElectronicFundsTransfer.aba
   checkacct?: string; // ElectronicFundsTransfer.checkingAccountNumber
-  amount: string; // Transaction.amount
-  BADDR1: string; // BillingInfo.address
-  BZIP1: string; // BillingInfo.zip
-  BCUST_EMAIL: string; // BillingInfo.email
-  override_email_customer: "Y" | "N"; // TransactionOptions.emailCustomerReceipt
-  override_trans_email: "Y" | "N"; // TransactionOptions.sendTransactionEmail
-  RestrictKey?: string; // TransactionOptions.restrictKey
-  BNAME?: string; // BillingInfo.name
+  amount: string; // Payment.amount
+  BADDR1: string; // Payer.address
+  BZIP1: string; // Payer.zip
+  BCUST_EMAIL: string; // Payer.email
+  override_email_customer: "Y" | "N"; // Options.emailCustomerReceipt
+  override_trans_email: "Y" | "N"; // Options.sendTransactionEmail
+  RestrictKey?: string; // Options.restrictKey
+  BNAME?: string; // Payer.name
   CVV2?: string; // CreditCard.cvv2
-  CVVtype?: string; // CreditCard.cvvType
-  Dsep?: string; // TransactionOptions.dataSeparator
-  MAXMIND?: "1" | "2"; // TransactionOptions.maxMindOn
+  CVVtype?: "0" | "1" | "2" | "9"; // CreditCard.cvvType
+  Dsep?: string; // Options.dataSeparator
+  MAXMIND?: "1" | "2"; // Options.maxMindOn
   override_recur?: "Y" | "N"; // RecurringOptions.overrideRecurringPrice
   RID?: string; // RecurringOptions.rid
   initial_amount?: string; // RecurringOptions.initialAmount
@@ -110,7 +110,7 @@ export type DirectAPI = {
   OverRideRecureDay?: "Y" | "N"; // RecurringOptions.overrideRecurringDay
 };
 
-enum TransactionType {
+export enum TransactionType {
   "CREDIT" = "CREDIT",
   "SALES" = "SALES",
   "AUTH_CAPTURE" = "AUTH_CAPTURE",
