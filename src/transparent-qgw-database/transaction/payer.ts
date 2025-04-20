@@ -1,5 +1,4 @@
 import { DirectAPI } from "..";
-import { DirectAPIBuilder } from "./builder";
 
 // Payer Class:
 // - address: BADDR1
