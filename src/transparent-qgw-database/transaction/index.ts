@@ -1,12 +1,7 @@
 import { DirectAPI, TransparentDbEngine } from "..";
 import { Options } from "./options";
 import { Payer } from "./payer";
-import {
-  CreditCard,
-  CvvType,
-  ElectronicFundsTransfer,
-  Payment,
-} from "./payment";
+import { Payment } from "./payment";
 import { RecurringOptions } from "./recurringOptions";
 
 /*
