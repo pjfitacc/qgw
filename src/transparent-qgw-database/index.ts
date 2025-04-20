@@ -80,6 +80,27 @@ This DirectAPI type follows the Document's API exactly based on these criteria:
         - String default values:
             - some values are still type string but are restricted to specific types according to Quantum Gateway's interface.
             - ex: trans_method is only a "CC" or "EFT", override_email_customer is only "Y" or "N", override_recur is only "1" or "2", etc.
+    
+    Required Values According to Documentation:
+        1. gwlogin
+        2. amount
+        3. BADDR1
+        4. BZIP1
+        5. BCUST_EMAIL
+        6. override_email_customer
+        7. override_trans_email
+    
+      
+    Default Values According to Documentation:
+      - The Default Values are what Quantum Gateway assumes should be filled if these fields are not provided.
+      - Note: In this section, settings = QuantumGateway Login => Processing Settings, unless otherwise stated.
+        1. trans_method = "CC"
+        2. trans_type = settings => Processing Mode
+        3. override_email_customer = settings => Email Receipts => Send Email Receipts To Customers: Yes or No
+        4. override_trans_email = settings => Email Receipts => Receive Merchant Receipts: Yes or No
+        5. RestrictKey = key if use Restrict Key is enabled @ settings => RestrictKey
+        6. Dsep = settings => Default Data Separator
+        7. MAXMIND = "1" Use Maxmind (default if not sent).
 */
 export type DirectAPI = {
   gwlogin: string;
