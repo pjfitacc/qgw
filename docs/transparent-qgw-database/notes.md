@@ -24,8 +24,22 @@ The [wrapper](https://en.wikipedia.org/wiki/Wrapper_library) will refine the int
 
 API Wrapper Library Solutions:
 
-1. Offer required fields that are accurate.
-2. Offer stricter run time checking.
-3. Consistent, typescript variable names for the interface using camelCasing.
-4. More intuitive datatypes like numbers, booleans, etc. instead of all strings that the API uses.
-5. Better Response Object instead of a string that a developer would have to parse.
+1. Offer required fields that are accurate to actual interaction with system.
+2. Consistent, typescript variable names for the interface using camelCasing.
+3. More intuitive datatypes like numbers, booleans, etc. instead of all strings that the DirectAPI uses.
+4. Formatted Response Object instead of a string that a developer would have to parse.
+
+The Library Solution that implements this is essentially a facade: TransactionRequest Class
+
+Transaction Request Class:
+
+By default, since DirectAPI is a fixed type, any variables given with blank values to TransactionRequest will be undefined once converted to DirectAPI.
+
+TransactionRequest creates an Object with different:
+
+- variable names
+- variable properties
+- variable optionality
+  compared to the DirectAPI.
+
+We need to specify mapping from TransactionRequest to DirectAPI to see conflicting cases and how to handle it.

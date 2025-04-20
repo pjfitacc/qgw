@@ -93,7 +93,8 @@ This DirectAPI type follows the Document's API exactly based on these criteria:
     Actual Required Values:
         1. gwlogin
         2. amount
-        3. ccnumber IF trans_method CC
+        3. ccnumber IF trans_method = CC
+        4. aba,checkacct IF trans_method = EFT 
       
     Default Values According to Documentation:
       - The Default Values are what Quantum Gateway assumes should be filled if these fields are not provided.
@@ -108,31 +109,31 @@ This DirectAPI type follows the Document's API exactly based on these criteria:
 */
 export type DirectAPI = {
   gwlogin: string;
-  trans_method?: "CC" | "EFT"; // "CC" or "EFT" depending on if class Payment has CreditCard or ElectronicFundsTransfer type as its payment field.
-  trans_type?: TransactionType; // Options.transctionType where transactioType is a TransactionType enum
-  transID?: string; // Options.transactionID
-  ccnum?: string; // CreditCard.number
-  ccmo?: string; // CreditCard.expirationMonth
-  ccyr?: string; // CreditCard.expirationYear
-  aba?: string; // ElectronicFundsTransfer.aba
-  checkacct?: string; // ElectronicFundsTransfer.checkingAccountNumber
-  amount: string; // Payment.amount
-  BADDR1: string; // Payer.address
-  BZIP1: string; // Payer.zip
-  BCUST_EMAIL: string; // Payer.email
-  override_email_customer: "Y" | "N"; // Options.emailCustomerReceipt
-  override_trans_email: "Y" | "N"; // Options.sendTransactionEmail
-  RestrictKey?: string; // Options.restrictKey
-  BNAME?: string; // Payer.name
-  CVV2?: string; // CreditCard.cvv2
-  CVVtype?: "0" | "1" | "2" | "9"; // CreditCard.cvvType
-  Dsep?: string; // Options.dataSeparator
-  MAXMIND?: "1" | "2"; // Options.maxMindOn
-  override_recur?: "Y" | "N"; // RecurringOptions.overrideRecurringPrice
-  RID?: string; // RecurringOptions.rid
-  initial_amount?: string; // RecurringOptions.initialAmount
-  recur_times?: string; // RecurringOptions.recurCycles
-  OverRideRecureDay?: "Y" | "N"; // RecurringOptions.overrideRecurringDay
+  trans_method?: "CC" | "EFT";
+  trans_type?: TransactionType;
+  transID?: string;
+  ccnum?: string;
+  ccmo?: string;
+  ccyr?: string;
+  aba?: string;
+  checkacct?: string;
+  amount: string;
+  BADDR1: string;
+  BZIP1: string;
+  BCUST_EMAIL: string;
+  override_email_customer: "Y" | "N";
+  override_trans_email: "Y" | "N";
+  RestrictKey?: string;
+  BNAME?: string;
+  CVV2?: string;
+  CVVtype?: "0" | "1" | "2" | "9";
+  Dsep?: string;
+  MAXMIND?: "1" | "2";
+  override_recur?: "Y" | "N";
+  RID?: string;
+  initial_amount?: string;
+  recur_times?: string;
+  OverRideRecureDay?: "Y" | "N";
 };
 
 export enum TransactionType {
