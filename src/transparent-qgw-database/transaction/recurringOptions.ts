@@ -11,7 +11,7 @@ export class RecurringOptions {
   public fields: RecurringFields;
   constructor(
     public rid: string,
-    public recurCycles: number = 0,
+    public recurCycles?: number,
     public overrideRecurringPrice?: boolean,
     public initialAmount?: number,
     public overrideRecurringDay?: boolean
@@ -20,7 +20,7 @@ export class RecurringOptions {
       RID: rid,
       override_recur: overrideRecurringPrice ? "Y" : "N",
       initial_amount: initialAmount?.toString(),
-      recur_times: recurCycles.toString(),
+      recur_times: recurCycles?.toString(),
       OverRideRecureDay: overrideRecurringDay ? "Y" : "N",
     };
   }
