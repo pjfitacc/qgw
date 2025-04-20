@@ -14,7 +14,7 @@ describe("Default TransQGW Options field values", () => {
       new ElectronicFundsTransfer("123123123", "123123123123")
     );
     const transactionRequest = new TransactionRequest(payment, payer);
-    const payload = transactionRequest.convertToPayload();
+    const payload = transactionRequest.toAPI();
 
     expect(payload.override_email_customer).toBe("Y");
     expect(payload.override_trans_email).toBe("Y");
