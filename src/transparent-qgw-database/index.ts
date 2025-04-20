@@ -89,7 +89,11 @@ This DirectAPI type follows the Document's API exactly based on these criteria:
         5. BCUST_EMAIL
         6. override_email_customer
         7. override_trans_email
-    
+
+    Actual Required Values:
+        1. gwlogin
+        2. amount
+        3. ccnumber IF trans_method CC
       
     Default Values According to Documentation:
       - The Default Values are what Quantum Gateway assumes should be filled if these fields are not provided.
