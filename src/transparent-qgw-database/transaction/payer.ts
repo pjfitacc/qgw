@@ -12,7 +12,7 @@ export class Payer {
     public address: string,
     public zip: string,
     public email: string,
-    public name?: string
+    public name: string = "anonymous"
   ) {
     this.fields = {
       BADDR1: address,
