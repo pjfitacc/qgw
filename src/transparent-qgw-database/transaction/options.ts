@@ -11,17 +11,24 @@ import { DirectAPI, TransactionType } from "..";
 export class Options {
   public fields: OptionsFields;
   constructor(
-    public emailCustomerReceipt: boolean = true,
-    public sendTransactionEmail: boolean = true,
+    public emailCustomerReceipt?: boolean,
+    public sendTransactionEmail?: boolean,
     public transactionType?: TransactionType,
     public transactionID?: string,
     public restrictKey?: string,
     public dataSeparator?: string,
     public maxMindOn?: boolean
   ) {
+    const overrideTransQGWOption = (
+      setOption: boolean | undefined
+    ): "Y" | "N" | undefined => {
+      if (setOption === undefined) return undefined;
+
+      return setOption ? "Y" : "N";
+    };
     this.fields = {
-      override_email_customer: emailCustomerReceipt ? "Y" : "N",
-      override_trans_email: sendTransactionEmail ? "Y" : "N",
+      override_email_customer: overrideTransQGWOption(emailCustomerReceipt),
+      override_trans_email: overrideTransQGWOption(sendTransactionEmail),
       trans_type: transactionType,
       transID: transactionID,
       RestrictKey: restrictKey,
