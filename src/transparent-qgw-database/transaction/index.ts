@@ -46,16 +46,6 @@ export class TransactionRequest {
     public options?: Options,
     public recurringOptions?: RecurringOptions
   ) {}
-
-  convertToPayload(): DirectAPI {
-    const chunks = [
-      this.payment.fields,
-      this.payer.fields,
-      this.options?.fields,
-      this.recurringOptions?.fields,
-    ];
-    return Object.assign({}, ...chunks);
-  }
 }
 
 // TODO: Split up the large DirectAPI type into manageable chunks where each chunk is a class containing fields related to each other.
