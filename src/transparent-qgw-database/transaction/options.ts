@@ -3,7 +3,7 @@ import { DirectAPI, TransactionType } from "..";
 // Options:
 // emailCustomerReceipt: override_email_customer "Y" | "N";
 // sendTransactionEmail: override_trans_email "Y" | "N";
-// transctionType: trans_type
+// transactionType: trans_type
 // transactionID: transID
 // restrictKey: RestrictKey
 // dataSeparator: Dsep
@@ -13,8 +13,8 @@ export class Options {
   constructor(
     public emailCustomerReceipt: boolean = true,
     public sendTransactionEmail: boolean = true,
-    public transctionType: TransactionType,
-    public transactionID: string,
+    public transactionType?: TransactionType,
+    public transactionID?: string,
     public restrictKey?: string,
     public dataSeparator?: string,
     public maxMindOn?: boolean
@@ -22,7 +22,7 @@ export class Options {
     this.fields = {
       override_email_customer: emailCustomerReceipt ? "Y" : "N",
       override_trans_email: sendTransactionEmail ? "Y" : "N",
-      trans_type: transctionType,
+      trans_type: transactionType,
       transID: transactionID,
       RestrictKey: restrictKey,
       Dsep: dataSeparator,
