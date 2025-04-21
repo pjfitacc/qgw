@@ -2,6 +2,11 @@
 
 Creating an NPM package that provides a library to access the [Quantum Gateway Integration APIs](https://www.quantumgateway.com/developer.php).
 
+Goal:
+
+- Create wrapper libraries that allows developers to easily access Quantum Gateway Developer APIs.
+- First one we're working on: Transparent QuantumGateway Database Engine (TransQgwDbE)
+
 Supported APIs:
 
 - [Transparent QGWdatabase Engine](https://www.quantumgateway.com/view_developer.php?Cat1=3)
