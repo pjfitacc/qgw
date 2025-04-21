@@ -1,4 +1,5 @@
 import { DirectAPI } from "..";
+import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
 
 // RecurringOptions:
 // rid: RID
@@ -18,10 +19,10 @@ export class RecurringOptions {
   ) {
     this.fields = {
       RID: rid,
-      override_recur: overrideRecurringPrice ? "Y" : "N",
+      override_recur: toggleYesOrNO(overrideRecurringPrice),
       initial_amount: initialAmount?.toString(),
       recur_times: recurCycles?.toString(),
-      OverRideRecureDay: overrideRecurringDay ? "Y" : "N",
+      OverRideRecureDay: toggleYesOrNO(overrideRecurringDay),
     };
   }
 }

@@ -1,4 +1,8 @@
 import { DirectAPI, TransactionType } from "..";
+import {
+  toggleBinary,
+  toggleYesOrNO,
+} from "../../utils/transparent-qgw-db-engine";
 
 // Options:
 // emailCustomerReceipt: override_email_customer "Y" | "N";
@@ -29,16 +33,6 @@ export class Options {
       MAXMIND: toggleBinary(maxMindOn),
     };
   }
-}
-
-function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
-  if (boolean === undefined) return undefined;
-  return boolean ? "Y" : "N";
-}
-
-function toggleBinary(boolean?: boolean): "1" | "2" | undefined {
-  if (boolean === undefined) return undefined;
-  return boolean ? "1" : "2";
 }
 
 export type OptionsFields = Pick<

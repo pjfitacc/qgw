@@ -6,6 +6,7 @@ import { TransactionRequest } from ".";
 import { Options } from "./options";
 import { Payer } from "./payer";
 import { ElectronicFundsTransfer, Payment } from "./payment";
+import { RecurringOptions } from "./recurringOptions";
 
 describe("TransactionRequest: Default TransQGW Options field values", () => {
   it("If TransactionRequest has blank options, the optional variables that it creates with the toAPI() method should be undefined", () => {
@@ -24,5 +25,28 @@ describe("TransactionRequest: Default TransQGW Options field values", () => {
     expect(payload.RestrictKey).toBe(undefined);
     expect(payload.Dsep).toBe(undefined);
     expect(payload.MAXMIND).toBe(undefined);
+  });
+});
+
+describe("TransactionRequest: Default TransQGW Options field values", () => {
+  it("If TransactionRequest has recurringOptions, there MUST be a RID", () => {
+    const payer = new Payer("123 street", "10001", "email@email.com");
+    const eft = new ElectronicFundsTransfer("123123123", "123123123123");
+    const payment = new Payment(200, eft);
+    const options = new Options();
+
+    const transactionRequest = new TransactionRequest(
+      payment,
+      payer,
+      options,
+      new RecurringOptions("1")
+    );
+    const payload = transactionRequest.toAPI();
+
+    expect(payload.RID).toBe("1");
+    expect(payload.override_recur).toBe(undefined);
+    expect(payload.override_trans_email).toBe(undefined);
+    expect(payload.recur_times).toBe(undefined);
+    expect(payload.initial_amount).toBe(undefined);
   });
 });
