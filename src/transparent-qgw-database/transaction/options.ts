@@ -19,21 +19,36 @@ export class Options {
     public dataSeparator?: string,
     public maxMindOn?: boolean
   ) {
-    const overrideTransQGWOption = (
-      setOption: boolean | undefined
-    ): "Y" | "N" | undefined => {
+    type TransQgwBooleanOutput = {
+      true: string;
+      false: string;
+    };
+
+    function overrideTransQgwBoolOption<T extends TransQgwBooleanOutput>(
+      setOption: boolean | undefined,
+      booleanOutput = { true: "Y", false: "N" }
+    ): T["true"] | T["false"] | undefined {
       if (setOption === undefined) return undefined;
 
-      return setOption ? "Y" : "N";
-    };
+      return setOption ? booleanOutput["true"] : booleanOutput["false"];
+    }
     this.fields = {
-      override_email_customer: overrideTransQGWOption(emailCustomerReceipt),
-      override_trans_email: overrideTransQGWOption(sendTransactionEmail),
+      override_email_customer: overrideTransQgwBoolOption<{
+        true: "Y";
+        false: "N";
+      }>(emailCustomerReceipt),
+      override_trans_email: overrideTransQgwBoolOption<{
+        true: "Y";
+        false: "N";
+      }>(sendTransactionEmail),
       trans_type: transactionType,
       transID: transactionID,
       RestrictKey: restrictKey,
       Dsep: dataSeparator,
-      MAXMIND: maxMindOn ? "1" : "2",
+      MAXMIND: overrideTransQgwBoolOption<{
+        true: "1";
+        false: "2";
+      }>(maxMindOn, { true: "1", false: "2" }),
     };
   }
 }
