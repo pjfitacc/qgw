@@ -19,38 +19,26 @@ export class Options {
     public dataSeparator?: string,
     public maxMindOn?: boolean
   ) {
-    type TransQgwBooleanOutput = {
-      true: string;
-      false: string;
-    };
-
-    function overrideTransQgwBoolOption<T extends TransQgwBooleanOutput>(
-      setOption: boolean | undefined,
-      booleanOutput = { true: "Y", false: "N" }
-    ): T["true"] | T["false"] | undefined {
-      if (setOption === undefined) return undefined;
-
-      return setOption ? booleanOutput["true"] : booleanOutput["false"];
-    }
     this.fields = {
-      override_email_customer: overrideTransQgwBoolOption<{
-        true: "Y";
-        false: "N";
-      }>(emailCustomerReceipt),
-      override_trans_email: overrideTransQgwBoolOption<{
-        true: "Y";
-        false: "N";
-      }>(sendTransactionEmail),
+      override_email_customer: toggleYesOrNO(emailCustomerReceipt),
+      override_trans_email: toggleYesOrNO(sendTransactionEmail),
       trans_type: transactionType,
       transID: transactionID,
       RestrictKey: restrictKey,
       Dsep: dataSeparator,
-      MAXMIND: overrideTransQgwBoolOption<{
-        true: "1";
-        false: "2";
-      }>(maxMindOn, { true: "1", false: "2" }),
+      MAXMIND: toggleBinary(maxMindOn),
     };
   }
+}
+
+function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
+  if (boolean === undefined) return undefined;
+  return boolean ? "Y" : "N";
+}
+
+function toggleBinary(boolean?: boolean): "1" | "2" | undefined {
+  if (boolean === undefined) return undefined;
+  return boolean ? "1" : "2";
 }
 
 export type OptionsFields = Pick<
