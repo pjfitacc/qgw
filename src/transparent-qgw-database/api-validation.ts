@@ -21,6 +21,10 @@ const yearValidator = z.string().regex(/^\d{2}$/, "Year must be two digits");
 
 const numericString = z.string().regex(/^\d+$/, "Must be numerical");
 
+const numericOrFloatString = z
+  .string()
+  .regex(/^\d*\.?\d+$/, "Must be a numerical value");
+
 const email = z.string().email();
 
 const yesNo = z.enum(["Y", "N"]);
@@ -29,7 +33,7 @@ const cvvValidator = z.string().refine((val) => /^\d{3,4}$/.test(val), {
   message: "CVV2 must be 3 or 4 digits",
 });
 
-const formSchema = z
+export const apiSchema = z
   .object({
     gwlogin: z.string(),
     trans_method: z
@@ -50,7 +54,7 @@ const formSchema = z
     ccyr: z.string().optional(),
     aba: z.string().optional(),
     checkacct: z.string().optional(),
-    amount: numericString.refine((val) => parseFloat(val) > 0, {
+    amount: numericOrFloatString.refine((val) => parseFloat(val) > 0, {
       message: "Amount must be greater than 0",
     }),
     BADDR1: z.string(),
@@ -66,18 +70,12 @@ const formSchema = z
     MAXMIND: z.enum(["1", "2"]).optional(),
     override_recur: yesNo.optional(),
     RID: numericString.optional(),
-    initial_amount: numericString.optional(),
-    recur_times: numericString.optional().refine(
-      (val) => {
-        if (val === undefined) {
-          return false;
-        }
-        return parseInt(val) >= 0;
-      },
-      {
+    initial_amount: numericOrFloatString.optional(),
+    recur_times: numericString
+      .optional()
+      .refine((val) => !val || parseInt(val) >= 0, {
         message: "recur_times must be 0 or greater",
-      }
-    ),
+      }),
     OverRideRecureDay: yesNo.optional(),
   })
   .superRefine((data, ctx) => {
