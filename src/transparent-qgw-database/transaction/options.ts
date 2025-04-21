@@ -1,9 +1,18 @@
 import { DirectAPI, TransactionType } from "..";
 import {
-  toggleBinary,
+  toggle1or2,
   toggleYesOrNO,
 } from "../../utils/transparent-qgw-db-engine";
 
+export type OptionsFields = {
+  emailCustomerReceipt?: boolean;
+  sendTransactionEmail?: boolean;
+  transactionType?: TransactionType;
+  transactionID?: string;
+  restrictKey?: string;
+  dataSeparator?: string;
+  maxMindOn?: boolean;
+};
 // Options:
 // emailCustomerReceipt: override_email_customer "Y" | "N";
 // sendTransactionEmail: override_trans_email "Y" | "N";
@@ -13,29 +22,23 @@ import {
 // dataSeparator: Dsep
 // maxMindOn: MAXMIND "1" | "2";
 export class Options {
-  public fields: OptionsFields;
-  constructor(
-    public emailCustomerReceipt?: boolean,
-    public sendTransactionEmail?: boolean,
-    public transactionType?: TransactionType,
-    public transactionID?: string,
-    public restrictKey?: string,
-    public dataSeparator?: string,
-    public maxMindOn?: boolean
-  ) {
-    this.fields = {
-      override_email_customer: toggleYesOrNO(emailCustomerReceipt),
-      override_trans_email: toggleYesOrNO(sendTransactionEmail),
-      trans_type: transactionType,
-      transID: transactionID,
-      RestrictKey: restrictKey,
-      Dsep: dataSeparator,
-      MAXMIND: toggleBinary(maxMindOn),
+  public directApiFields: DirectApiOptionsFields;
+  constructor(optionsFields?: OptionsFields) {
+    this.directApiFields = {
+      override_email_customer: toggleYesOrNO(
+        optionsFields?.emailCustomerReceipt
+      ),
+      override_trans_email: toggleYesOrNO(optionsFields?.sendTransactionEmail),
+      trans_type: optionsFields?.transactionType,
+      transID: optionsFields?.transactionID,
+      RestrictKey: optionsFields?.restrictKey,
+      Dsep: optionsFields?.dataSeparator,
+      MAXMIND: toggle1or2(optionsFields?.maxMindOn),
     };
   }
 }
 
-export type OptionsFields = Pick<
+export type DirectApiOptionsFields = Pick<
   DirectAPI,
   | "override_email_customer"
   | "override_trans_email"

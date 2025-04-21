@@ -51,7 +51,7 @@ export class TransactionRequest {
     const chunks = [
       this.payment.fields,
       this.payer.fields,
-      this.options?.fields,
+      this.options?.directApiFields,
       this.recurringOptions?.fields,
     ];
     return Object.assign({}, ...chunks);
