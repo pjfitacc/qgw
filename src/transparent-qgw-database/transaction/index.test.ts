@@ -39,7 +39,7 @@ describe("TransactionRequest: Default TransQGW Options field values", () => {
       payment,
       payer,
       options,
-      new RecurringOptions("1")
+      new RecurringOptions({ rid: "1" })
     );
     const payload = transactionRequest.toAPI();
 

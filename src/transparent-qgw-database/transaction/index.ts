@@ -52,7 +52,7 @@ export class TransactionRequest {
       this.payment.fields,
       this.payer.fields,
       this.options?.directApiFields,
-      this.recurringOptions?.fields,
+      this.recurringOptions?.directApiFields,
     ];
     return Object.assign({}, ...chunks);
   }
