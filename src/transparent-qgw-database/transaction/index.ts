@@ -49,8 +49,8 @@ export class TransactionRequest {
 
   toAPI(): DirectAPI {
     const chunks = [
-      this.payment.fields,
-      this.payer.fields,
+      this.payment.directApiFields,
+      this.payer.directApiFields,
       this.options?.directApiFields,
       this.recurringOptions?.directApiFields,
     ];

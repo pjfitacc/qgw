@@ -37,14 +37,14 @@ export class ElectronicFundsTransfer {
 // - amount: amount
 // - method: CreditCard | ElectronicFundsTransfer
 export class Payment {
-  public fields: CreditCardPaymentFields | EftPaymentFields;
+  public directApiFields: CreditCardPaymentFields | EftPaymentFields;
   constructor(
     public amount: number,
     public method: CreditCard | ElectronicFundsTransfer
   ) {
     switch (method.kind) {
       case "CC":
-        this.fields = {
+        this.directApiFields = {
           amount: amount.toString(),
           trans_method: method.kind,
           ccnum: method.number,
@@ -55,7 +55,7 @@ export class Payment {
         };
         return;
       case "EFT":
-        this.fields = {
+        this.directApiFields = {
           amount: amount.toString(),
           trans_method: method.kind,
           aba: method.aba,

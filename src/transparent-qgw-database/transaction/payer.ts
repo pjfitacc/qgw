@@ -7,14 +7,14 @@ import { DirectAPI } from "..";
 // - name: BNAME
 
 export class Payer {
-  public fields: PayerFields;
+  public directApiFields: PayerFields;
   constructor(
     public address: string,
     public zip: string,
     public email: string,
     public name: string = "anonymous"
   ) {
-    this.fields = {
+    this.directApiFields = {
       BADDR1: address,
       BZIP1: zip,
       BCUST_EMAIL: email,
