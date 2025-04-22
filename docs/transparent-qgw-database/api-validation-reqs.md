@@ -11,7 +11,7 @@ optional just means two things:
       required
 - [x] trans_method:
       type: "CC" or "EFT" (case insensitive); Must ONLY be CC or EFT.
-      required
+      default value if trans_method is falsy = "CC"
       special instructions:
 
         Validate different fields depending on trans_method.

@@ -136,7 +136,8 @@ export const apiSchema = z
     trans_method: z
       .string()
       .toUpperCase()
-      .pipe(z.enum(["CC", "EFT"])),
+      .pipe(z.enum(["CC", "EFT"]))
+      .default("CC"),
     trans_type: z.enum([
       "CREDIT",
       "SALES",
