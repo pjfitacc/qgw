@@ -134,8 +134,9 @@ export const apiSchema = z
   .object({
     gwlogin: z.string(),
     trans_method: z
-      .enum(["CC", "EFT"])
-      .transform((val) => val.toUpperCase() as "CC" | "EFT"),
+      .string()
+      .toUpperCase()
+      .pipe(z.enum(["CC", "EFT"])),
     trans_type: z.enum([
       "CREDIT",
       "SALES",
