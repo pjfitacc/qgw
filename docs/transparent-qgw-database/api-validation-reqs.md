@@ -19,6 +19,7 @@ optional just means two things:
 
 - [x] trans_type:
       type: TransactionType: "CREDIT" | "SALES" | "AUTH_CAPTURE" | "AUTH_ONLY" | "RETURN" | "VOID" |"PREVIOUS_SALE"
+      optional
 - [x] transID:
       type: string;
 - [x] ccnum:

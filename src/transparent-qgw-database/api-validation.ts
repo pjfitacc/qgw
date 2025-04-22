@@ -138,15 +138,17 @@ export const apiSchema = z
       .toUpperCase()
       .pipe(z.enum(["CC", "EFT"]))
       .default("CC"),
-    trans_type: z.enum([
-      "CREDIT",
-      "SALES",
-      "AUTH_CAPTURE",
-      "AUTH_ONLY",
-      "RETURN",
-      "VOID",
-      "PREVIOUS_SALE",
-    ]),
+    trans_type: z
+      .enum([
+        "CREDIT",
+        "SALES",
+        "AUTH_CAPTURE",
+        "AUTH_ONLY",
+        "RETURN",
+        "VOID",
+        "PREVIOUS_SALE",
+      ])
+      .optional(),
     transID: z.string().optional(),
     ccnum: z.string().optional(),
     ccmo: z.string().optional(),
