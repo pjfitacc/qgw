@@ -1,3 +1,5 @@
+import { ZodError } from "zod";
+import { apiSchema } from "./api-validation";
 import { TransactionRequest, TransactionResponse } from "./transaction";
 
 /*
@@ -32,9 +34,10 @@ export class TransparentDbEngine {
     return TransactionResponse;
   }
 
-  validate(transactionRequest: TransactionRequest): boolean {
-    // TODO
-    return true;
+  validate(
+    directAPI: DirectAPI
+  ): { success: true; data: DirectAPI } | { success: false; error: ZodError } {
+    return apiSchema.safeParse(directAPI);
   }
 }
 

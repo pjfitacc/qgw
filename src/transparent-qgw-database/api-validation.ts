@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { TransactionType } from ".";
 
 // Helper validators
 const isAmex = (cardNum: string) => /^3[47][0-9]{13}$/.test(cardNum);
@@ -138,17 +139,7 @@ export const apiSchema = z
       .toUpperCase()
       .pipe(z.enum(["CC", "EFT"]))
       .default("CC"),
-    trans_type: z
-      .enum([
-        "CREDIT",
-        "SALES",
-        "AUTH_CAPTURE",
-        "AUTH_ONLY",
-        "RETURN",
-        "VOID",
-        "PREVIOUS_SALE",
-      ])
-      .optional(),
+    trans_type: z.nativeEnum(TransactionType).optional(),
     transID: z.string().optional(),
     ccnum: z.string().optional(),
     ccmo: z.string().optional(),
