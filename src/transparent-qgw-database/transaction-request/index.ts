@@ -1,4 +1,4 @@
-import { DirectAPI, TransparentDbEngine } from "..";
+import { DirectAPI, TransparentDbEngine } from "../api";
 import { Options } from "./options";
 import { Payer } from "./payer";
 import { Payment } from "./payment";

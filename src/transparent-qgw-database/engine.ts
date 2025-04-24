@@ -1,7 +1,7 @@
 import { ZodError } from "zod";
-import { apiSchema } from "./api-validation";
+import { apiSchema } from "./api/validation";
 import { TransactionRequest, TransactionResponse } from "./transaction-request";
-import { DirectAPI } from ".";
+import { DirectAPI } from "./api";
 
 /*
 A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php

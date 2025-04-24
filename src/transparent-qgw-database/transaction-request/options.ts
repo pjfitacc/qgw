@@ -1,4 +1,4 @@
-import { DirectAPI, TransactionType } from "..";
+import { DirectAPI, TransactionType } from "../api";
 import {
   toggle1or2,
   toggleYesOrNO,

@@ -1,4 +1,4 @@
-import { DirectAPI } from "..";
+import { DirectAPI } from "../api";
 
 // Payer Class:
 // - address: BADDR1
