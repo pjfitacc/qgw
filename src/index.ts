@@ -1,2 +1,2 @@
 export * from "./transparent-qgw-database/index";
-export * from "./transparent-qgw-database/transaction";
+export * from "./transparent-qgw-database/transaction-request";
