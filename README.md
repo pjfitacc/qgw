@@ -20,3 +20,7 @@ https://pauloe-me.medium.com/typescript-npm-package-publishing-a-beginners-guide
 Resources referred to when designing the API:
 
 - https://www.pretzellogix.net/2021/12/08/how-to-write-a-python3-sdk-library-module-for-a-json-rest-api/
+
+Error Handling Tutorial:
+https://www.youtube.com/watch?v=EUYnERcOGpA
+(This API does not use node.js in any major way but we will mimic the way it creates custom errors.)
