@@ -3,6 +3,7 @@ import { apiSchema } from "./api/validation";
 import { TransactionRequest, TransactionResponse } from "./transaction";
 import { DirectAPI } from "./api";
 import TransactionError from "../errors/transaction-error";
+import { postToServer } from "../utils/transparent-qgw-db-engine";
 
 /*
 A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
@@ -29,9 +30,9 @@ export class TransparentDbEngine {
     this.gatewayLogin = gatewayLogin;
   }
 
-  send(
+  async send(
     transactionRequest: TransactionRequest | DirectAPI
-  ): TransactionResponse {
+  ): Promise<TransactionResponse> {
     if (transactionRequest instanceof TransactionRequest) {
       transactionRequest = transactionRequest.toAPI();
     }
@@ -46,7 +47,12 @@ export class TransparentDbEngine {
       });
     }
 
-    return new TransactionResponse([]);
+    const form = validTransaction.data;
+    form.gwlogin = this.gatewayLogin;
+
+    const serverResponse = await postToServer(form);
+
+    return new TransactionResponse(serverResponse);
   }
 
   validate(
