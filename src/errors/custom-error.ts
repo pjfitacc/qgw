@@ -16,7 +16,7 @@ interface CustomIssue {
 /*
 message - a human readable display for what error our library caught.
 
-error code - the custom error. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
+code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
 
 Issues = an Array of class CustomIssue related to the overall message + error code.
 */
