@@ -46,7 +46,7 @@ export class TransparentDbEngine {
       });
     }
 
-    return TransactionResponse;
+    return new TransactionResponse([]);
   }
 
   validate(
