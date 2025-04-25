@@ -61,4 +61,15 @@ export class TransactionRequest {
 // TODO: Split up the large DirectAPI type into manageable chunks where each chunk is a class containing fields related to each other.
 // These classes are what the TransactionRequest constructor will take.
 
-export class TransactionResponse {}
+export class TransactionResponse {
+  /*
+  result,authcode,transID,AVRResponse,CVV Response,Max Score,decline_reason(if any),Error Code(if any)
+  "APPROVED","019452","65735","Y","M","0.3"
+  "DECLINED","019452","65735","Y","M","0.3","Auth Declined","200" 
+  */
+
+  // Example from PostMan: "APPROVED"|"604151"|"87646222"|""|"M"|""|"5454"|"MC"|"0"
+  constructor(responseString: string[]) {
+    
+  }
+}

@@ -78,16 +78,27 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
 
 /**
  * Parses pipe-delimited HTML response into structured data
+ * 
+ * Handles the following response formats:
+ * 1. Raw pipe-delimited: "value1"|"value2"|"value3"
+ * 2. HTML-wrapped: <body>"value1"|"value2"</body>
+ * 3. Mixed content: <html>..."value1"|"value2"...</html>
+ * 
+ * For each item in the pipe-delimited string:
+ * - Removes surrounding HTML tags if present
+ * - Strips outer quotation marks from each value
+ * - Trims whitespace from resulting values
+ * 
+ * @param htmlResponse The raw response string from the server
+ * @returns Array of cleaned string values
+ * @throws Error if no pipe delimiter is found in the response
  */
 function parsePipeDelimitedResponse(htmlResponse: string): string[] {
   if (!htmlResponse.includes('|')) {
-    throw new Error('Invalid response format: No pipe delimiter found.\n' +
-      'This qgw library only support Transparent QuantumGateway\'s Default Pipe Delimiter for now.' +
-      'Please set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update\n' +
-      'Also, when sending a transaction, make sure your DirectAPI type does not have Dsep value set, or if using the qgw library\'s TransactionRequest, do not set TransactionRequest.options.dataSeparator to have any value.');
+    throw new Error('Invalid response format: No pipe delimiter found');
   }
 
-  // Extract content between HTML tags if present (using ES6 compatible regex)
+  // Extract content between HTML tags if present
   const contentMatch = htmlResponse.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   const rawContent = contentMatch ? contentMatch[1] : htmlResponse;
 
@@ -96,7 +107,11 @@ function parsePipeDelimitedResponse(htmlResponse: string): string[] {
     .replace(/<[^>]+>/g, '')
     .trim();
 
-  return cleanedContent.split('|').map(item => item.trim());
+  return cleanedContent.split('|').map(item => {
+    // Remove surrounding quotes if they exist, then trim
+    const unquoted = item.trim().replace(/^"(.*)"$/, '$1');
+    return unquoted.trim();
+  });
 }
 
 /**
