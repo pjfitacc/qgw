@@ -1,6 +1,6 @@
 import { ZodError } from "zod";
 import { apiSchema } from "./api/validation";
-import { TransactionRequest, TransactionResponse } from "./transaction-request";
+import { TransactionRequest, TransactionResponse } from "./transaction";
 import { DirectAPI } from "./api";
 import TransactionError from "../errors/transaction-error";
 

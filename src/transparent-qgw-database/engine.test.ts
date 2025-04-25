@@ -1,9 +1,9 @@
 import TransactionError from "../errors/transaction-error";
 import { DirectAPI } from "./api";
 import { TransparentDbEngine } from "./engine";
-import { TransactionRequest } from "./transaction-request";
-import { Payer } from "./transaction-request/payer";
-import { CreditCard, Payment } from "./transaction-request/payment";
+import { TransactionRequest } from "./transaction";
+import { Payer } from "./transaction/payer";
+import { CreditCard, Payment } from "./transaction/payment";
 import { TransactionType } from "./api";
 
 function expectEngineTransactionError(transaction: DirectAPI | TransactionRequest, expectedErrorCode: TransactionErrorCode) {
