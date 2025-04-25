@@ -81,7 +81,7 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
  */
 function parsePipeDelimitedResponse(htmlResponse: string): string[] {
   if (!htmlResponse.includes('|')) {
-    throw new Error('Invalid response format: No pipe delimiter found');
+    throw new Error('Invalid response format: No pipe delimiter found.\nPlease set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update');
   }
 
   // Extract content between HTML tags if present (using ES6 compatible regex)
