@@ -81,7 +81,10 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
  */
 function parsePipeDelimitedResponse(htmlResponse: string): string[] {
   if (!htmlResponse.includes('|')) {
-    throw new Error('Invalid response format: No pipe delimiter found.\nPlease set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update');
+    throw new Error('Invalid response format: No pipe delimiter found.\n' +
+      'This qgw library only support Transparent QuantumGateway\'s Default Pipe Delimiter for now.' +
+      'Please set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update\n' +
+      'Also, when sending a transaction, make sure your DirectAPI type does not have Dsep value set, or if using the qgw library\'s TransactionRequest, do not set TransactionRequest.options.dataSeparator to have any value.');
   }
 
   // Extract content between HTML tags if present (using ES6 compatible regex)
