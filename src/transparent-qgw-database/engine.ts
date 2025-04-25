@@ -2,6 +2,7 @@ import { ZodError } from "zod";
 import { apiSchema } from "./api/validation";
 import { TransactionRequest, TransactionResponse } from "./transaction-request";
 import { DirectAPI } from "./api";
+import TransactionError from "../errors/transaction-error";
 
 /*
 A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
@@ -31,7 +32,20 @@ export class TransparentDbEngine {
   send(
     transactionRequest: TransactionRequest | DirectAPI
   ): TransactionResponse {
-    // TODO
+    if (transactionRequest instanceof TransactionRequest) {
+      transactionRequest = transactionRequest.toAPI();
+    }
+
+    const validTransaction = this.validate(transactionRequest);
+
+    if (!validTransaction.success) {
+      throw new TransactionError({
+        message: validTransaction.error.message,
+        issues: validTransaction.error.issues,
+        code: "ERR_PARSE",
+      });
+    }
+
     return TransactionResponse;
   }
 
