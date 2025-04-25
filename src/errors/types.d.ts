@@ -1,1 +1,1 @@
-type SchemaErrorCode = "ERR_PARSE";
+type TransactionErrorCode = "ERR_PARSE" | "ERR_SERVER_RESPONSE ";
