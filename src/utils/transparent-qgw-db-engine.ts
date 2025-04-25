@@ -31,11 +31,11 @@ interface HttpClientConfig {
  * Default configuration for the Quantum Gateway API client
  */
 const DEFAULT_CONFIG: HttpClientConfig = {
-  baseURL: "https://api.quantumgateway.com/v1", // Replace with your actual base URL
+  baseURL: "https://secure.quantumgateway.com/cgi/tqgwdbe.php", // Replace with your actual base URL
   timeout: 10000, // 10 second timeout
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    Accept: "application/json",
+    'Accept': 'text/html',
   },
 };
 
@@ -77,46 +77,69 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
 }
 
 /**
- * Posts data to the Quantum Gateway API and returns the transaction response
- *
- * @param directAPI - The DirectAPI payload to send
- * @returns Promise containing the transaction response array
- * @throws {AxiosError} When the request fails
+ * Parses pipe-delimited HTML response into structured data
  */
-export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
+function parsePipeDelimitedResponse(htmlResponse: string): string[] {
+  if (!htmlResponse.includes('|')) {
+    throw new Error('Invalid response format: No pipe delimiter found');
+  }
+
+  // Extract content between HTML tags if present (using ES6 compatible regex)
+  const contentMatch = htmlResponse.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  const rawContent = contentMatch ? contentMatch[1] : htmlResponse;
+
+  // Clean up any remaining HTML tags and whitespace
+  const cleanedContent = rawContent
+    .replace(/<[^>]+>/g, '')
+    .trim();
+
+  return cleanedContent.split('|').map(item => item.trim());
+}
+
+/**
+ * Posts data to the API and returns parsed pipe-delimited response
+ * 
+ * @param directAPI - The DirectAPI payload to send
+ * @returns Promise containing the parsed response array
+ * @throws {AxiosError} When the request fails
+ * @throws {Error} When response parsing fails
+ */
+export async function postToServer(
+  directAPI: DirectAPI
+): Promise<string[]> {
   const httpClient = createHttpClient();
   const formData = toFormUrlEncoded(directAPI);
 
   try {
-    const response: AxiosResponse<QuantumGatewayResponse> =
-      await httpClient.post(
-        "/transactions", // Adjust endpoint path as needed
-        formData
-      );
+    const response: AxiosResponse<string> = await httpClient.post(
+      '', // Adjust endpoint path as needed
+      formData,
+      { responseType: 'text' } // Ensure we get raw HTML response
+    );
 
-    if (!response.data.quantumGatewayTransactionResponse) {
-      throw new Error("Invalid response structure from server");
-    }
-
-    return response.data.quantumGatewayTransactionResponse;
+    return parsePipeDelimitedResponse(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      // Handle specific HTTP errors
-      console.error(
-        `API request failed with status ${error.response?.status}:`,
-        {
-          url: error.config?.url,
-          data: error.response?.data,
+      console.error(`API request failed with status ${error.response?.status}:`, {
+        url: error.config?.url,
+        data: error.response?.data,
+      });
+      
+      // Attempt to parse error response if it's also pipe-delimited
+      if (error.response?.data && typeof error.response.data === 'string') {
+        try {
+          const errorData = parsePipeDelimitedResponse(error.response.data);
+          throw new Error(`Payment processing failed: ${errorData.join(' - ')}`);
+        } catch {
+          throw new Error(`Payment processing failed: ${error.response.data}`);
         }
-      );
-
+      }
+      
       throw new Error(
-        `Payment processing failed: ${
-          error.response?.data?.message || error.message
-        }`
+        `Payment processing failed: ${error.message}`
       );
     }
-
+    
     // Re-throw non-Axios errors
     throw error;
   }

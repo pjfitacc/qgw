@@ -73,4 +73,22 @@ describe("TransparentQGW Db Engine", () => {
       })
     );
   });
+
+  it("sends a DirectAPI type and throws a TransactionError wtih code ERR_PARSE during validation due to no credit card number", () => {
+    const directApiNoCreditCardNumber: DirectAPI = {
+      ...baseCC,
+      ccnum: undefined,
+    };
+
+    const engine = new TransparentDbEngine("gwlogin");
+
+    expect(() => engine.send(directApiNoCreditCardNumber)).toThrow(
+      TransactionError
+    );
+    expect(() => engine.send(directApiNoCreditCardNumber)).toThrow(
+      expect.objectContaining({
+        code: "ERR_PARSE",
+      })
+    );
+  });
 });
