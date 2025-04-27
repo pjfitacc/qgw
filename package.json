@@ -1,6 +1,6 @@
 {
   "name": "qgw",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Typescript library with functions for the QuantumGateway Integration APIs: https://www.quantumgateway.com/developer.php",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
