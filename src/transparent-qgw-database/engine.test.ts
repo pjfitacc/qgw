@@ -6,13 +6,18 @@ import { Payer } from "./transaction/payer";
 import { CreditCard, Payment } from "./transaction/payment";
 import { TransactionType } from "./api";
 
-async function expectEngineTransactionError(transaction: DirectAPI | TransactionRequest, expectedErrorCode: TransactionErrorCode) {
+async function expectEngineTransactionError(
+  transaction: DirectAPI | TransactionRequest,
+  expectedErrorCode: TransactionErrorCode
+) {
   const engine = new TransparentDbEngine("gwlogin");
 
-  await expect(engine.send(transaction)).rejects.toThrow(TransactionError)
-  await expect(engine.send(transaction)).rejects.toThrow(expect.objectContaining({
-    code: expectedErrorCode,
-  }))
+  await expect(engine.send(transaction)).rejects.toThrow(TransactionError);
+  await expect(engine.send(transaction)).rejects.toThrow(
+    expect.objectContaining({
+      code: expectedErrorCode,
+    })
+  );
 }
 
 // Mock data builders
@@ -28,6 +33,8 @@ const baseCC: DirectAPI = {
   BADDR1: "123 Street",
   BZIP1: "90210",
   BCUST_EMAIL: "test@example.com",
+  override_email_customer: "N",
+  override_trans_email: "N",
 };
 
 describe("TransparentQGW Db Engine", () => {
@@ -39,7 +46,10 @@ describe("TransparentQGW Db Engine", () => {
       payer
     );
 
-    await expectEngineTransactionError(noCreditCardNumberTransaction, "ERR_PARSE");
+    await expectEngineTransactionError(
+      noCreditCardNumberTransaction,
+      "ERR_PARSE"
+    );
   });
 
   it("sends a DirectAPI type and throws a TransactionError wtih code ERR_PARSE during validation due to no credit card number", async () => {
@@ -48,7 +58,10 @@ describe("TransparentQGW Db Engine", () => {
       ccnum: undefined,
     };
 
-    await expectEngineTransactionError(directApiNoCreditCardNumber, "ERR_PARSE");
+    await expectEngineTransactionError(
+      directApiNoCreditCardNumber,
+      "ERR_PARSE"
+    );
   });
 
   it("send a valid Transaction", async () => {
