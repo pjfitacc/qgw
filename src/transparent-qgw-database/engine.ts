@@ -42,6 +42,10 @@ export class TransparentDbEngine {
       transactionRequest = transactionRequest.toAPI();
     }
 
+    // Set the gateway login to the Quantum Gateway Account ID
+    // This is required for all transactions
+    transactionRequest.gwlogin = this.gatewayLogin;
+
     const validTransaction = this.validate(transactionRequest);
 
     if (!validTransaction.success) {
@@ -53,7 +57,6 @@ export class TransparentDbEngine {
     }
 
     const form = validTransaction.data;
-    form.gwlogin = this.gatewayLogin;
 
     try {
       const serverResponse = await postToServer(form);
