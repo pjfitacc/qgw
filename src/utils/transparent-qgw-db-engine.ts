@@ -35,7 +35,7 @@ const DEFAULT_CONFIG: HttpClientConfig = {
   timeout: 10000, // 10 second timeout
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
-    'Accept': 'text/html',
+    Accept: "text/html",
   },
 };
 
@@ -78,27 +78,29 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
 
 /**
  * Parses pipe-delimited HTML response into structured data
- * 
+ *
  * Handles the following response formats:
  * 1. Raw pipe-delimited: "value1"|"value2"|"value3"
  * 2. HTML-wrapped: <body>"value1"|"value2"</body>
  * 3. Mixed content: <html>..."value1"|"value2"...</html>
- * 
+ *
  * For each item in the pipe-delimited string:
  * - Removes surrounding HTML tags if present
  * - Strips outer quotation marks from each value
  * - Trims whitespace from resulting values
- * 
+ *
  * @param htmlResponse The raw response string from the server
  * @returns Array of cleaned string values
  * @throws Error if no pipe delimiter is found in the response
  */
 function parsePipeDelimitedResponse(htmlResponse: string): string[] {
-  if (!htmlResponse.includes('|')) {
-    throw new Error('Invalid response format: No pipe delimiter found.\n' +
-      'This qgw library only support Transparent QuantumGateway\'s Default Pipe Delimiter for now.' +
-      'Please set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update\n' +
-      'Also, when sending a transaction, make sure your DirectAPI type does not have Dsep value set, or if using the qgw library\'s TransactionRequest, do not set TransactionRequest.options.dataSeparator to have any value.');
+  if (!htmlResponse.includes("|")) {
+    throw new Error(
+      "Invalid response format: No pipe delimiter found.\n" +
+        "This qgw library only supports Transparent QuantumGateway's Default Pipe Delimiter for now." +
+        'Please set your QuantumGateway Settings in your Quantum Gateway Account to: Settings => Processing Settings => Default Data Separator => select "Pipe" radio option => update\n' +
+        "Also, when sending a transaction, make sure your DirectAPI type does not have Dsep value set, or if using the qgw library's TransactionRequest, do not set TransactionRequest.options.dataSeparator to have any value."
+    );
   }
 
   // Extract content between HTML tags if present
@@ -106,61 +108,59 @@ function parsePipeDelimitedResponse(htmlResponse: string): string[] {
   const rawContent = contentMatch ? contentMatch[1] : htmlResponse;
 
   // Clean up any remaining HTML tags and whitespace
-  const cleanedContent = rawContent
-    .replace(/<[^>]+>/g, '')
-    .trim();
+  const cleanedContent = rawContent.replace(/<[^>]+>/g, "").trim();
 
-  return cleanedContent.split('|').map(item => {
+  return cleanedContent.split("|").map((item) => {
     // Remove surrounding quotes if they exist, then trim
-    const unquoted = item.trim().replace(/^"(.*)"$/, '$1');
+    const unquoted = item.trim().replace(/^"(.*)"$/, "$1");
     return unquoted.trim();
   });
 }
 
 /**
  * Posts data to the API and returns parsed pipe-delimited response
- * 
+ *
  * @param directAPI - The DirectAPI payload to send
  * @returns Promise containing the parsed response array
  * @throws {AxiosError} When the request fails
  * @throws {Error} When response parsing fails
  */
-export async function postToServer(
-  directAPI: DirectAPI
-): Promise<string[]> {
+export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   const httpClient = createHttpClient();
   const formData = toFormUrlEncoded(directAPI);
 
   try {
     const response: AxiosResponse<string> = await httpClient.post(
-      '', // Adjust endpoint path as needed
+      "", // Adjust endpoint path as needed
       formData,
-      { responseType: 'text' } // Ensure we get raw HTML response
+      { responseType: "text" } // Ensure we get raw HTML response
     );
-
     return parsePipeDelimitedResponse(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error(`API request failed with status ${error.response?.status}:`, {
-        url: error.config?.url,
-        data: error.response?.data,
-      });
-      
+      console.error(
+        `API request failed with status ${error.response?.status}:`,
+        {
+          url: error.config?.url,
+          data: error.response?.data,
+        }
+      );
+
       // Attempt to parse error response if it's also pipe-delimited
-      if (error.response?.data && typeof error.response.data === 'string') {
+      if (error.response?.data && typeof error.response.data === "string") {
         try {
           const errorData = parsePipeDelimitedResponse(error.response.data);
-          throw new Error(`Payment processing failed: ${errorData.join(' - ')}`);
+          throw new Error(
+            `Payment processing failed: ${errorData.join(" - ")}`
+          );
         } catch {
           throw new Error(`Payment processing failed: ${error.response.data}`);
         }
       }
-      
-      throw new Error(
-        `Payment processing failed: ${error.message}`
-      );
+
+      throw new Error(`Payment processing failed: ${error.message}`);
     }
-    
+
     // Re-throw non-Axios errors
     throw error;
   }
