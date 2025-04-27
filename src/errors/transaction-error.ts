@@ -1,5 +1,10 @@
-import CustomError from "./custom-error";
+import { TransactionResponse } from "../transparent-qgw-database/transaction";
+import CustomError, { CustomIssue } from "./custom-error";
 import { TransactionErrorCode } from "./types";
+
+export interface TransactionDeclinedIssue extends CustomIssue {
+  serverResponse: TransactionResponse;
+}
 
 /*
 Our own custom error class that throws issues during any part of the transaction process within the TransparentDBEngine,

@@ -82,4 +82,22 @@ describe("TransparentQGW Db Engine", () => {
     );
   });
 
+  it("Strict Mode OFF, throws a TransactionError wtih code ERR_SERVER_DECLINED during validation due to no credit card number", async () => {
+    const directApiNoCreditCardNumber: DirectAPI = {
+      ...baseCC,
+      ccnum: undefined,
+    };
+
+    const engine = new TransparentDbEngine("phimar11Dev");
+    engine.strictMode = false;
+
+    await expect(engine.send(directApiNoCreditCardNumber)).rejects.toThrow(
+      TransactionError
+    );
+    await expect(engine.send(directApiNoCreditCardNumber)).rejects.toThrow(
+      expect.objectContaining({
+        code: "ERR_SERVER_DECLINED",
+      })
+    );
+  });
 });

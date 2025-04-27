@@ -7,7 +7,7 @@ path?
 
 message
 */
-interface CustomIssue {
+export interface CustomIssue {
   code: any;
   path?: (string | number)[];
   message: string;

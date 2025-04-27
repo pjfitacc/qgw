@@ -1,5 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { DirectAPI } from "../transparent-qgw-database/api";
+import { TransactionResponse } from "../transparent-qgw-database/transaction";
+import TransactionError, {
+  TransactionDeclinedIssue,
+} from "../errors/transaction-error";
 
 export function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
   if (boolean === undefined) return undefined;
@@ -47,7 +51,6 @@ function createHttpClient(config: HttpClientConfig = DEFAULT_CONFIG) {
 
   // Add request interceptor for logging/metrics
   client.interceptors.request.use((request) => {
-    console.debug(`Sending request to ${request.url}`);
     return request;
   });
 
@@ -124,6 +127,7 @@ function parsePipeDelimitedResponse(htmlResponse: string): string[] {
  * @returns Promise containing the parsed response array
  * @throws {AxiosError} When the request fails
  * @throws {Error} When response parsing fails
+ * @throws {TransactionError} When the transaction is declined
  */
 export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   const httpClient = createHttpClient();
@@ -135,6 +139,9 @@ export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
       formData,
       { responseType: "text" } // Ensure we get raw HTML response
     );
+
+    catchQuantumGatewayErrors(response.data);
+
     return parsePipeDelimitedResponse(response.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -166,12 +173,12 @@ export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   }
 }
 
-
 /**
  * Handles errors from the Quantum Gateway API
  *
  * @param response - The raw response string from the server
  * @throws Generic Error if the response does not contain "APPROVED" or "DECLINED"
+ * @throws TransactionError with code "ERR_SERVER_DECLINED": if the response contains "DECLINED"
  */
 function catchQuantumGatewayErrors(response: string) {
   // If the response does not contain APPROVED or DECLINED, throw an error
@@ -181,4 +188,21 @@ function catchQuantumGatewayErrors(response: string) {
     );
   }
 
+  if (response.includes("DECLINED")) {
+    const declinedTransaction = new TransactionResponse(
+      parsePipeDelimitedResponse(response)
+    );
+
+    const declinedIssue: TransactionDeclinedIssue = {
+      message: declinedTransaction.declineReason ?? "Transaction Declined",
+      code: declinedTransaction.errorCode ?? "Unknown Error",
+      serverResponse: declinedTransaction,
+    };
+
+    throw new TransactionError({
+      message: declinedTransaction.declineReason ?? "Transaction Declined",
+      issues: [declinedIssue],
+      code: "ERR_SERVER_DECLINED",
+    });
   }
+}

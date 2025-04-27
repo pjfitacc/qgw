@@ -4,6 +4,8 @@ import { TransactionRequest, TransactionResponse } from "./transaction";
 import { DirectAPI } from "./api";
 import TransactionError from "../errors/transaction-error";
 import { postToServer } from "../utils/transparent-qgw-db-engine";
+import { AxiosError } from "axios";
+import { CustomIssue } from "../errors/custom-error";
 import { TransactionErrorCode } from "../errors/types";
 
 /*
@@ -53,8 +55,8 @@ export class TransparentDbEngine {
     form.gwlogin = this.gatewayLogin;
 
     try {
-    const serverResponse = await postToServer(form);
-    return new TransactionResponse(serverResponse);
+      const serverResponse = await postToServer(form);
+      return new TransactionResponse(serverResponse);
     } catch (error: unknown) {
       throw this.serverError(error);
     }
@@ -70,6 +72,13 @@ export class TransparentDbEngine {
         const serverError = error.response?.data;
         if (serverError) {
           errorMessage = serverError.message;
+        }
+        break;
+      case error instanceof TransactionError:
+        errorMessage = error.message;
+        errorCode = error?.code || "ERR_SERVER_RESPONSE";
+        if (error.issues.length > 0) {
+          transactionIssues = error.issues;
         }
         break;
       case error instanceof Error:
