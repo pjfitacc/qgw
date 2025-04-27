@@ -1,4 +1,5 @@
 import CustomError from "./custom-error";
+import { TransactionErrorCode } from "./types";
 
 /*
 Our own custom error class that throws issues during any part of the transaction process within the TransparentDBEngine,

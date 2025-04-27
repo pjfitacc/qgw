@@ -4,6 +4,7 @@ import { TransactionRequest, TransactionResponse } from "./transaction";
 import { DirectAPI } from "./api";
 import TransactionError from "../errors/transaction-error";
 import { postToServer } from "../utils/transparent-qgw-db-engine";
+import { TransactionErrorCode } from "../errors/types";
 
 /*
 A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
@@ -51,9 +52,38 @@ export class TransparentDbEngine {
     const form = validTransaction.data;
     form.gwlogin = this.gatewayLogin;
 
+    try {
     const serverResponse = await postToServer(form);
-
     return new TransactionResponse(serverResponse);
+    } catch (error: unknown) {
+      throw this.serverError(error);
+    }
+  }
+
+  serverError(error: unknown): TransactionError {
+    let errorMessage = "";
+    let transactionIssues = [] as CustomIssue[];
+    let errorCode: TransactionErrorCode = "ERR_SERVER_RESPONSE";
+
+    switch (true) {
+      case error instanceof AxiosError:
+        const serverError = error.response?.data;
+        if (serverError) {
+          errorMessage = serverError.message;
+        }
+        break;
+      case error instanceof Error:
+        errorMessage = error.message;
+        break;
+      default:
+        errorMessage = "An unexpected server error occurred";
+    }
+
+    throw new TransactionError({
+      message: errorMessage,
+      issues: transactionIssues,
+      code: errorCode,
+    });
   }
 
   validate(

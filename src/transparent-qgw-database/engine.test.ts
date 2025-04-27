@@ -5,6 +5,7 @@ import { TransactionRequest, TransactionResponse } from "./transaction";
 import { Payer } from "./transaction/payer";
 import { CreditCard, Payment } from "./transaction/payment";
 import { TransactionType } from "./api";
+import { TransactionErrorCode } from "../errors/types";
 
 async function expectEngineTransactionError(
   transaction: DirectAPI | TransactionRequest,
@@ -69,4 +70,16 @@ describe("TransparentQGW Db Engine", () => {
 
     expect(engine.send(baseCC)).resolves.toHaveProperty("result", "APPROVED");
   });
+
+  it("get a server transaction error due to incorrect gateway login", async () => {
+    const engine = new TransparentDbEngine("as;dlfkjas;lkj");
+
+    await expect(engine.send(baseCC)).rejects.toThrow(TransactionError);
+    await expect(engine.send(baseCC)).rejects.toThrow(
+      expect.objectContaining({
+        code: "ERR_SERVER_RESPONSE",
+      })
+    );
+  });
+
 });

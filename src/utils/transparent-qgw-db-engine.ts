@@ -166,4 +166,19 @@ export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   }
 }
 
-// TODO: Transform Quantum Gateway Response into a TransactionResponse
+
+/**
+ * Handles errors from the Quantum Gateway API
+ *
+ * @param response - The raw response string from the server
+ * @throws Generic Error if the response does not contain "APPROVED" or "DECLINED"
+ */
+function catchQuantumGatewayErrors(response: string) {
+  // If the response does not contain APPROVED or DECLINED, throw an error
+  if (!response.includes("APPROVED") && !response.includes("DECLINED")) {
+    throw new Error(
+      "Quantum Gateway Server Error Response: " + response + "\n"
+    );
+  }
+
+  }
