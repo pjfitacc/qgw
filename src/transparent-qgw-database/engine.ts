@@ -25,6 +25,7 @@ The only difference between this class and the Official TransQGWDb Engine is tha
 export class TransparentDbEngine {
   public gatewayLogin: string;
   static postURL: string = "https://secure.quantumgateway.com/cgi/tqgwdbe.php";
+  public strictMode: boolean = true; // Strict Mode set to true, makes library validate your input before sending it to the server.
 
   constructor(gatewayLogin: string) {
     this.gatewayLogin = gatewayLogin;
@@ -58,6 +59,9 @@ export class TransparentDbEngine {
   validate(
     directAPI: DirectAPI
   ): { success: true; data: DirectAPI } | { success: false; error: ZodError } {
+    if (!this.strictMode) {
+      return { success: true, data: directAPI };
+    }
     return apiSchema.safeParse(directAPI);
   }
 }
