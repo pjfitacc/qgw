@@ -1,4 +1,4 @@
-import { apiSchema } from "./api-validation";
+import { apiSchema } from "./validation";
 
 // Zod helpers for clean debugging
 function expectZodSuccess(parsed: ReturnType<typeof apiSchema.safeParse>) {

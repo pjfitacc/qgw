@@ -1,4 +1,4 @@
-import { DirectAPI } from "..";
+import { DirectAPI } from "../api";
 import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
 
 export type RecurringOptionsFields = {
