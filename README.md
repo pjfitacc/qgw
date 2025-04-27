@@ -24,3 +24,21 @@ Resources referred to when designing the API:
 Error Handling Tutorial:
 https://www.youtube.com/watch?v=EUYnERcOGpA
 (This API does not use node.js in any major way but we will mimic the way it creates custom errors.)
+
+# Publishing a new version to github and npm
+
+1. go to main branch
+2. change version number in package.json and package-lock.json
+3. git tag -a vMajor_Minor_Patch -m "message"
+4. git push origin vMajor_Minor_Patch (same tag version as step above)
+5. npm run build
+6. npm publish
+
+If using the qgw-test-consumer to try out new version features + fixes:
+
+- npm update
+
+# Deleting a version tag:
+
+1. git push --delete origin vMajor_Minor_patch
+2. git tag --delete vMajor_Minor_patch (same version as above)
