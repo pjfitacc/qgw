@@ -120,6 +120,22 @@ function parsePipeDelimitedResponse(htmlResponse: string): string[] {
   });
 }
 
+type RemoveUndefined<T> = {
+  [K in keyof T as T[K] extends undefined ? never : K]: T[K];
+};
+
+function filterUndefined<T extends object>(obj: T): RemoveUndefined<T> {
+  const result: Partial<T> = {};
+
+  for (const key in obj) {
+    if (obj[key] !== undefined) {
+      result[key] = obj[key];
+    }
+  }
+
+  return result as unknown as RemoveUndefined<T>;
+}
+
 /**
  * Posts data to the API and returns parsed pipe-delimited response
  *
@@ -131,7 +147,8 @@ function parsePipeDelimitedResponse(htmlResponse: string): string[] {
  */
 export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   const httpClient = createHttpClient();
-  const formData = toFormUrlEncoded(directAPI);
+  const filteredAPI = filterUndefined(directAPI);
+  const formData = toFormUrlEncoded(filteredAPI);
 
   try {
     const response: AxiosResponse<string> = await httpClient.post(

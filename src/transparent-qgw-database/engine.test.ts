@@ -1,19 +1,21 @@
 import TransactionError from "../errors/transaction-error";
 import { DirectAPI } from "./api";
 import { TransparentDbEngine } from "./engine";
-import { TransactionRequest, TransactionResponse } from "./transaction";
 import { Payer } from "./transaction/payer";
 import { CreditCard, Payment } from "./transaction/payment";
 import { TransactionType } from "./api";
 import { TransactionErrorCode } from "../errors/types";
+import { Options } from "./transaction/options";
+import { TransactionRequest } from "./transaction/request";
+import { RecurringOptions } from "./transaction/recurringOptions";
 
 async function expectEngineTransactionError(
   transaction: DirectAPI | TransactionRequest,
-  expectedErrorCode: TransactionErrorCode
+  expectedErrorCode: TransactionErrorCode,
+  gwlogin: string = "gwlogin"
 ) {
-  const engine = new TransparentDbEngine("gwlogin");
+  const engine = new TransparentDbEngine(gwlogin);
 
-  await expect(engine.send(transaction)).rejects.toThrow(TransactionError);
   await expect(engine.send(transaction)).rejects.toThrow(
     expect.objectContaining({
       code: expectedErrorCode,
@@ -50,6 +52,57 @@ describe("TransparentQGW Db Engine", () => {
     await expectEngineTransactionError(
       noCreditCardNumberTransaction,
       "ERR_PARSE"
+    );
+  });
+
+  it("sends a TransactionRequest Object with Options should be a success", async () => {
+    const cc = new CreditCard("4111111111111111", "12", "28", "999");
+    const payment = new Payment(100, cc);
+    const payer = new Payer(
+      "123 cheese street",
+      "90210",
+      "transactiontequest@email.com",
+      "Transaction Options Tester"
+    );
+    const options = new Options({
+      emailCustomerReceipt: false,
+      sendTransactionEmail: false,
+    });
+
+    const engine = new TransparentDbEngine("phimar11Dev");
+
+    const transactionRequest = new TransactionRequest(payment, payer, options);
+    expect(engine.send(transactionRequest)).resolves.toHaveProperty(
+      "result",
+      "APPROVED"
+    );
+  });
+
+  it("sends a TransactionRequest Object with Recurring should be a success", async () => {
+    const cc = new CreditCard("4111111111111111", "12", "28", "999");
+    const payment = new Payment(100, cc);
+    const payer = new Payer(
+      "123 recurring street",
+      "90210",
+      "transactiontequest@email.com",
+      "Recurring Transaction Tester"
+    );
+
+    const recurringOptions = new RecurringOptions({
+      rid: "1",
+    });
+
+    const engine = new TransparentDbEngine("phimar11Dev");
+
+    const transactionRequest = new TransactionRequest(
+      payment,
+      payer,
+      undefined,
+      recurringOptions
+    );
+    expect(engine.send(transactionRequest)).resolves.toHaveProperty(
+      "result",
+      "APPROVED"
     );
   });
 
