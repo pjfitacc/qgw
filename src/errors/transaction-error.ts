@@ -1,4 +1,4 @@
-import { TransactionResponse } from "../transparent-qgw-database/transaction";
+import { TransactionResponse } from "../transparent-qgw-database/transaction/response";
 import CustomError, { CustomIssue } from "./custom-error";
 import { TransactionErrorCode } from "./types";
 

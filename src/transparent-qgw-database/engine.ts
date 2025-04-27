@@ -1,12 +1,13 @@
 import { ZodError } from "zod";
 import { apiSchema } from "./api/validation";
-import { TransactionRequest, TransactionResponse } from "./transaction";
 import { DirectAPI } from "./api";
 import TransactionError from "../errors/transaction-error";
 import { postToServer } from "../utils/transparent-qgw-db-engine";
 import { AxiosError } from "axios";
 import { CustomIssue } from "../errors/custom-error";
 import { TransactionErrorCode } from "../errors/types";
+import { TransactionRequest } from "./transaction/request";
+import { TransactionResponse } from "./transaction/response";
 
 /*
 A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
