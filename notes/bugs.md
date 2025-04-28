@@ -73,6 +73,8 @@ const options = new Options({
 });
 ```
 
+**Bug Starts here**
+
 ```javascript
 // ** BUG EXISTS HERE WHEN THE PAYMENT AMOUNT IS SET TO A FLOAT **
 const paymentAmount = 19.99;
