@@ -24,7 +24,7 @@ import {
 const myQuantumGatewayLogin = "gwlogin";
 
 // Customer Dummy Data
-const paymentAmount = 19;
+const paymentAmount = 19.95;
 
 const ccNumber = "4111111111111111";
 const ccExpMonth = "12";
