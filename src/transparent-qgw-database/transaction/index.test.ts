@@ -2,11 +2,11 @@
 // Execute
 // Expect
 
-import { TransactionRequest } from ".";
 import { Options } from "./options";
 import { Payer } from "./payer";
 import { ElectronicFundsTransfer, Payment } from "./payment";
 import { RecurringOptions } from "./recurringOptions";
+import { TransactionRequest } from "./request";
 
 describe("TransactionRequest: Default TransQGW Options field values", () => {
   it("If TransactionRequest has blank options, the optional variables that it creates with the toAPI() method should be undefined", () => {
