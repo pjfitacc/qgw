@@ -13,7 +13,7 @@
 
 ### Official Document API Link
   - https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
-    - if this link is unavailable, a copy is available under this project's root directory: `./public/api/v1.0 QGW-Non-Interactive_API.pdf`
+    - if this link is unavailable, a copy is available under this project's root directory: `./public/api/official/v1.0 QGW-Non-Interactive_API.pdf`
 
 ### Type Safety and Checking Guarantees
     - Besides the type safety, no other checks are in place for the values like run time guarantees.
