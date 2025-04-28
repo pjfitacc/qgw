@@ -60,9 +60,16 @@ engine.send(transactionRequest);
 
 #### Diagrams
 
-##### UML Diagram
+##### Transparent Quantum Gateway Library UML
 
 <figure>    
     <img src="../../assets/Version 1 UML diagram.svg">
     <figcaption>Diagram made with <a href="https://github.com/demike/TsUML2">TsUML2</a></figcaption>
+</figure>
+
+##### TransparentDbEngine Class Functions Flow Diagram
+
+<figure>    
+    <img src="../../assets/TransactionDbEngine functions flowchart.svg">
+    <figcaption>Diagram made with <a href="https://lucid.app/lucidchart/6b600307-6ca9-4481-972b-ceff31ac10ee/edit?viewport_loc=-745%2C-375%2C6821%2C3927%2C0_0&invitationId=inv_45e8b426-b684-40e5-8ddc-1a0bf6871fc3">LucidChart</a></figcaption>
 </figure>
