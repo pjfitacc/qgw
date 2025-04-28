@@ -2,6 +2,8 @@
 
 ---
 
+Read the [Official API](https://www.quantumgateway.com/view_developer.php?Cat1=3) that this library is based off of.
+
 #### Example Usage
 
 ```javascript
