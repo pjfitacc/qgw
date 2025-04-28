@@ -16,13 +16,6 @@ export function toggle1or2(boolean?: boolean): "1" | "2" | undefined {
 }
 
 /**
- * Expected response structure from the Quantum Gateway API
- */
-interface QuantumGatewayResponse {
-  quantumGatewayTransactionResponse: string[];
-}
-
-/**
  * Configuration options for the HTTP client
  */
 interface HttpClientConfig {
