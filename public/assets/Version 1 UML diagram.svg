@@ -1,0 +1,621 @@
+<svg version="1.1" baseProfile="full" width="3382.8" height="1185.0" viewBox="0 0 3382.75 1185" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+
+[CustomError&lt;C&gt;|+message: string;+issues: CustomIssue\[\];+code?: C|]
+[&lt;interface&gt;CustomIssue|+code: any;+path?: (string \| number)\[\];+message: string|]
+[CustomError&lt;C&gt;]  - 0..* [CustomIssue]
+[TransactionError||]
+[&lt;interface&gt;TransactionDeclinedIssue|+serverResponse: TransactionResponse|]
+[CustomError&lt;C&gt;]&lt;:-[TransactionError]
+[CustomIssue]&lt;:--[TransactionDeclinedIssue]
+[TransactionDeclinedIssue]  -  [TransactionResponse]
+[TransparentDbEngine|+gatewayLogin: string;+static postURL: string;+strictMode: boolean|+send(): Promise&lt;TransactionResponse&gt;;+serverError(): TransactionError;+validate(): { success: true; data: DirectAPI; } \| { success: false; error: ZodError&lt;any&gt;; }]
+[&lt;interface&gt;HttpClientConfig|+baseURL: string;+timeout: number;+headers: Record&lt;string, string&gt;|]
+[&lt;enumeration&gt;TransactionType|&quot;CREDIT&quot;;&quot;SALES&quot;;&quot;AUTH_CAPTURE&quot;;&quot;AUTH_ONLY&quot;;&quot;RETURN&quot;;&quot;VOID&quot;;&quot;PREVIOUS_SALE&quot;]
+[&lt;type&gt;DirectAPI|+gwlogin: string;+trans_method?: &quot;CC&quot; \| &quot;EFT&quot;;+trans_type?: TransactionType;+transID?: string;+ccnum?: string;+ccmo?: string;+ccyr?: string;+aba?: string;+checkacct?: string;+amount: string;+BADDR1?: string;+BZIP1?: string;+BCUST_EMAIL?: string;+override_email_customer?: &quot;Y&quot; \| &quot;N&quot;;+override_trans_email?: &quot;Y&quot; \| &quot;N&quot;;+RestrictKey?: string;+BNAME?: string;+CVV2?: string;+CVVtype?: &quot;0&quot; \| &quot;1&quot; \| &quot;2&quot; \| &quot;9&quot;;+Dsep?: string;+MAXMIND?: &quot;1&quot; \| &quot;2&quot;;+override_recur?: &quot;Y&quot; \| &quot;N&quot;;+RID?: string;+initial_amount?: string;+recur_times?: string;+OverRideRecureDay?: &quot;Y&quot; \| &quot;N&quot;|]
+[DirectAPI]  -  [TransactionType]
+[Options|+directApiFields: DirectApiOptionsFields|]
+[&lt;type&gt;OptionsFields|+emailCustomerReceipt?: boolean;+sendTransactionEmail?: boolean;+transactionType?: TransactionType;+transactionID?: string;+restrictKey?: string;+dataSeparator?: string;+maxMindOn?: boolean|]
+[OptionsFields]  -  [TransactionType]
+[Payer|+directApiFields: PayerFields;+address: string;+zip: string;+email: string;+name: string|]
+[CreditCard|+kind: &quot;CC&quot;;+number: string;+expirationMonth: string;+expirationYear: string;+cvv2?: string;+cvvType?: CvvType|]
+[ElectronicFundsTransfer|+kind: &quot;EFT&quot;;+aba: string;+checkingAccountNumber: string|]
+[Payment|+directApiFields: CreditCardPaymentFields \| EftPaymentFields;+amount: number;+method: CreditCard \| ElectronicFundsTransfer|]
+[&lt;enumeration&gt;CvvType|&quot;Not Passing CVV2&quot;;&quot;CVV2 is being passed&quot;;&quot;CVV2 on card is unreadable&quot;;&quot;Card does not have CVV2 imprint&quot;]
+[CreditCard]  -  [CvvType]
+[Payment]  -  [CreditCard]
+[Payment]  -  [ElectronicFundsTransfer]
+[RecurringOptions|+directApiFields: DirectApiRecurringFields|]
+[&lt;type&gt;RecurringOptionsFields|+rid: string;+recurCycles?: number;+overrideRecurringPrice?: boolean;+initialAmount?: number;+overrideRecurringDay?: boolean|]
+[TransactionRequest|+payment: Payment;+payer: Payer;+options?: Options;+recurringOptions?: RecurringOptions|+toAPI(): DirectAPI]
+[TransactionRequest]  -  [Payment]
+[TransactionRequest]  -  [Payer]
+[TransactionRequest]  -  [Options]
+[TransactionRequest]  -  [RecurringOptions]
+[TransactionResponse|+result: &quot;APPROVED&quot; \| &quot;DECLINED&quot;;+authCode: string;+transID: string;+avrResponse: string;+cvvResponse: string;+maxScore: string;+declineReason?: string;+errorCode?: string;+last4Digits?: string;+creditCardProvider?: string|]
+[&lt;enumeration&gt;ServerResponseFieldIndexes|&quot;RESULT&quot;;&quot;AUTH_CODE&quot;;&quot;TRANS_ID&quot;;&quot;AVR_RESPONSE&quot;;&quot;CVV_RESPONSE&quot;;&quot;MAX_SCORE&quot;;&quot;DECLINE_REASON&quot;;&quot;ERROR_CODE&quot;]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="1185.0" width="3382.8" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#33322E" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<text x="134.5" y="537.0" stroke="none">0..*</text>
+<path d="M233.1 291.0 L169.5 497 L169.5 545 L169.5 545.0 " fill="none"></path>
+<path d="M348.2 297.9 L680.25 497 L680.25 573.5 L680.3 573.5 " fill="none"></path>
+<path d="M351.0 293.3 L348.2 297.9 L345.5 302.4 L336.8 291.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M169.5 663.3 L169.5 698 L169.5 758.5 L169.5 758.5 " fill="none"></path>
+</g>
+<path d="M174.8 663.3 L169.5 663.3 L164.2 663.3 L169.5 650.0 Z"></path>
+<path d="M169.5 830.5 L169.5 891 L169.5 911 L169.5 911.0 " fill="none"></path>
+<path d="M1243.3 477.0 L1243.25 497 L1252.1554726368158 517 L1252.2 517.0 " fill="none"></path>
+<path d="M1589.8 323.0 L1589.75 497 L1371.5 569.6897265948633 L1371.5 569.7 " fill="none"></path>
+<path d="M1555.3 871.0 L1555.25 891 L1555.25 963.5 L1555.3 963.5 " fill="none"></path>
+<path d="M2434.8 619.9 L1555.25 698 L1555.25 718 L1555.3 718.0 " fill="none"></path>
+<path d="M2760.9 650.0 L2828.25 698 L2828.25 742 L2828.3 742.0 " fill="none"></path>
+<path d="M2537.9 311.0 L2687.25 497 L2687.25 545 L2687.3 545.0 " fill="none"></path>
+<path d="M2421.6 311.0 L2272.25 497 L2272.25 529 L2272.3 529.0 " fill="none"></path>
+<path d="M2329.6 311.0 L1944.25 497 L1944.25 561.5 L1944.3 561.5 " fill="none"></path>
+<path d="M2637.8 299.1 L3153.25 497 L3153.25 561.5 L3153.3 561.5 " fill="none"></path>
+<g data-name="CustomError&lt;C&gt;">
+<g fill="#eee8d5" stroke="#33322E" data-name="CustomError&lt;C&gt;">
+<rect x="149.3" y="186.0" height="105.0" width="200.0" data-name="CustomError&lt;C&gt;"></rect>
+<path d="M149.3 218.0 L349.3 218.0" fill="none" data-name="CustomError&lt;C&gt;"></path>
+<path d="M149.3 283.0 L349.3 283.0" fill="none" data-name="CustomError&lt;C&gt;"></path>
+</g>
+<g transform="translate(149.25, 186)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CustomError&lt;C&gt;" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CustomError&lt;C&gt;" data-compartment="0">
+<a id="src/errors/custom-error.ts.CustomError&lt;C&gt;" xlink:href="src/errors/custom-error.ts"><text x="92.0" y="14.1" stroke="none" text-anchor="middle" data-name="CustomError&lt;C&gt;" data-compartment="0">CustomError&lt;C&gt;</text></a>
+
+</g>
+</g>
+<g transform="translate(149.25, 218)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CustomError&lt;C&gt;" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CustomError&lt;C&gt;" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="CustomError&lt;C&gt;" data-compartment="1">+message: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="CustomError&lt;C&gt;" data-compartment="1">+issues: CustomIssue[]</text>
+<text x="0.0" y="46.5" stroke="none" data-name="CustomError&lt;C&gt;" data-compartment="1">+code?: C</text>
+
+</g>
+</g>
+<g transform="translate(149.25, 283)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CustomError&lt;C&gt;" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CustomError&lt;C&gt;" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="CustomIssue">
+<g fill="lightblue" stroke="#33322E" data-name="CustomIssue">
+<rect x="58.5" y="545.0" height="105.0" width="222.0" data-name="CustomIssue"></rect>
+<path d="M58.5 577.0 L280.5 577.0" fill="none" data-name="CustomIssue"></path>
+<path d="M58.5 642.0 L280.5 642.0" fill="none" data-name="CustomIssue"></path>
+</g>
+<g transform="translate(58.5, 545)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CustomIssue" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CustomIssue" data-compartment="0">
+<a id="src/errors/custom-error.ts.CustomIssue" xlink:href="src/errors/custom-error.ts"><text x="103.0" y="14.1" stroke="none" text-anchor="middle" data-name="CustomIssue" data-compartment="0">CustomIssue</text></a>
+
+</g>
+</g>
+<g transform="translate(58.5, 577)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CustomIssue" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CustomIssue" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="CustomIssue" data-compartment="1">+code: any</text>
+<text x="0.0" y="30.3" stroke="none" data-name="CustomIssue" data-compartment="1">+path?: (string | number)[]</text>
+<text x="0.0" y="46.5" stroke="none" data-name="CustomIssue" data-compartment="1">+message: string</text>
+
+</g>
+</g>
+<g transform="translate(58.5, 642)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CustomIssue" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CustomIssue" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransactionError">
+<g fill="#eee8d5" stroke="#33322E" data-name="TransactionError">
+<rect x="606.3" y="573.5" height="48.0" width="148.0" data-name="TransactionError"></rect>
+<path d="M606.3 605.5 L754.3 605.5" fill="none" data-name="TransactionError"></path>
+<path d="M606.3 613.5 L754.3 613.5" fill="none" data-name="TransactionError"></path>
+</g>
+<g transform="translate(606.25, 573.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TransactionError" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransactionError" data-compartment="0">
+<a id="src/errors/transaction-error.ts.TransactionError" xlink:href="src/errors/transaction-error.ts"><text x="66.0" y="14.1" stroke="none" text-anchor="middle" data-name="TransactionError" data-compartment="0">TransactionError</text></a>
+
+</g>
+</g>
+<g transform="translate(606.25, 605.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionError" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TransactionError" data-compartment="1">
+
+</g>
+</g>
+<g transform="translate(606.25, 613.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionError" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TransactionError" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransactionDeclinedIssue">
+<g fill="lightblue" stroke="#33322E" data-name="TransactionDeclinedIssue">
+<rect x="0.0" y="758.5" height="72.0" width="339.0" data-name="TransactionDeclinedIssue"></rect>
+<path d="M0.0 790.5 L339.0 790.5" fill="none" data-name="TransactionDeclinedIssue"></path>
+<path d="M0.0 822.5 L339.0 822.5" fill="none" data-name="TransactionDeclinedIssue"></path>
+</g>
+<g transform="translate(0, 758.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionDeclinedIssue" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransactionDeclinedIssue" data-compartment="0">
+<a id="src/errors/transaction-error.ts.TransactionDeclinedIssue" xlink:href="src/errors/transaction-error.ts"><text x="161.5" y="14.1" stroke="none" text-anchor="middle" data-name="TransactionDeclinedIssue" data-compartment="0">TransactionDeclinedIssue</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 790.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionDeclinedIssue" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionDeclinedIssue" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TransactionDeclinedIssue" data-compartment="1">+serverResponse: TransactionResponse</text>
+
+</g>
+</g>
+<g transform="translate(0, 822.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionDeclinedIssue" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TransactionDeclinedIssue" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransactionResponse">
+<g fill="#eee8d5" stroke="#33322E" data-name="TransactionResponse">
+<rect x="21.5" y="911.0" height="218.0" width="296.0" data-name="TransactionResponse"></rect>
+<path d="M21.5 943.0 L317.5 943.0" fill="none" data-name="TransactionResponse"></path>
+<path d="M21.5 1121.0 L317.5 1121.0" fill="none" data-name="TransactionResponse"></path>
+</g>
+<g transform="translate(21.5, 911)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TransactionResponse" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransactionResponse" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/response.ts.TransactionResponse" xlink:href="src/transparent-qgw-database/transaction/response.ts"><text x="140.0" y="14.1" stroke="none" text-anchor="middle" data-name="TransactionResponse" data-compartment="0">TransactionResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(21.5, 943)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionResponse" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionResponse" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TransactionResponse" data-compartment="1">+result: &quot;APPROVED&quot; | &quot;DECLINED&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransactionResponse" data-compartment="1">+authCode: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="TransactionResponse" data-compartment="1">+transID: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="TransactionResponse" data-compartment="1">+avrResponse: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="TransactionResponse" data-compartment="1">+cvvResponse: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="TransactionResponse" data-compartment="1">+maxScore: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="TransactionResponse" data-compartment="1">+declineReason?: string</text>
+<text x="0.0" y="127.5" stroke="none" data-name="TransactionResponse" data-compartment="1">+errorCode?: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="TransactionResponse" data-compartment="1">+last4Digits?: string</text>
+<text x="0.0" y="159.9" stroke="none" data-name="TransactionResponse" data-compartment="1">+creditCardProvider?: string</text>
+
+</g>
+</g>
+<g transform="translate(21.5, 1121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionResponse" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TransactionResponse" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransparentDbEngine">
+<g fill="#eee8d5" stroke="#33322E" data-name="TransparentDbEngine">
+<rect x="389.3" y="125.5" height="226.0" width="344.0" data-name="TransparentDbEngine"></rect>
+<path d="M389.3 157.5 L733.3 157.5" fill="none" data-name="TransparentDbEngine"></path>
+<path d="M389.3 222.5 L733.3 222.5" fill="none" data-name="TransparentDbEngine"></path>
+</g>
+<g transform="translate(389.25, 125.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TransparentDbEngine" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransparentDbEngine" data-compartment="0">
+<a id="src/transparent-qgw-database/engine.ts.TransparentDbEngine" xlink:href="src/transparent-qgw-database/engine.ts"><text x="164.0" y="14.1" stroke="none" text-anchor="middle" data-name="TransparentDbEngine" data-compartment="0">TransparentDbEngine</text></a>
+
+</g>
+</g>
+<g transform="translate(389.25, 157.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransparentDbEngine" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransparentDbEngine" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TransparentDbEngine" data-compartment="1">+gatewayLogin: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransparentDbEngine" data-compartment="1">+static postURL: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="TransparentDbEngine" data-compartment="1">+strictMode: boolean</text>
+
+</g>
+</g>
+<g transform="translate(389.25, 222.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransparentDbEngine" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransparentDbEngine" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="TransparentDbEngine" data-compartment="2">+send(): Promise&lt;TransactionResponse&gt;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransparentDbEngine" data-compartment="2">+serverError(): TransactionError</text>
+<text x="0.0" y="46.5" stroke="none" data-name="TransparentDbEngine" data-compartment="2">+validate(): { success: true</text>
+<text x="0.0" y="62.7" stroke="none" data-name="TransparentDbEngine" data-compartment="2">data: DirectAPI</text>
+<text x="0.0" y="78.9" stroke="none" data-name="TransparentDbEngine" data-compartment="2">} | { success: false</text>
+<text x="0.0" y="95.1" stroke="none" data-name="TransparentDbEngine" data-compartment="2">error: ZodError&lt;any&gt;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="TransparentDbEngine" data-compartment="2">}</text>
+
+</g>
+</g>
+</g>
+<g data-name="HttpClientConfig">
+<g fill="lightblue" stroke="#33322E" data-name="HttpClientConfig">
+<rect x="773.3" y="186.0" height="105.0" width="276.0" data-name="HttpClientConfig"></rect>
+<path d="M773.3 218.0 L1049.3 218.0" fill="none" data-name="HttpClientConfig"></path>
+<path d="M773.3 283.0 L1049.3 283.0" fill="none" data-name="HttpClientConfig"></path>
+</g>
+<g transform="translate(773.25, 186)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HttpClientConfig" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="HttpClientConfig" data-compartment="0">
+<a id="src/utils/transparent-qgw-db-engine.ts.HttpClientConfig" xlink:href="src/utils/transparent-qgw-db-engine.ts"><text x="130.0" y="14.1" stroke="none" text-anchor="middle" data-name="HttpClientConfig" data-compartment="0">HttpClientConfig</text></a>
+
+</g>
+</g>
+<g transform="translate(773.25, 218)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HttpClientConfig" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="HttpClientConfig" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="HttpClientConfig" data-compartment="1">+baseURL: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="HttpClientConfig" data-compartment="1">+timeout: number</text>
+<text x="0.0" y="46.5" stroke="none" data-name="HttpClientConfig" data-compartment="1">+headers: Record&lt;string, string&gt;</text>
+
+</g>
+</g>
+<g transform="translate(773.25, 283)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="HttpClientConfig" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="HttpClientConfig" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransactionType">
+<g fill="lightgreen" stroke="#33322E" data-name="TransactionType">
+<rect x="1204.5" y="517.0" height="161.0" width="167.0" data-name="TransactionType"></rect>
+<path d="M1204.5 549.0 L1371.5 549.0" fill="none" data-name="TransactionType"></path>
+</g>
+<g transform="translate(1204.5, 517)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionType" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransactionType" data-compartment="0">
+<a id="src/transparent-qgw-database/api/index.ts.TransactionType" xlink:href="src/transparent-qgw-database/api/index.ts"><text x="75.5" y="14.1" stroke="none" text-anchor="middle" data-name="TransactionType" data-compartment="0">TransactionType</text></a>
+
+</g>
+</g>
+<g transform="translate(1204.5, 549)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionType" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionType" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TransactionType" data-compartment="1">&quot;CREDIT&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransactionType" data-compartment="1">&quot;SALES&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="TransactionType" data-compartment="1">&quot;AUTH_CAPTURE&quot;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="TransactionType" data-compartment="1">&quot;AUTH_ONLY&quot;</text>
+<text x="0.0" y="78.9" stroke="none" data-name="TransactionType" data-compartment="1">&quot;RETURN&quot;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="TransactionType" data-compartment="1">&quot;VOID&quot;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="TransactionType" data-compartment="1">&quot;PREVIOUS_SALE&quot;</text>
+
+</g>
+</g>
+</g>
+<g data-name="DirectAPI">
+<g fill="lightgray" stroke="#33322E" data-name="DirectAPI">
+<rect x="1089.3" y="0.0" height="477.0" width="308.0" data-name="DirectAPI"></rect>
+<path d="M1089.3 32.0 L1397.3 32.0" fill="none" data-name="DirectAPI"></path>
+<path d="M1089.3 469.0 L1397.3 469.0" fill="none" data-name="DirectAPI"></path>
+</g>
+<g transform="translate(1089.25, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DirectAPI" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DirectAPI" data-compartment="0">
+<a id="src/transparent-qgw-database/api/index.ts.DirectAPI" xlink:href="src/transparent-qgw-database/api/index.ts"><text x="146.0" y="14.1" stroke="none" text-anchor="middle" data-name="DirectAPI" data-compartment="0">DirectAPI</text></a>
+
+</g>
+</g>
+<g transform="translate(1089.25, 32)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DirectAPI" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DirectAPI" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="DirectAPI" data-compartment="1">+gwlogin: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="DirectAPI" data-compartment="1">+trans_method?: &quot;CC&quot; | &quot;EFT&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="DirectAPI" data-compartment="1">+trans_type?: TransactionType</text>
+<text x="0.0" y="62.7" stroke="none" data-name="DirectAPI" data-compartment="1">+transID?: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="DirectAPI" data-compartment="1">+ccnum?: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="DirectAPI" data-compartment="1">+ccmo?: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="DirectAPI" data-compartment="1">+ccyr?: string</text>
+<text x="0.0" y="127.5" stroke="none" data-name="DirectAPI" data-compartment="1">+aba?: string</text>
+<text x="0.0" y="143.7" stroke="none" data-name="DirectAPI" data-compartment="1">+checkacct?: string</text>
+<text x="0.0" y="159.9" stroke="none" data-name="DirectAPI" data-compartment="1">+amount: string</text>
+<text x="0.0" y="176.1" stroke="none" data-name="DirectAPI" data-compartment="1">+BADDR1?: string</text>
+<text x="0.0" y="192.3" stroke="none" data-name="DirectAPI" data-compartment="1">+BZIP1?: string</text>
+<text x="0.0" y="208.5" stroke="none" data-name="DirectAPI" data-compartment="1">+BCUST_EMAIL?: string</text>
+<text x="0.0" y="224.7" stroke="none" data-name="DirectAPI" data-compartment="1">+override_email_customer?: &quot;Y&quot; | &quot;N&quot;</text>
+<text x="0.0" y="240.9" stroke="none" data-name="DirectAPI" data-compartment="1">+override_trans_email?: &quot;Y&quot; | &quot;N&quot;</text>
+<text x="0.0" y="257.1" stroke="none" data-name="DirectAPI" data-compartment="1">+RestrictKey?: string</text>
+<text x="0.0" y="273.3" stroke="none" data-name="DirectAPI" data-compartment="1">+BNAME?: string</text>
+<text x="0.0" y="289.5" stroke="none" data-name="DirectAPI" data-compartment="1">+CVV2?: string</text>
+<text x="0.0" y="305.7" stroke="none" data-name="DirectAPI" data-compartment="1">+CVVtype?: &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;9&quot;</text>
+<text x="0.0" y="321.9" stroke="none" data-name="DirectAPI" data-compartment="1">+Dsep?: string</text>
+<text x="0.0" y="338.1" stroke="none" data-name="DirectAPI" data-compartment="1">+MAXMIND?: &quot;1&quot; | &quot;2&quot;</text>
+<text x="0.0" y="354.3" stroke="none" data-name="DirectAPI" data-compartment="1">+override_recur?: &quot;Y&quot; | &quot;N&quot;</text>
+<text x="0.0" y="370.5" stroke="none" data-name="DirectAPI" data-compartment="1">+RID?: string</text>
+<text x="0.0" y="386.7" stroke="none" data-name="DirectAPI" data-compartment="1">+initial_amount?: string</text>
+<text x="0.0" y="402.9" stroke="none" data-name="DirectAPI" data-compartment="1">+recur_times?: string</text>
+<text x="0.0" y="419.1" stroke="none" data-name="DirectAPI" data-compartment="1">+OverRideRecureDay?: &quot;Y&quot; | &quot;N&quot;</text>
+
+</g>
+</g>
+<g transform="translate(1089.25, 469)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DirectAPI" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DirectAPI" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="Options">
+<g fill="#eee8d5" stroke="#33322E" data-name="Options">
+<rect x="1778.8" y="561.5" height="72.0" width="331.0" data-name="Options"></rect>
+<path d="M1778.8 593.5 L2109.8 593.5" fill="none" data-name="Options"></path>
+<path d="M1778.8 625.5 L2109.8 625.5" fill="none" data-name="Options"></path>
+</g>
+<g transform="translate(1778.75, 561.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Options" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Options" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/options.ts.Options" xlink:href="src/transparent-qgw-database/transaction/options.ts"><text x="157.5" y="14.1" stroke="none" text-anchor="middle" data-name="Options" data-compartment="0">Options</text></a>
+
+</g>
+</g>
+<g transform="translate(1778.75, 593.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Options" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Options" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Options" data-compartment="1">+directApiFields: DirectApiOptionsFields</text>
+
+</g>
+</g>
+<g transform="translate(1778.75, 625.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Options" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Options" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="OptionsFields">
+<g fill="lightgray" stroke="#33322E" data-name="OptionsFields">
+<rect x="1437.3" y="154.0" height="169.0" width="305.0" data-name="OptionsFields"></rect>
+<path d="M1437.3 186.0 L1742.3 186.0" fill="none" data-name="OptionsFields"></path>
+<path d="M1437.3 315.0 L1742.3 315.0" fill="none" data-name="OptionsFields"></path>
+</g>
+<g transform="translate(1437.25, 154)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="OptionsFields" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="OptionsFields" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/options.ts.OptionsFields" xlink:href="src/transparent-qgw-database/transaction/options.ts"><text x="144.5" y="14.1" stroke="none" text-anchor="middle" data-name="OptionsFields" data-compartment="0">OptionsFields</text></a>
+
+</g>
+</g>
+<g transform="translate(1437.25, 186)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="OptionsFields" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="OptionsFields" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="OptionsFields" data-compartment="1">+emailCustomerReceipt?: boolean</text>
+<text x="0.0" y="30.3" stroke="none" data-name="OptionsFields" data-compartment="1">+sendTransactionEmail?: boolean</text>
+<text x="0.0" y="46.5" stroke="none" data-name="OptionsFields" data-compartment="1">+transactionType?: TransactionType</text>
+<text x="0.0" y="62.7" stroke="none" data-name="OptionsFields" data-compartment="1">+transactionID?: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="OptionsFields" data-compartment="1">+restrictKey?: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="OptionsFields" data-compartment="1">+dataSeparator?: string</text>
+<text x="0.0" y="111.3" stroke="none" data-name="OptionsFields" data-compartment="1">+maxMindOn?: boolean</text>
+
+</g>
+</g>
+<g transform="translate(1437.25, 315)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="OptionsFields" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="OptionsFields" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="Payer">
+<g fill="#eee8d5" stroke="#33322E" data-name="Payer">
+<rect x="2149.8" y="529.0" height="137.0" width="245.0" data-name="Payer"></rect>
+<path d="M2149.8 561.0 L2394.8 561.0" fill="none" data-name="Payer"></path>
+<path d="M2149.8 658.0 L2394.8 658.0" fill="none" data-name="Payer"></path>
+</g>
+<g transform="translate(2149.75, 529)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Payer" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Payer" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/payer.ts.Payer" xlink:href="src/transparent-qgw-database/transaction/payer.ts"><text x="114.5" y="14.1" stroke="none" text-anchor="middle" data-name="Payer" data-compartment="0">Payer</text></a>
+
+</g>
+</g>
+<g transform="translate(2149.75, 561)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Payer" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Payer" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Payer" data-compartment="1">+directApiFields: PayerFields</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Payer" data-compartment="1">+address: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Payer" data-compartment="1">+zip: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="Payer" data-compartment="1">+email: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="Payer" data-compartment="1">+name: string</text>
+
+</g>
+</g>
+<g transform="translate(2149.75, 658)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Payer" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Payer" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="CreditCard">
+<g fill="#eee8d5" stroke="#33322E" data-name="CreditCard">
+<rect x="1451.8" y="718.0" height="153.0" width="207.0" data-name="CreditCard"></rect>
+<path d="M1451.8 750.0 L1658.8 750.0" fill="none" data-name="CreditCard"></path>
+<path d="M1451.8 863.0 L1658.8 863.0" fill="none" data-name="CreditCard"></path>
+</g>
+<g transform="translate(1451.75, 718)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="CreditCard" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CreditCard" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/payment.ts.CreditCard" xlink:href="src/transparent-qgw-database/transaction/payment.ts"><text x="95.5" y="14.1" stroke="none" text-anchor="middle" data-name="CreditCard" data-compartment="0">CreditCard</text></a>
+
+</g>
+</g>
+<g transform="translate(1451.75, 750)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreditCard" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CreditCard" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="CreditCard" data-compartment="1">+kind: &quot;CC&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="CreditCard" data-compartment="1">+number: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="CreditCard" data-compartment="1">+expirationMonth: string</text>
+<text x="0.0" y="62.7" stroke="none" data-name="CreditCard" data-compartment="1">+expirationYear: string</text>
+<text x="0.0" y="78.9" stroke="none" data-name="CreditCard" data-compartment="1">+cvv2?: string</text>
+<text x="0.0" y="95.1" stroke="none" data-name="CreditCard" data-compartment="1">+cvvType?: CvvType</text>
+
+</g>
+</g>
+<g transform="translate(1451.75, 863)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CreditCard" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CreditCard" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="ElectronicFundsTransfer">
+<g fill="#eee8d5" stroke="#33322E" data-name="ElectronicFundsTransfer">
+<rect x="2689.8" y="742.0" height="105.0" width="277.0" data-name="ElectronicFundsTransfer"></rect>
+<path d="M2689.8 774.0 L2966.8 774.0" fill="none" data-name="ElectronicFundsTransfer"></path>
+<path d="M2689.8 839.0 L2966.8 839.0" fill="none" data-name="ElectronicFundsTransfer"></path>
+</g>
+<g transform="translate(2689.75, 742)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="ElectronicFundsTransfer" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ElectronicFundsTransfer" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/payment.ts.ElectronicFundsTransfer" xlink:href="src/transparent-qgw-database/transaction/payment.ts"><text x="130.5" y="14.1" stroke="none" text-anchor="middle" data-name="ElectronicFundsTransfer" data-compartment="0">ElectronicFundsTransfer</text></a>
+
+</g>
+</g>
+<g transform="translate(2689.75, 774)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ElectronicFundsTransfer" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ElectronicFundsTransfer" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="ElectronicFundsTransfer" data-compartment="1">+kind: &quot;EFT&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="ElectronicFundsTransfer" data-compartment="1">+aba: string</text>
+<text x="0.0" y="46.5" stroke="none" data-name="ElectronicFundsTransfer" data-compartment="1">+checkingAccountNumber: string</text>
+
+</g>
+</g>
+<g transform="translate(2689.75, 839)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ElectronicFundsTransfer" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ElectronicFundsTransfer" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="Payment">
+<g fill="#eee8d5" stroke="#33322E" data-name="Payment">
+<rect x="2434.8" y="545.0" height="105.0" width="505.0" data-name="Payment"></rect>
+<path d="M2434.8 577.0 L2939.8 577.0" fill="none" data-name="Payment"></path>
+<path d="M2434.8 642.0 L2939.8 642.0" fill="none" data-name="Payment"></path>
+</g>
+<g transform="translate(2434.75, 545)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Payment" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Payment" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/payment.ts.Payment" xlink:href="src/transparent-qgw-database/transaction/payment.ts"><text x="244.5" y="14.1" stroke="none" text-anchor="middle" data-name="Payment" data-compartment="0">Payment</text></a>
+
+</g>
+</g>
+<g transform="translate(2434.75, 577)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Payment" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Payment" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="Payment" data-compartment="1">+directApiFields: CreditCardPaymentFields | EftPaymentFields</text>
+<text x="0.0" y="30.3" stroke="none" data-name="Payment" data-compartment="1">+amount: number</text>
+<text x="0.0" y="46.5" stroke="none" data-name="Payment" data-compartment="1">+method: CreditCard | ElectronicFundsTransfer</text>
+
+</g>
+</g>
+<g transform="translate(2434.75, 642)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Payment" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Payment" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="CvvType">
+<g fill="lightgreen" stroke="#33322E" data-name="CvvType">
+<rect x="1409.8" y="963.5" height="113.0" width="291.0" data-name="CvvType"></rect>
+<path d="M1409.8 995.5 L1700.8 995.5" fill="none" data-name="CvvType"></path>
+</g>
+<g transform="translate(1409.75, 963.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CvvType" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CvvType" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/payment.ts.CvvType" xlink:href="src/transparent-qgw-database/transaction/payment.ts"><text x="137.5" y="14.1" stroke="none" text-anchor="middle" data-name="CvvType" data-compartment="0">CvvType</text></a>
+
+</g>
+</g>
+<g transform="translate(1409.75, 995.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CvvType" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CvvType" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="CvvType" data-compartment="1">&quot;Not Passing CVV2&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="CvvType" data-compartment="1">&quot;CVV2 is being passed&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="CvvType" data-compartment="1">&quot;CVV2 on card is unreadable&quot;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="CvvType" data-compartment="1">&quot;Card does not have CVV2 imprint&quot;</text>
+
+</g>
+</g>
+</g>
+<g data-name="RecurringOptions">
+<g fill="#eee8d5" stroke="#33322E" data-name="RecurringOptions">
+<rect x="2979.8" y="561.5" height="72.0" width="347.0" data-name="RecurringOptions"></rect>
+<path d="M2979.8 593.5 L3326.8 593.5" fill="none" data-name="RecurringOptions"></path>
+<path d="M2979.8 625.5 L3326.8 625.5" fill="none" data-name="RecurringOptions"></path>
+</g>
+<g transform="translate(2979.75, 561.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="RecurringOptions" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RecurringOptions" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/recurringOptions.ts.RecurringOptions" xlink:href="src/transparent-qgw-database/transaction/recurringOptions.ts"><text x="165.5" y="14.1" stroke="none" text-anchor="middle" data-name="RecurringOptions" data-compartment="0">RecurringOptions</text></a>
+
+</g>
+</g>
+<g transform="translate(2979.75, 593.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RecurringOptions" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RecurringOptions" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="RecurringOptions" data-compartment="1">+directApiFields: DirectApiRecurringFields</text>
+
+</g>
+</g>
+<g transform="translate(2979.75, 625.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RecurringOptions" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RecurringOptions" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="RecurringOptionsFields">
+<g fill="lightgray" stroke="#33322E" data-name="RecurringOptionsFields">
+<rect x="1782.3" y="170.0" height="137.0" width="292.0" data-name="RecurringOptionsFields"></rect>
+<path d="M1782.3 202.0 L2074.3 202.0" fill="none" data-name="RecurringOptionsFields"></path>
+<path d="M1782.3 299.0 L2074.3 299.0" fill="none" data-name="RecurringOptionsFields"></path>
+</g>
+<g transform="translate(1782.25, 170)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RecurringOptionsFields" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RecurringOptionsFields" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/recurringOptions.ts.RecurringOptionsFields" xlink:href="src/transparent-qgw-database/transaction/recurringOptions.ts"><text x="138.0" y="14.1" stroke="none" text-anchor="middle" data-name="RecurringOptionsFields" data-compartment="0">RecurringOptionsFields</text></a>
+
+</g>
+</g>
+<g transform="translate(1782.25, 202)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RecurringOptionsFields" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RecurringOptionsFields" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="RecurringOptionsFields" data-compartment="1">+rid: string</text>
+<text x="0.0" y="30.3" stroke="none" data-name="RecurringOptionsFields" data-compartment="1">+recurCycles?: number</text>
+<text x="0.0" y="46.5" stroke="none" data-name="RecurringOptionsFields" data-compartment="1">+overrideRecurringPrice?: boolean</text>
+<text x="0.0" y="62.7" stroke="none" data-name="RecurringOptionsFields" data-compartment="1">+initialAmount?: number</text>
+<text x="0.0" y="78.9" stroke="none" data-name="RecurringOptionsFields" data-compartment="1">+overrideRecurringDay?: boolean</text>
+
+</g>
+</g>
+<g transform="translate(1782.25, 299)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RecurringOptionsFields" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RecurringOptionsFields" data-compartment="2">
+
+</g>
+</g>
+</g>
+<g data-name="TransactionRequest">
+<g fill="#eee8d5" stroke="#33322E" data-name="TransactionRequest">
+<rect x="2321.8" y="166.0" height="145.0" width="316.0" data-name="TransactionRequest"></rect>
+<path d="M2321.8 198.0 L2637.8 198.0" fill="none" data-name="TransactionRequest"></path>
+<path d="M2321.8 279.0 L2637.8 279.0" fill="none" data-name="TransactionRequest"></path>
+</g>
+<g transform="translate(2321.75, 166)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="TransactionRequest" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TransactionRequest" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/request.ts.TransactionRequest" xlink:href="src/transparent-qgw-database/transaction/request.ts"><text x="150.0" y="14.1" stroke="none" text-anchor="middle" data-name="TransactionRequest" data-compartment="0">TransactionRequest</text></a>
+
+</g>
+</g>
+<g transform="translate(2321.75, 198)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionRequest" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionRequest" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="TransactionRequest" data-compartment="1">+payment: Payment</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransactionRequest" data-compartment="1">+payer: Payer</text>
+<text x="0.0" y="46.5" stroke="none" data-name="TransactionRequest" data-compartment="1">+options?: Options</text>
+<text x="0.0" y="62.7" stroke="none" data-name="TransactionRequest" data-compartment="1">+recurringOptions?: RecurringOptions</text>
+
+</g>
+</g>
+<g transform="translate(2321.75, 279)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionRequest" data-compartment="2">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionRequest" data-compartment="2">
+<text x="0.0" y="14.1" stroke="none" data-name="TransactionRequest" data-compartment="2">+toAPI(): DirectAPI</text>
+
+</g>
+</g>
+</g>
+<g data-name="ServerResponseFieldIndexes">
+<g fill="lightgreen" stroke="#33322E" data-name="ServerResponseFieldIndexes">
+<rect x="2677.8" y="149.5" height="178.0" width="249.0" data-name="ServerResponseFieldIndexes"></rect>
+<path d="M2677.8 181.5 L2926.8 181.5" fill="none" data-name="ServerResponseFieldIndexes"></path>
+</g>
+<g transform="translate(2677.75, 149.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ServerResponseFieldIndexes" data-compartment="0">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ServerResponseFieldIndexes" data-compartment="0">
+<a id="src/transparent-qgw-database/transaction/response.ts.ServerResponseFieldIndexes" xlink:href="src/transparent-qgw-database/transaction/response.ts"><text x="116.5" y="14.1" stroke="none" text-anchor="middle" data-name="ServerResponseFieldIndexes" data-compartment="0">ServerResponseFieldIndexes</text></a>
+
+</g>
+</g>
+<g transform="translate(2677.75, 181.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ServerResponseFieldIndexes" data-compartment="1">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ServerResponseFieldIndexes" data-compartment="1">
+<text x="0.0" y="14.1" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;RESULT&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;AUTH_CODE&quot;</text>
+<text x="0.0" y="46.5" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;TRANS_ID&quot;</text>
+<text x="0.0" y="62.7" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;AVR_RESPONSE&quot;</text>
+<text x="0.0" y="78.9" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;CVV_RESPONSE&quot;</text>
+<text x="0.0" y="95.1" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;MAX_SCORE&quot;</text>
+<text x="0.0" y="111.3" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;DECLINE_REASON&quot;</text>
+<text x="0.0" y="127.5" stroke="none" data-name="ServerResponseFieldIndexes" data-compartment="1">&quot;ERROR_CODE&quot;</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
