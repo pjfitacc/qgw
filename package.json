@@ -40,6 +40,7 @@
     "axios": "^1.9.0",
     "class-transformer": "^0.5.1",
     "reflect-metadata": "^0.2.2",
+    "typedoc": "^0.28.3",
     "zod": "^3.24.3"
   }
 }

@@ -1,24 +1,25 @@
-/*
-Description:
-    This API type is an exact clone of QGW's Transparent Database Engine Official Document API here:
-    https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
-    Because this API type is virtually the same as the Official API, we call it a "DIRECT" API,
-    as if we're using the interface exactly laid out as how QGW intended it.
-    Since the doc has no version, we will version this document and its content: v1.0
+/**
+### Description
+  This API type is an exact clone of QGW's Transparent Database Engine Official Document API here:
+  
+  https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
+  
+  Because this API type is virtually the same as the Official API, we call it a "DIRECT" API,
+  as if we're using the interface exactly laid out as how QGW intended it.
+  Since the doc has no version, we will version this document and its content: v1.0
 
-Version: v1.0
+### API Version
+  - v1.0
 
-Official Document API Link:
-    - https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
-    - under the root ./documents/v1.0/QGW-Non-Interactive_API.pdf
+### Official Document API Link
+  - https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
+    - if this link is unavailable, a copy is available under this project's root directory: `./public/api/v1.0 QGW-Non-Interactive_API.pdf`
 
-
-NOTES
-----
-Type Safety and Checking Guarantees:
+### Type Safety and Checking Guarantees
     - Besides the type safety, no other checks are in place for the values like run time guarantees.
 
-This DirectAPI type follows the Document's API exactly based on these criteria:
+### API Formatting Followed 
+    This DirectAPI type follows the Document's API exactly based on these criteria:
     Variables:
         - name + casing
         - ordering exactly like the way the Document orders it.
@@ -79,8 +80,7 @@ DIFFERENCES: Where this Library's DirectAPI becomes opinionated and diverges fro
 
           The rest of the reuirqed values though like gwlogin and amount are actually required in the DirectAPI type as seen with
           the values not having question marks "?" which indicate an optional value in Typescript.
-      
-*/
+**/
 export type DirectAPI = {
   gwlogin: string;
   trans_method?: "CC" | "EFT";

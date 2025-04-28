@@ -42,3 +42,7 @@ If using the qgw-test-consumer to try out new version features + fixes:
 
 1. git push --delete origin vMajor_Minor_patch
 2. git tag --delete vMajor_Minor_patch (same version as above)
+
+# Generating Typedoc Documents:
+
+npx typedoc --out docs src
