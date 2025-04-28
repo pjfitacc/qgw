@@ -1,0 +1,4 @@
+// typedoc.json
+{
+    "projectDocuments": ["public/**/*.md"]
+}
