@@ -18,9 +18,9 @@ public
 
 - [x] TransactionResponse
 
-- [ ] TransparentDbEngine
-  - [ ] TransactionError
-    - [ ] TransactionDeclinedIssue
+- [x] TransparentDbEngine
+  - [x] TransactionError
+    - [x] TransactionDeclinedIssue
 
 private
 
