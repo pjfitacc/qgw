@@ -13,9 +13,10 @@ import { RecurringOptions } from "./recurringOptions";
  *  - common sense data types rather than just all strings
  *      - Some values in the Library API are "Y" | "N" or "1" or "2" which are effectively just booleans. This class takes booleans but then converts it to the values expected of the official API.
  *  - Splits up parameters and objects into intuitive types instead of taking one giant type with all of the variables and values like the Library API.
- *  - [TODO: NOT YET IMPLEMENTED] input and format checking
+ *  - input and format checking
  *      - ex: if you are going to make your payment type / trans_method = "CC", the class ensures both in compile time and runtime that you have:
  *      - ccnum, ccmo, and ccyr values as well.
+ *
  *
  * ### TransactionRequest Class vs DirectAPI
  *  The required fields are going to be a bit different from the DirectAPI
@@ -25,6 +26,9 @@ import { RecurringOptions } from "./recurringOptions";
  *  You trade the directness of the API for the convenience and runtime safeguards of this class.
  *  Just because it's less direct doesn't means it's inaccurate though. Since we're using typescript to implement this class,
  *  strong typing is still there to ensure when the TransactionRequest converts the parameters into the Library API.
+ *
+ * @remarks
+ * - TODO: [NOT YET IMPLEMENTED] input and format checking for TransactionRequest class and other classes that TransactionRequest uses.
  *
  */
 export class TransactionRequest {
