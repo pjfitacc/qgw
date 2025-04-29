@@ -29,4 +29,4 @@ If using the qgw-test-consumer to try out new version features + fixes:
 
 # Generating Typedoc Documents:
 
-`npx typedoc --out docs src/**/*.ts`
+`npx typedoc --out docs src`
