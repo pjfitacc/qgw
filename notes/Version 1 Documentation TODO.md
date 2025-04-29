@@ -4,7 +4,7 @@ public
 
   - [x] TransactionType
 
-- [ ] TransactionRequest
+- [x] TransactionRequest
 
   - [ ] Payer
     - [ ] Payment
