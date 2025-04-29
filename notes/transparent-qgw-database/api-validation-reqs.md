@@ -18,7 +18,7 @@ optional just means two things:
         example: - CC requires ccnum, ccmo, ccyr. - EFT requires aba and checkacct.
 
 - [x] trans_type:
-      type: TransactionType: "CREDIT" | "SALES" | "AUTH_CAPTURE" | "AUTH_ONLY" | "RETURN" | "VOID" |"PREVIOUS_SALE"
+      type: TransactionType: "CREDIT" | "SALE" | "AUTH_CAPTURE" | "AUTH_ONLY" | "RETURN" | "VOID" |"PREVIOUS_SALE"
 - [x] transID:
       type: string;
 - [x] ccnum:

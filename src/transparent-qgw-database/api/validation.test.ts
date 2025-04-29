@@ -30,7 +30,7 @@ function expectZodFailure(parsed: ReturnType<typeof apiSchema.safeParse>) {
 const baseCC = {
   gwlogin: "testLogin",
   trans_method: "CC",
-  trans_type: "SALES",
+  trans_type: "SALE",
   transID: "12345",
   ccnum: "4111111111111111", // Visa
   ccmo: "12",

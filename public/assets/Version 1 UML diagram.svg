@@ -13,7 +13,7 @@
 [TransactionDeclinedIssue]  -  [TransactionResponse]
 [TransparentDbEngine|+gatewayLogin: string;+static postURL: string;+strictMode: boolean|+send(): Promise&lt;TransactionResponse&gt;;+serverError(): TransactionError;+validate(): { success: true; data: DirectAPI; } \| { success: false; error: ZodError&lt;any&gt;; }]
 [&lt;interface&gt;HttpClientConfig|+baseURL: string;+timeout: number;+headers: Record&lt;string, string&gt;|]
-[&lt;enumeration&gt;TransactionType|&quot;CREDIT&quot;;&quot;SALES&quot;;&quot;AUTH_CAPTURE&quot;;&quot;AUTH_ONLY&quot;;&quot;RETURN&quot;;&quot;VOID&quot;;&quot;PREVIOUS_SALE&quot;]
+[&lt;enumeration&gt;TransactionType|&quot;CREDIT&quot;;&quot;SALE&quot;;&quot;AUTH_CAPTURE&quot;;&quot;AUTH_ONLY&quot;;&quot;RETURN&quot;;&quot;VOID&quot;;&quot;PREVIOUS_SALE&quot;]
 [&lt;type&gt;DirectAPI|+gwlogin: string;+trans_method?: &quot;CC&quot; \| &quot;EFT&quot;;+trans_type?: TransactionType;+transID?: string;+ccnum?: string;+ccmo?: string;+ccyr?: string;+aba?: string;+checkacct?: string;+amount: string;+BADDR1?: string;+BZIP1?: string;+BCUST_EMAIL?: string;+override_email_customer?: &quot;Y&quot; \| &quot;N&quot;;+override_trans_email?: &quot;Y&quot; \| &quot;N&quot;;+RestrictKey?: string;+BNAME?: string;+CVV2?: string;+CVVtype?: &quot;0&quot; \| &quot;1&quot; \| &quot;2&quot; \| &quot;9&quot;;+Dsep?: string;+MAXMIND?: &quot;1&quot; \| &quot;2&quot;;+override_recur?: &quot;Y&quot; \| &quot;N&quot;;+RID?: string;+initial_amount?: string;+recur_times?: string;+OverRideRecureDay?: &quot;Y&quot; \| &quot;N&quot;|]
 [DirectAPI]  -  [TransactionType]
 [Options|+directApiFields: DirectApiOptionsFields|]
@@ -266,7 +266,7 @@
 <g transform="translate(1204.5, 549)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TransactionType" data-compartment="1">
 <g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TransactionType" data-compartment="1">
 <text x="0.0" y="14.1" stroke="none" data-name="TransactionType" data-compartment="1">&quot;CREDIT&quot;</text>
-<text x="0.0" y="30.3" stroke="none" data-name="TransactionType" data-compartment="1">&quot;SALES&quot;</text>
+<text x="0.0" y="30.3" stroke="none" data-name="TransactionType" data-compartment="1">&quot;SALE&quot;</text>
 <text x="0.0" y="46.5" stroke="none" data-name="TransactionType" data-compartment="1">&quot;AUTH_CAPTURE&quot;</text>
 <text x="0.0" y="62.7" stroke="none" data-name="TransactionType" data-compartment="1">&quot;AUTH_ONLY&quot;</text>
 <text x="0.0" y="78.9" stroke="none" data-name="TransactionType" data-compartment="1">&quot;RETURN&quot;</text>

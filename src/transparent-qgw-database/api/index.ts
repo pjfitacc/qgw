@@ -121,7 +121,7 @@ export type DirectAPI = {
  */
 export enum TransactionType {
   "CREDIT" = "CREDIT",
-  "SALES" = "SALES",
+  "SALE" = "SALE",
   "AUTH_CAPTURE" = "AUTH_CAPTURE",
   "AUTH_ONLY" = "AUTH_ONLY",
   "RETURN" = "RETURN",
