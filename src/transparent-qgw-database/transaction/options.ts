@@ -27,7 +27,6 @@ export type OptionsFields = {
  * dataSeparator: Dsep
  * maxMindOn: MAXMIND "1" | "2";
  *
- * @export
  * @class Options
  */
 export class Options {

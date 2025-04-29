@@ -21,7 +21,6 @@ export type RecurringOptionsFields = {
  * recurCycles: recur_times
  * overrideRecurringDay: OverRideRecureDay "Y" | "N"
  *
- * @export
  * @class RecurringOptions
  */
 export class RecurringOptions {

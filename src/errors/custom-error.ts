@@ -4,8 +4,6 @@
  * path?
  * message
  *
- * @export
- * @interface CustomIssue
  */
 export interface CustomIssue {
   code: any;

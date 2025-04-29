@@ -19,7 +19,6 @@ enum ServerResponseFieldIndexes {
 /**
  *
  *
- * @export
  * @class TransactionResponse
  */
 export class TransactionResponse {
@@ -29,6 +28,12 @@ export class TransactionResponse {
   "DECLINED","019452","65735","Y","M","0.3","Auth Declined","200" 
   */
   result: "APPROVED" | "DECLINED"; // result
+  /**
+   *
+   *
+   * @type {string}
+   * @memberof TransactionResponse
+   */
   authCode: string; // authcode
   transID: string; // transID
   avrResponse: string; // AVRResponse

@@ -5,8 +5,6 @@ import { TransactionErrorCode } from "./types";
 /**
  *
  *
- * @export
- * @interface TransactionDeclinedIssue
  * @extends {CustomIssue}
  */
 export interface TransactionDeclinedIssue extends CustomIssue {

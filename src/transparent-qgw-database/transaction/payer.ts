@@ -7,7 +7,6 @@ import { DirectAPI } from "../api";
  * - email: BCUST_EMAIL
  * - name: BNAME
  *
- * @export
  * @class Payer
  */
 export class Payer {

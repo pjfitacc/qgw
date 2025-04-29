@@ -3,7 +3,6 @@ import { DirectAPI } from "../api";
 /**
  * cvvType: CVVtype "0" | "1" | "2" | "9" === Not Passing CVV2 | CVV2 is being passed | CVV2 on card is unreadable |Card does not have CVV2 imprint
  *
- * @export
  * @enum {number}
  */
 export enum CvvType {
@@ -21,7 +20,6 @@ export enum CvvType {
  * cvv2: CVV2
  * cvvType: CVVtype
  *
- * @export
  * @class CreditCard
  */
 export class CreditCard {
@@ -40,7 +38,6 @@ export class CreditCard {
  * aba: aba
  * checkingAccountNumber: checkacct
  *
- * @export
  * @class ElectronicFundsTransfer
  */
 export class ElectronicFundsTransfer {
@@ -53,7 +50,6 @@ export class ElectronicFundsTransfer {
  * amount: amount
  * method: CreditCard | ElectronicFundsTransfer
  *
- * @export
  * @class Payment
  */
 export class Payment {

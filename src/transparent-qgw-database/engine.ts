@@ -26,7 +26,6 @@ import { TransactionResponse } from "./transaction/response";
  *
  * The only difference between this class and the Official TransQGWDb Engine is that this class sends a better formatted response compared to POSTing directly.
  *
- * @export
  * @class TransparentDbEngine
  */
 export class TransparentDbEngine {
