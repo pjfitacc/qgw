@@ -2,7 +2,19 @@ import { DirectAPI } from "../api";
 import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
 
 /**
+ * ### Description
+ *  Some of the available recurring options you can set for a Transparent API Transaction.
+ *  rid is the only required field and is based on Quantum Gateway's Recurring Recipes.
+ *  The rest are to further configure the particular transaction's recurring settings.
+ *  Other configurable options are available throughout various classes within the TransactionRequest class.
  *
+ * @privateRemarks
+ * RecurringOptionsFields class to DirectAPI mapping:
+ *  - rid: RID
+ *  - overrideRecurringPrice: override_recur "Y" | "N"
+ *  - initialAmount: initial_amount
+ *  - recurCycles: recur_times
+ *  - overrideRecurringDay: OverRideRecureDay "Y" | "N"
  */
 export type RecurringOptionsFields = {
   rid: string;
@@ -13,13 +25,8 @@ export type RecurringOptionsFields = {
 };
 
 /**
- * RecurringOptions:
- * rid: RID
- *  - if there are recurring options present, this class must ensure that RID exists.
- * overrideRecurringPrice: override_recur "Y" | "N"
- * initialAmount: initial_amount
- * recurCycles: recur_times
- * overrideRecurringDay: OverRideRecureDay "Y" | "N"
+ * ### Description
+ *  Used to set quantum gateway's recurring options for a transaction.
  *
  */
 export class RecurringOptions {

@@ -13,8 +13,8 @@ public
       - [x] ElectronicFundsTransfer
   - [x] Options
     - [x] OptionsFields
-  - [ ] RecurringOptions
-    - [ ] RecurringOptionsFields
+  - [x] RecurringOptions
+    - [x] RecurringOptionsFields
 
 - [ ] TransactionResponse
 
