@@ -7,7 +7,6 @@ import { DirectAPI } from "../api";
  * - email: BCUST_EMAIL
  * - name: BNAME
  *
- * @class Payer
  */
 export class Payer {
   public directApiFields: PayerFields;

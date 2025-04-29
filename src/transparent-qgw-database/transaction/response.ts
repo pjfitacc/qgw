@@ -19,7 +19,6 @@ enum ServerResponseFieldIndexes {
 /**
  *
  *
- * @class TransactionResponse
  */
 export class TransactionResponse {
   /*

@@ -39,7 +39,6 @@ import { RecurringOptions } from "./recurringOptions";
  * Just because it's less direct doesn't means it's inaccurate though. Since we're using typescript to implement this class,
  * strong typing is still there to ensure when the TransactionRequest converts the parameters into the Library API.
  *
- * @class TransactionRequest
  */
 export class TransactionRequest {
   constructor(

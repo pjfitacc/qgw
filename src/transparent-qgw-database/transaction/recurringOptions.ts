@@ -21,7 +21,6 @@ export type RecurringOptionsFields = {
  * recurCycles: recur_times
  * overrideRecurringDay: OverRideRecureDay "Y" | "N"
  *
- * @class RecurringOptions
  */
 export class RecurringOptions {
   public directApiFields: DirectApiRecurringFields;

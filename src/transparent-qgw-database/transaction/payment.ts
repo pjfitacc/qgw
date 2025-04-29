@@ -20,7 +20,6 @@ export enum CvvType {
  * cvv2: CVV2
  * cvvType: CVVtype
  *
- * @class CreditCard
  */
 export class CreditCard {
   readonly kind = "CC";
@@ -38,7 +37,6 @@ export class CreditCard {
  * aba: aba
  * checkingAccountNumber: checkacct
  *
- * @class ElectronicFundsTransfer
  */
 export class ElectronicFundsTransfer {
   readonly kind = "EFT";
@@ -50,7 +48,6 @@ export class ElectronicFundsTransfer {
  * amount: amount
  * method: CreditCard | ElectronicFundsTransfer
  *
- * @class Payment
  */
 export class Payment {
   public directApiFields: CreditCardPaymentFields | EftPaymentFields;
