@@ -26,5 +26,5 @@ private
 
 - [x] ServerResponseFieldIndexes
 - [x] HttpClientConfig
-- [ ] CustomError
+- [x] CustomError
   - [ ] CustomIssue
