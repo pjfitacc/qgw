@@ -6,7 +6,7 @@
  *
  */
 export interface CustomIssue {
-  code: any;
+  code: string;
   path?: (string | number)[];
   message: string;
 }
