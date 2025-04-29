@@ -86,7 +86,7 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
  * - Strips outer quotation marks from each value
  * - Trims whitespace from resulting values
  *
- * @param htmlResponse The raw response string from the server
+ * @param htmlResponse - The raw response string from the server
  * @returns Array of cleaned string values
  * @throws Error if no pipe delimiter is found in the response
  */
@@ -135,9 +135,9 @@ function filterUndefined<T extends object>(obj: T): RemoveUndefined<T> {
  *
  * @param directAPI - The DirectAPI payload to send
  * @returns Promise containing the parsed response array
- * @throws {AxiosError} When the request fails
- * @throws {Error} When response parsing fails
- * @throws {TransactionError} When the transaction is declined
+ * @throws {@link AxiosError} When the request fails
+ * @throws {@link Error} When response parsing fails
+ * @throws {@link TransactionError} When the transaction is declined
  */
 export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   const httpClient = createHttpClient();
