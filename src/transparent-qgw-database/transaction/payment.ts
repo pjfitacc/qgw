@@ -1,6 +1,11 @@
 import { DirectAPI } from "../api";
 
-// cvvType: CVVtype "0" | "1" | "2" | "9" === Not Passing CVV2 | CVV2 is being passed | CVV2 on card is unreadable |Card does not have CVV2 imprint
+/**
+ * cvvType: CVVtype "0" | "1" | "2" | "9" === Not Passing CVV2 | CVV2 is being passed | CVV2 on card is unreadable |Card does not have CVV2 imprint
+ *
+ * @export
+ * @enum {number}
+ */
 export enum CvvType {
   "Not Passing CVV2" = "0",
   "CVV2 is being passed" = "1",
@@ -8,12 +13,17 @@ export enum CvvType {
   "Card does not have CVV2 imprint" = "9",
 }
 
-// Credit Card Class:
-// number: ccnum
-// expirationMonth: ccmo
-// expirationYear: ccyr
-// cvv2: CVV2
-// cvvType: CVVtype
+/**
+ * Credit Card Class:
+ * number: ccnum
+ * expirationMonth: ccmo
+ * expirationYear: ccyr
+ * cvv2: CVV2
+ * cvvType: CVVtype
+ *
+ * @export
+ * @class CreditCard
+ */
 export class CreditCard {
   readonly kind = "CC";
   constructor(
@@ -25,17 +35,27 @@ export class CreditCard {
   ) {}
 }
 
-// ElectronicFundsTransfer Class:
-// aba: aba
-// checkingAccountNumber: checkacct
+/**
+ * ElectronicFundsTransfer Class:
+ * aba: aba
+ * checkingAccountNumber: checkacct
+ *
+ * @export
+ * @class ElectronicFundsTransfer
+ */
 export class ElectronicFundsTransfer {
   readonly kind = "EFT";
   constructor(public aba: string, public checkingAccountNumber: string) {}
 }
 
-// Payment Class:
-// - amount: amount
-// - method: CreditCard | ElectronicFundsTransfer
+/**
+ * Payment Class:
+ * amount: amount
+ * method: CreditCard | ElectronicFundsTransfer
+ *
+ * @export
+ * @class Payment
+ */
 export class Payment {
   public directApiFields: CreditCardPaymentFields | EftPaymentFields;
   constructor(

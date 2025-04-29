@@ -1,5 +1,10 @@
 import TransactionError from "../../errors/transaction-error";
 
+/**
+ *
+ *
+ * @enum {number}
+ */
 enum ServerResponseFieldIndexes {
   "RESULT",
   "AUTH_CODE",
@@ -11,6 +16,12 @@ enum ServerResponseFieldIndexes {
   "ERROR_CODE",
 }
 
+/**
+ *
+ *
+ * @export
+ * @class TransactionResponse
+ */
 export class TransactionResponse {
   /*
   result,authcode,transID,AVRResponse,CVV Response,Max Score,decline_reason(if any),Error Code(if any)

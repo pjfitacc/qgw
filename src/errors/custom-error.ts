@@ -1,12 +1,12 @@
-/*
-CustomIssue Interface (copies: https://zod.dev/ERROR_HANDLING?id=zodissue):
-
-code
-
-path?
-
-message
-*/
+/**
+ * CustomIssue Interface (copies: https://zod.dev/ERROR_HANDLING?id=zodissue):
+ * code
+ * path?
+ * message
+ *
+ * @export
+ * @interface CustomIssue
+ */
 export interface CustomIssue {
   code: any;
   path?: (string | number)[];
@@ -14,12 +14,18 @@ export interface CustomIssue {
 }
 
 /*
-message - a human readable display for what error our library caught.
 
-code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
-
-Issues = an Array of class CustomIssue related to the overall message + error code.
 */
+/**
+ *
+ * message - a human readable display for what error our library caught.
+ * code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
+ * issues = an Array of class CustomIssue related to the overall message + error code.
+ *
+ * @class CustomError
+ * @extends {Error}
+ * @template C
+ */
 class CustomError<C extends string> extends Error {
   message: string;
   issues: CustomIssue[];

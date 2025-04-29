@@ -1,11 +1,15 @@
 import { DirectAPI } from "../api";
 
-// Payer Class:
-// - address: BADDR1
-// - zip: BZIP1
-// - email: BCUST_EMAIL
-// - name: BNAME
-
+/**
+ * Payer Class:
+ * - address: BADDR1
+ * - zip: BZIP1
+ * - email: BCUST_EMAIL
+ * - name: BNAME
+ *
+ * @export
+ * @class Payer
+ */
 export class Payer {
   public directApiFields: PayerFields;
   constructor(

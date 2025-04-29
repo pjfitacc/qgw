@@ -4,6 +4,9 @@ import {
   toggleYesOrNO,
 } from "../../utils/transparent-qgw-db-engine";
 
+/**
+ *
+ */
 export type OptionsFields = {
   emailCustomerReceipt?: boolean;
   sendTransactionEmail?: boolean;
@@ -13,14 +16,20 @@ export type OptionsFields = {
   dataSeparator?: string;
   maxMindOn?: boolean;
 };
-// Options:
-// emailCustomerReceipt: override_email_customer "Y" | "N";
-// sendTransactionEmail: override_trans_email "Y" | "N";
-// transactionType: trans_type
-// transactionID: transID
-// restrictKey: RestrictKey
-// dataSeparator: Dsep
-// maxMindOn: MAXMIND "1" | "2";
+
+/**
+ * Options:
+ * emailCustomerReceipt: override_email_customer "Y" | "N";
+ * sendTransactionEmail: override_trans_email "Y" | "N";
+ * transactionType: trans_type
+ * transactionID: transID
+ * restrictKey: RestrictKey
+ * dataSeparator: Dsep
+ * maxMindOn: MAXMIND "1" | "2";
+ *
+ * @export
+ * @class Options
+ */
 export class Options {
   public directApiFields: DirectApiOptionsFields;
   constructor(optionsFields?: OptionsFields) {

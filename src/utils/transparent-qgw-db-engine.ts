@@ -17,6 +17,8 @@ export function toggle1or2(boolean?: boolean): "1" | "2" | undefined {
 
 /**
  * Configuration options for the HTTP client
+ *
+ * @interface HttpClientConfig
  */
 interface HttpClientConfig {
   baseURL: string;

@@ -1,6 +1,9 @@
 import { DirectAPI } from "../api";
 import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
 
+/**
+ *
+ */
 export type RecurringOptionsFields = {
   rid: string;
   recurCycles?: number;
@@ -8,13 +11,19 @@ export type RecurringOptionsFields = {
   initialAmount?: number;
   overrideRecurringDay?: boolean;
 };
-// RecurringOptions:
-// rid: RID
-//  - if there are recurring options present, this class must ensure that RID exists.
-// overrideRecurringPrice: override_recur "Y" | "N"
-// initialAmount: initial_amount
-// recurCycles: recur_times
-// overrideRecurringDay: OverRideRecureDay "Y" | "N"
+
+/**
+ * RecurringOptions:
+ * rid: RID
+ *  - if there are recurring options present, this class must ensure that RID exists.
+ * overrideRecurringPrice: override_recur "Y" | "N"
+ * initialAmount: initial_amount
+ * recurCycles: recur_times
+ * overrideRecurringDay: OverRideRecureDay "Y" | "N"
+ *
+ * @export
+ * @class RecurringOptions
+ */
 export class RecurringOptions {
   public directApiFields: DirectApiRecurringFields;
   constructor(recurringOptionsFields?: RecurringOptionsFields) {
