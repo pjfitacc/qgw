@@ -7,10 +7,10 @@ public
 - [x] TransactionRequest
 
   - [x] Payer
-    - [ ] Payment
-      - [ ] CreditCard
-        - [ ] CvvType
-      - [ ] ElectronicFundsTransfer
+    - [x] Payment
+      - [x] CreditCard
+        - [x] CvvType
+      - [x] ElectronicFundsTransfer
   - [ ] Options
     - [ ] OptionsFields
   - [ ] RecurringOptions
