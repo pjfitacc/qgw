@@ -1,17 +1,18 @@
 public
-- [ ] DirectAPI
+
+- [x] DirectAPI
+
   - [ ] TransactionType
 
 - [ ] TransactionRequest
+
   - [ ] Payer
     - [ ] Payment
       - [ ] CreditCard
         - [ ] CvvType
       - [ ] ElectronicFundsTransfer
-      
   - [ ] Options
     - [ ] OptionsFields
-    
   - [ ] RecurringOptions
     - [ ] RecurringOptionsFields
 
@@ -20,12 +21,10 @@ public
 - [ ] TransparentDbEngine
   - [ ] TransactionError
     - [ ] TransactionDeclinedIssue
-  
-
 
 private
+
 - [ ] ServerResponseFieldIndexes
-- [ ] HttpClientConfig  
-  
+- [ ] HttpClientConfig
 - [ ] CustomError
   - [ ] CustomIssue
