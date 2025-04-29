@@ -115,7 +115,8 @@ export type DirectAPI = {
 };
 
 /**
- *
+ * ### Description
+ *  The TransactionType enum is used to define the type of transaction being processed.
  *
  */
 export enum TransactionType {

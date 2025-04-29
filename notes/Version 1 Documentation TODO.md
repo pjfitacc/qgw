@@ -2,7 +2,7 @@ public
 
 - [x] DirectAPI
 
-  - [ ] TransactionType
+  - [x] TransactionType
 
 - [ ] TransactionRequest
 
