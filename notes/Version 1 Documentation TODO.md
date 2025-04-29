@@ -16,7 +16,7 @@ public
   - [x] RecurringOptions
     - [x] RecurringOptionsFields
 
-- [ ] TransactionResponse
+- [x] TransactionResponse
 
 - [ ] TransparentDbEngine
   - [ ] TransactionError

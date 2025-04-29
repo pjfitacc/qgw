@@ -1,6 +1,7 @@
 import TransactionError from "../../errors/transaction-error";
 
 /**
+ * @privateRemarks
  * This enum is private to the class. The fields associated with these enums
  * will be publicly available in the TransactionResponse class.
  *
