@@ -1,7 +1,8 @@
 import TransactionError from "../../errors/transaction-error";
 
 /**
- *
+ * This enum is private to the class. The fields associated with these enums
+ * will be publicly available in the TransactionResponse class.
  *
  */
 enum ServerResponseFieldIndexes {
