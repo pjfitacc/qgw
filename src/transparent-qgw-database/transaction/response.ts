@@ -17,7 +17,15 @@ enum ServerResponseFieldIndexes {
 }
 
 /**
+ * ### Description
+ *  This class is used to parse a successful response string from the Quantum Gateway server.
+ *  The response string is a single delimiter-separated string (default is the pipe: | ) that contains the following fields according to Transparent API:
+ *  result,authcode,transID,AVRResponse,CVV Response,Max Score,decline_reason(if any),Error Code(if any)
+ *  This string MUST be split into an array of strings before being passed to the constructor.
+ *  {@link parsePipeDelimitedResponse} function in the transparent-qgw-db-engine module under utils should be used to parse the response string.
  *
+ * @remarks
+ * The only supported response string delimiter for this library is the pipe: |.
  *
  */
 export class TransactionResponse {
