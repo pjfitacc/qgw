@@ -116,8 +116,15 @@ export type DirectAPI = {
 
 /**
  * ### Description
- *  The TransactionType enum is used to define the type of transaction being processed.
+ *  How Quantum Gateway processes transactions.
  *
+ * ### Transaction Types
+ *  - CREDIT - a charge that uses default Processing Settings. Processing Settings is at Quantum Gateway Login =\> Settings =\> Processing Settings.
+ *  - SALE - same as CREDIT, is a charge but will bypass the Processing Settings. SALE does not use AVS and CVV2 settings.
+ *  - AUTH_CAPTURE - an auth and if AVS and CVV2 settings pass then it will be converted to a sale.
+ *  - AUTH_ONLY - a auth to see if the credit card is good and has the fund and will bypass the Processing Settings. AUTH_ONLY does not use AVS and CVV2 settings.
+ *  - RETURN - a refund. Requires full credit card information.
+ *  - VOID and PREVIOUS_SALE - require transID - The TransactionID
  */
 export enum TransactionType {
   "CREDIT" = "CREDIT",
