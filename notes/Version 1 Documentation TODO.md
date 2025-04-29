@@ -11,8 +11,8 @@ public
       - [x] CreditCard
         - [x] CvvType
       - [x] ElectronicFundsTransfer
-  - [ ] Options
-    - [ ] OptionsFields
+  - [x] Options
+    - [x] OptionsFields
   - [ ] RecurringOptions
     - [ ] RecurringOptionsFields
 

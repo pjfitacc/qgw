@@ -5,6 +5,20 @@ import {
 } from "../../utils/transparent-qgw-db-engine";
 
 /**
+ * ### Description
+ *  Some of the available options you can set for a Transparent API Transaction.
+ *  These were the Transparent API options that the author decided could be grouped as Optional.
+ *  Other configurable options are available throughout various classes within the TransactionRequest class.
+ *
+ * @privateRemarks
+ * Options Class to DirectAPI mapping:
+ *  - emailCustomerReceipt: override_email_customer "Y" | "N";
+ *  - sendTransactionEmail: override_trans_email "Y" | "N";
+ *  - transactionType: trans_type
+ *  - transactionID: transID
+ *  - restrictKey: RestrictKey
+ *  - dataSeparator: Dsep
+ *  - maxMindOn: MAXMIND "1" | "2";
  *
  */
 export type OptionsFields = {
@@ -18,14 +32,8 @@ export type OptionsFields = {
 };
 
 /**
- * Options:
- * emailCustomerReceipt: override_email_customer "Y" | "N";
- * sendTransactionEmail: override_trans_email "Y" | "N";
- * transactionType: trans_type
- * transactionID: transID
- * restrictKey: RestrictKey
- * dataSeparator: Dsep
- * maxMindOn: MAXMIND "1" | "2";
+ * ### Description
+ *  Wrapper class for the DirectAPI Options. TransactionRequest class uses this class to set the options for the transaction.
  *
  */
 export class Options {
