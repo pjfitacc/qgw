@@ -18,7 +18,6 @@ export interface TransactionDeclinedIssue extends CustomIssue {
  *  Our own custom error class that throws issues during any part of the transaction process within the TransparentDBEngine,
  *  whether that is formatting issues prior to the transaction or issues after the transaction's been sent
  *  The CustomIssues are used to provide more information about the error.
- *  The CustomError class is inspired by ZodError: https://zod.dev/ERROR_HANDLING?id=zoderror
  *
  */
 class TransactionError extends CustomError<TransactionErrorCode> {}

@@ -15,17 +15,23 @@ export interface CustomIssue {
 
 */
 /**
+ * ### Description
+ *  The base error class for this library.
  *
- * message - a human readable display for what error our library caught.
- * code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
- * issues = an Array of class CustomIssue related to the overall message + error code.
- *
+ * @remarks
+ * Inspired by ZodError: https://zod.dev/ERROR_HANDLING?id=zoderror
  */
 class CustomError<C extends string> extends Error {
   message: string;
   issues: CustomIssue[];
   code?: C;
 
+  /**
+   *
+   * @param message - a human readable display for what error our library caught.
+   * @param issues - specific information regarding the error that occurred.
+   * @param code - the custom error code.
+   */
   constructor({
     message,
     issues,
