@@ -113,7 +113,6 @@ export type DirectAPI = {
 /**
  *
  *
- * @enum {number}
  */
 export enum TransactionType {
   "CREDIT" = "CREDIT",

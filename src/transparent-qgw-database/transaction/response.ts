@@ -3,7 +3,6 @@ import TransactionError from "../../errors/transaction-error";
 /**
  *
  *
- * @enum {number}
  */
 enum ServerResponseFieldIndexes {
   "RESULT",
