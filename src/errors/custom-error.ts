@@ -20,7 +20,6 @@ export interface CustomIssue {
  * code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
  * issues = an Array of class CustomIssue related to the overall message + error code.
  *
- * @template C
  */
 class CustomError<C extends string> extends Error {
   message: string;
