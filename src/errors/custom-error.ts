@@ -1,9 +1,9 @@
 /**
- * CustomIssue Interface (copies: https://zod.dev/ERROR_HANDLING?id=zodissue):
- * code
- * path?
- * message
+ * ### Description
+ *  In depth information about the general error that occurred.
  *
+ * @remarks
+ * inspired by ZodIssue https://zod.dev/ERROR_HANDLING?id=zodissue
  */
 export interface CustomIssue {
   code: string;
