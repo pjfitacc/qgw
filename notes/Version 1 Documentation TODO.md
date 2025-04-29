@@ -6,7 +6,7 @@ public
 
 - [x] TransactionRequest
 
-  - [ ] Payer
+  - [x] Payer
     - [ ] Payment
       - [ ] CreditCard
         - [ ] CvvType

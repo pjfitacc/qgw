@@ -1,11 +1,15 @@
 import { DirectAPI } from "../api";
 
 /**
- * Payer Class:
- * - address: BADDR1
- * - zip: BZIP1
- * - email: BCUST_EMAIL
- * - name: BNAME
+ * ### Description
+ *  TransactionRequest requires a Payer object that provides information about the customer.
+ *
+ * @privateRemarks
+ *  Payer Class fields to DirectAPI mapping:
+ *  - address: BADDR1
+ *  - zip: BZIP1
+ *  - email: BCUST_EMAIL
+ *  - name: BNAME
  *
  */
 export class Payer {
