@@ -10,7 +10,7 @@ import { TransactionRequest } from "./transaction/request";
 import { TransactionResponse } from "./transaction/response";
 
 /**
- * A class that communicates w/ the TransparentQGW Database Engine @ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
+ * A class that communicates w/ the TransparentQGW Database Engine \@ POST URL: https://secure.quantumgateway.com/cgi/tqgwdbe.php
  * It acts as a middleman between this library and the engine.
  *
  * Class Flow:

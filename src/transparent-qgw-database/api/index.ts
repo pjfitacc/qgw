@@ -49,7 +49,7 @@
  *     2. trans_type = settings =\> Processing Mode
  *     3. override_email_customer = settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
  *     4. override_trans_email = settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
- *     5. RestrictKey = key if use Restrict Key is enabled @ settings =\> RestrictKey
+ *     5. RestrictKey = key if use Restrict Key is enabled \@ settings =\> RestrictKey
  *     6. Dsep = settings =\> Default Data Separator
  *     7. MAXMIND = "1" Use Maxmind (default if not sent).
  *
