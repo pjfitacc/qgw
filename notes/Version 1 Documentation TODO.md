@@ -1,44 +1,31 @@
 public
 - [ ] DirectAPI
-  - [x] TSDoc Boilerplate
-- [ ] CreditCard
-  - [x] TSDoc Boilerplate
-- [ ] CvvType
-  - [x] TSDoc Boilerplate
-- [ ] ElectronicFundsTransfer
-  - [x] TSDoc Boilerplate
-- [ ] Options
-  - [x] TSDoc Boilerplate
-- [ ] OptionsFields
-  - [x] TSDoc Boilerplate
-- [ ] RecurringOptions
-  - [x] TSDoc Boilerplate
-- [ ] RecurringOptionsFields
-  - [x] TSDoc Boilerplate
-- [ ] Payer
-  - [x] TSDoc Boilerplate
-- [ ] Payment
-  - [x] TSDoc Boilerplate
+  - [ ] TransactionType
+
 - [ ] TransactionRequest
-  - [x] TSDoc Boilerplate
-- [ ] TransactionType
-  - [x] TSDoc Boilerplate
+  - [ ] Payer
+    - [ ] Payment
+      - [ ] CreditCard
+        - [ ] CvvType
+      - [ ] ElectronicFundsTransfer
+      
+  - [ ] Options
+    - [ ] OptionsFields
+    
+  - [ ] RecurringOptions
+    - [ ] RecurringOptionsFields
+
 - [ ] TransactionResponse
-  - [x] TSDoc Boilerplate
+
 - [ ] TransparentDbEngine
-  - [x] TSDoc Boilerplate
-- [ ] TransactionError
-  - [x] TSDoc Boilerplate
-- [ ] TransactionDeclinedIssue
-  - [x] TSDoc Boilerplate
+  - [ ] TransactionError
+    - [ ] TransactionDeclinedIssue
+  
 
 
 private
-- [ ] HttpClientConfig
-  - [x] TSDoc Boilerplate
-- [ ] CustomError
-  - [x] TSDoc Boilerplate
-- [ ] CustomIssue
-  - [x] TSDoc Boilerplate
 - [ ] ServerResponseFieldIndexes
-  - [x] TSDoc Boilerplate
+- [ ] HttpClientConfig  
+  
+- [ ] CustomError
+  - [ ] CustomIssue
