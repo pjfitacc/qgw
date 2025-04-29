@@ -44,13 +44,13 @@
  *
  * Default Values:
  *   - The Default Values are what Quantum Gateway assumes should be filled if these fields are not provided in the request.
- *   - Note: In this section, settings = QuantumGateway Login => Processing Settings, unless otherwise stated.
+ *   - Note: In this section, settings = QuantumGateway Login =\> Processing Settings, unless otherwise stated.
  *     1. trans_method = "CC"
- *     2. trans_type = settings => Processing Mode
- *     3. override_email_customer = settings => Email Receipts => Send Email Receipts To Customers: Yes or No
- *     4. override_trans_email = settings => Email Receipts => Receive Merchant Receipts: Yes or No
- *     5. RestrictKey = key if use Restrict Key is enabled @ settings => RestrictKey
- *     6. Dsep = settings => Default Data Separator
+ *     2. trans_type = settings =\> Processing Mode
+ *     3. override_email_customer = settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
+ *     4. override_trans_email = settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
+ *     5. RestrictKey = key if use Restrict Key is enabled @ settings =\> RestrictKey
+ *     6. Dsep = settings =\> Default Data Separator
  *     7. MAXMIND = "1" Use Maxmind (default if not sent).
  *
  * DIFFERENCES: Where this Library's DirectAPI becomes opinionated and diverges from the official Document API.
