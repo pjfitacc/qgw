@@ -30,3 +30,41 @@ If using the qgw-test-consumer to try out new version features + fixes:
 # Generating Typedoc Documents:
 
 `npx typedoc --out docs src`
+
+# Linting:
+
+We're using typescript linting with the tsdoc plugin.
+I followed this guide in this order:
+
+### Configuration (Read first before [Execution](#execution)):
+
+1. typescript-eslint https://typescript-eslint.io/getting-started
+2. tsdoc plugin: https://tsdoc.org/pages/packages/eslint-plugin-tsdoc/
+3. created a .eslintrc.js file with the exact settings in the tsdoc plugin:
+
+```
+module.exports = {
+  plugins: ['@typescript-eslint/eslint-plugin', 'eslint-plugin-tsdoc'],
+  extends: ['plugin:@typescript-eslint/recommended'],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
+    ecmaVersion: 2018,
+    sourceType: 'module'
+  },
+  rules: {
+    'tsdoc/syntax': 'warn'
+  }
+};
+```
+
+4. typescript es-lint no longer supports .eslintrc.js and uses different configuration files:
+5. So I had had to migrate and used the automatic migration tool: https://eslint.org/docs/latest/use/configure/migration-guide
+6. automatic migration command: `npx  @eslint/migrate-config .eslintrc.json`
+7. now the eslint config file is **eslint.config.mjs**
+8. changed **eslint.config.mjs** languageOptions from 2018 to 2016,
+
+### Execution
+
+`npx eslint .`
