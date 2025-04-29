@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { TransactionType } from ".";
+import { DirectAPI, TransactionType } from ".";
 
 // Helper validators
 const isAmex = (cardNum: string) => /^3[47][0-9]{13}$/.test(cardNum);
@@ -30,7 +30,7 @@ const cvvValidator = z.string().refine((val) => /^\d{3,4}$/.test(val), {
 
 // === SuperRefine Helpers ===
 
-function validateCCFields(data: any, ctx: z.RefinementCtx) {
+function validateCCFields(data: DirectAPI, ctx: z.RefinementCtx) {
   const now = new Date();
   const currentYear = now.getFullYear() % 100;
   const currentMonth = now.getMonth() + 1;
@@ -112,7 +112,7 @@ function validateCCFields(data: any, ctx: z.RefinementCtx) {
   }
 }
 
-function validateEFTFields(data: any, ctx: z.RefinementCtx) {
+function validateEFTFields(data: DirectAPI, ctx: z.RefinementCtx) {
   if (!data.aba) {
     ctx.addIssue({
       path: ["aba"],
