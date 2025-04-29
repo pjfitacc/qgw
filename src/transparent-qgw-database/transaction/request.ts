@@ -8,12 +8,12 @@ import { RecurringOptions } from "./recurringOptions";
  * TransactionRequest is a custom class specific to this library.
  * It's a wrapper around the TransQGWDbEngine Document API in ./documents/v1.0/QGW-Non-Interactive_API.pdf
  * This class ultimately converts its parameters into the DirectAPI type in ./index.ts:
- * export type DirectAPI = {
+ * export type DirectAPI = \{
  *   gwlogin: string;
  *   trans_method?: "CC" | "EFT"; // "CC" or "EFT" depending on if class Transaction has CreditCard | ElectronicFundsTransfer type as its payment field.
  *   trans_type?: TransactionType;
  *   ...
- * }
+ * \}
  * DirectAPI type is a closer, almost identical match to the Official Document API.
  * For the following documentation for TransactionRequest, we'll treat the Official Document API and DirectAPI as if they're the same thing.
  *
