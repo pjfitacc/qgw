@@ -10,7 +10,7 @@ This library offers Javascript modules and functionality into the [Quantum Gatew
 
 #### Contributions
 
-Developers, if you want to view and tinker with the library system, go to the [Developer Notes](notes/developer-notes.md) and refer to the [Supported APIs](#supported-apis) section in this README.
+Developers, if you want to view and tinker with the library system, go to the [Developer Notes](notes/README.dev.md) and refer to the [Supported APIs](#supported-apis) section in this README.
 
 The features prioritized are based on the author's Quantum Gateway integration needs. If you wish to help out, send a pull request, or if you want to talk in further detail, contact the author through their email in the [Contact](#contact) section.
 

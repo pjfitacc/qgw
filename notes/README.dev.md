@@ -1,3 +1,5 @@
+For Developers interested in the inner workings or modifying this package.
+
 # Building this package:
 
 `npm run build`
