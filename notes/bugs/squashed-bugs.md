@@ -35,3 +35,26 @@ Form Data: gwlogin=phimar11Dev&trans_method=CC&trans_type=CREDIT&transID=12345&c
 Solution:
 For optional fields, whenever a field's value is undefined, don't include that field when posting to the server.
 commit: 74c0c740368dcbcf93711ad87d3e78d9cb962e48
+
+### Bug #2 [Fixed]
+
+**Typedoc Reference exists but no Documentation error.**
+
+**recreation**
+
+**Error**
+[warning] TransactionError, defined in qgw/src/errors/transaction-error.ts, is referenced by src.TransparentDbEngine.serverError but not included in the documentation
+
+**Possible Solution: Change src/error/types.d.ts to src/error/type.ts**
+We have a potential solution to this typedoc reference error:
+
+      Solution:
+      - https://reemus.dev/article/publishing-type-definitions-with-npm-package
+
+      This guide mentions that if you create your own Declaration Files in your project source code, it should be a .ts instead of .d.ts, and any module that uses that type must explicitly import it instead of relying on the Typescript global namespace.
+      This is because Typescript might not include the .d.ts types that you've defined during compilation.
+
+**Actual Fix**
+The above was not the solution, it was the fact that our documentation’s index.ts entry point didn’t include the module which holds TransactionError in our exports, and also we had to export the TransactionError class as a named export instead of a default export.
+
+Git commit that fixes it: 9125d713d3102ba7a9779a5e4802ea7c1aa218ea
