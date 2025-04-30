@@ -1,13 +1,6 @@
-This package uses Typescript. This is the tutorial I followed to create it:
-https://pauloe-me.medium.com/typescript-npm-package-publishing-a-beginners-guide-40b95908e69c
+# Building this package:
 
-Resources referred to when designing the API:
-
-- https://www.pretzellogix.net/2021/12/08/how-to-write-a-python3-sdk-library-module-for-a-json-rest-api/
-
-Error Handling Tutorial:
-https://www.youtube.com/watch?v=EUYnERcOGpA
-(This API does not use node.js in any major way but we will mimic the way it creates custom errors.)
+`npm run build`
 
 # Publishing a new version to github and npm
 
@@ -68,3 +61,19 @@ module.exports = {
 ### Execution
 
 `npx eslint .`
+
+### Resources:
+
+Resources I used to design, build, and test the library.
+
+**Setting up this Typescript Package**
+This package uses Typescript. This is the tutorial I followed to create it:
+https://pauloe-me.medium.com/typescript-npm-package-publishing-a-beginners-guide-40b95908e69c
+
+**API Design**
+https://www.pretzellogix.net/2021/12/08/how-to-write-a-python3-sdk-library-module-for-a-json-rest-api/
+
+**Error Handling**
+I followed this Error Handling Tutorial to create custom errors:
+https://www.youtube.com/watch?v=EUYnERcOGpA
+(This API does not use node.js in any major way but we will mimic the way it creates custom errors.)
