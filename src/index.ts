@@ -6,3 +6,6 @@ export * from "./transparent-qgw-database/transaction/recurringOptions";
 export * from "./transparent-qgw-database/transaction/request";
 export * from "./transparent-qgw-database/transaction/response";
 export * from "./transparent-qgw-database/engine";
+export * from "./errors/custom-error";
+export * from "./errors/transaction-error";
+export * from "./errors/types";

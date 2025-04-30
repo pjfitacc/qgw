@@ -1,4 +1,4 @@
-import TransactionError from "../../errors/transaction-error";
+import { TransactionError } from "../../errors/transaction-error";
 
 /**
  * @privateRemarks

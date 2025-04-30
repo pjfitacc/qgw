@@ -15,11 +15,11 @@ export interface TransactionDeclinedIssue extends CustomIssue {
 
 /**
  * ### Description
- *  Our own custom error class that throws issues during any part of the transaction process within the TransparentDBEngine,
+ *  Throws issues during any part of the transaction process within the TransparentDBEngine,
  *  whether that is formatting issues prior to the transaction or issues after the transaction's been sent
  *  The CustomIssues are used to provide more information about the error.
  *
  */
 class TransactionError extends CustomError<TransactionErrorCode> {}
 
-export default TransactionError;
+export { TransactionError };

@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { DirectAPI } from "../transparent-qgw-database/api";
-import TransactionError, {
+import {
   TransactionDeclinedIssue,
+  TransactionError,
 } from "../errors/transaction-error";
 import { TransactionResponse } from "../transparent-qgw-database/transaction/response";
 

@@ -1,7 +1,7 @@
 import { ZodError } from "zod";
 import { apiSchema } from "./api/validation";
 import { DirectAPI } from "./api";
-import TransactionError from "../errors/transaction-error";
+import { TransactionError } from "../errors/transaction-error";
 import { postToServer } from "../utils/transparent-qgw-db-engine";
 import { AxiosError } from "axios";
 import { CustomIssue } from "../errors/custom-error";
