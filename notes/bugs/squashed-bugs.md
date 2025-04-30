@@ -41,6 +41,7 @@ commit: 74c0c740368dcbcf93711ad87d3e78d9cb962e48
 **Typedoc Reference exists but no Documentation error.**
 
 **recreation**
+`npx typedoc --out docs src`
 
 **Error**
 [warning] TransactionError, defined in qgw/src/errors/transaction-error.ts, is referenced by src.TransparentDbEngine.serverError but not included in the documentation
