@@ -27,10 +27,10 @@ class CustomError<C extends string> extends Error {
   code?: C;
 
   /**
-   *
-   * @param message - a human readable display for what error our library caught.
-   * @param issues - specific information regarding the error that occurred.
-   * @param code - the custom error code.
+   * @param options - The options for the error
+   * @param options.message - a human readable display for what error our library caught.
+   * @param options.issues - specific information regarding the error that occurred.
+   * @param options.code - the custom error code.
    */
   constructor({
     message,
