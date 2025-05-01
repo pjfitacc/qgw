@@ -48,4 +48,4 @@ class CustomError<C extends string> extends Error {
   }
 }
 
-export default CustomError;
+export { CustomError };

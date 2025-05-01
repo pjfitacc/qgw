@@ -1,5 +1,5 @@
 import { TransactionResponse } from "../transparent-db/transaction/response";
-import CustomError, { CustomIssue } from "./custom-error";
+import { CustomIssue, CustomError } from "./custom-error";
 import { TransactionErrorCode } from "./types";
 
 /**
