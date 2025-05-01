@@ -1,10 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { DirectAPI } from "../transparent-qgw-database/api";
+import { DirectAPI } from "../transparent-db/api";
 import {
   TransactionDeclinedIssue,
   TransactionError,
 } from "../errors/transaction-error";
-import { TransactionResponse } from "../transparent-qgw-database/transaction/response";
+import { TransactionResponse } from "../transparent-db/transaction/response";
 
 export function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
   if (boolean === undefined) return undefined;
