@@ -1,4 +1,4 @@
-### Library Version 1 Construct Categorization
+### QGW Library Version 1 Construct Categorization
 
 This md document notes the list all of the library constructs we created and displayed in the [Library's Version 1 UML Diagram](../public/assets/Version%201%20UML%20diagram.svg)
 
