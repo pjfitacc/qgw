@@ -32,6 +32,10 @@ import { RecurringOptions } from "./recurringOptions";
  *
  */
 export class TransactionRequest {
+  /**
+   *
+   * @param options - Transparent DB transaction settings not related to the payment, payer, or recurring options.
+   */
   constructor(
     public payment: Payment,
     public payer: Payer,
@@ -39,6 +43,7 @@ export class TransactionRequest {
     public recurringOptions?: RecurringOptions
   ) {}
 
+  /** @hidden TODO: custom typedoc tag. have to add it to tsdoc so it passes linting: https://typedoc.org/documents/Tags.html#defining-tags*/
   toAPI(): DirectAPI {
     const chunks = [
       this.payment.directApiFields,
