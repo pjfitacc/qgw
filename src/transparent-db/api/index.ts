@@ -107,6 +107,9 @@ export type DirectAPI = {
   CVVtype?: "0" | "1" | "2" | "9";
   Dsep?: string;
   MAXMIND?: "1" | "2";
+  /**
+   * TODO: BUG: We assumed that this value could take N, but quantum Gateway's API only accepts Y.
+   */
   override_recur?: "Y" | "N";
   RID?: string;
   initial_amount?: string;
