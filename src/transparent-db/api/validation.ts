@@ -160,7 +160,7 @@ export const apiSchema = z
     CVVtype: z.enum(["0", "1", "2", "9"]).optional(),
     Dsep: z.string().optional(),
     MAXMIND: z.enum(["1", "2"]).optional(),
-    override_recur: yesNo.optional(),
+    override_recur: z.enum(["Y"]).optional(),
     RID: numericString.optional(),
     initial_amount: numericOrFloatString.optional(),
     recur_times: numericString

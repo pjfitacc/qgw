@@ -135,7 +135,7 @@ describe("TransactionRequest: Default TransQGW Recurring Options field values", 
 
     const newPayload = transactionRequest.toAPI();
 
-    expect(newPayload.override_recur).toBe("N");
+    expect(newPayload.override_recur).toBe(undefined);
     expect(newPayload.OverRideRecureDay).toBe("N");
   });
 });

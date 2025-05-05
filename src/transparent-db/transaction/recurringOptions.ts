@@ -11,7 +11,7 @@ import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
  * @privateRemarks
  * RecurringOptionsFields class to DirectAPI mapping:
  *  - rid: RID
- *  - overrideRecurringPrice: override_recur "Y" | "N"
+ *  - overrideRecurringPrice: override_recur "Y"
  *  - initialAmount: initial_amount
  *  - recurCycles: recur_times
  *  - overrideRecurringDay: OverRideRecureDay "Y" | "N"
@@ -39,15 +39,16 @@ export class RecurringOptions {
 
     this.directApiFields = {
       RID: recurringOptionsFields.rid,
-      override_recur: toggleYesOrNO(
-        recurringOptionsFields.overrideRecurringPrice
-      ),
       initial_amount: recurringOptionsFields.initialAmount?.toString(),
       recur_times: recurringOptionsFields.recurCycles?.toString(),
       OverRideRecureDay: toggleYesOrNO(
         recurringOptionsFields.overrideRecurringDay
       ),
     };
+
+    if (recurringOptionsFields.overrideRecurringPrice) {
+      this.directApiFields.override_recur = "Y";
+    }
   }
 }
 

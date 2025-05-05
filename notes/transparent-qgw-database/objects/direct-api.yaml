@@ -38,7 +38,6 @@ Fields:
     - "2"
   override_recur:
     - "Y"
-    - "N"
   RID: string
   initial_amount: string
   recur_times: string

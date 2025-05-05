@@ -71,7 +71,7 @@ DirectAPI => TransactionRequest:
       => payment.method.cvvType?: CvvType
 - [x] Dsep?: string => options.dataSeparator?: string
 - [x] MAXMIND?: "1" | "2" => options.maxMindOn?: boolean
-- [x] override_recur?: "Y" | "N" => recurringOptions.overrideRecurringPrice?: boolean
+- [x] override_recur?: "Y" => recurringOptions.overrideRecurringPrice?: boolean
 - [x] RID?: string => recurringOptions.rid: string
 - [x] initial_amount?: string => recurringOptions.initialAmount?: number
 - [x] recur_times?: string => recurringOptions.recurCycles: number = 0

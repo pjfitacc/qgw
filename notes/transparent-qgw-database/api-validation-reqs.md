@@ -75,7 +75,7 @@ optional just means two things:
 - [x] MAXMIND:
       type: "1" | "2";
 - [x] override_recur:
-      type: "Y" | "N";
+      type: "Y"";
 - [x] RID:
       type: string;
       must be numerical

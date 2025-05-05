@@ -14,7 +14,7 @@
 [TransparentDbEngine|+gatewayLogin: string;+static postURL: string;+strictMode: boolean|+send(): Promise&lt;TransactionResponse&gt;;+serverError(): TransactionError;+validate(): { success: true; data: DirectAPI; } \| { success: false; error: ZodError&lt;any&gt;; }]
 [&lt;interface&gt;HttpClientConfig|+baseURL: string;+timeout: number;+headers: Record&lt;string, string&gt;|]
 [&lt;enumeration&gt;TransactionType|&quot;CREDIT&quot;;&quot;SALE&quot;;&quot;AUTH_CAPTURE&quot;;&quot;AUTH_ONLY&quot;;&quot;RETURN&quot;;&quot;VOID&quot;;&quot;PREVIOUS_SALE&quot;]
-[&lt;type&gt;DirectAPI|+gwlogin: string;+trans_method?: &quot;CC&quot; \| &quot;EFT&quot;;+trans_type?: TransactionType;+transID?: string;+ccnum?: string;+ccmo?: string;+ccyr?: string;+aba?: string;+checkacct?: string;+amount: string;+BADDR1?: string;+BZIP1?: string;+BCUST_EMAIL?: string;+override_email_customer?: &quot;Y&quot; \| &quot;N&quot;;+override_trans_email?: &quot;Y&quot; \| &quot;N&quot;;+RestrictKey?: string;+BNAME?: string;+CVV2?: string;+CVVtype?: &quot;0&quot; \| &quot;1&quot; \| &quot;2&quot; \| &quot;9&quot;;+Dsep?: string;+MAXMIND?: &quot;1&quot; \| &quot;2&quot;;+override_recur?: &quot;Y&quot; \| &quot;N&quot;;+RID?: string;+initial_amount?: string;+recur_times?: string;+OverRideRecureDay?: &quot;Y&quot; \| &quot;N&quot;|]
+[&lt;type&gt;DirectAPI|+gwlogin: string;+trans_method?: &quot;CC&quot; \| &quot;EFT&quot;;+trans_type?: TransactionType;+transID?: string;+ccnum?: string;+ccmo?: string;+ccyr?: string;+aba?: string;+checkacct?: string;+amount: string;+BADDR1?: string;+BZIP1?: string;+BCUST_EMAIL?: string;+override_email_customer?: &quot;Y&quot; \| &quot;N&quot;;+override_trans_email?: &quot;Y&quot; \| &quot;N&quot;;+RestrictKey?: string;+BNAME?: string;+CVV2?: string;+CVVtype?: &quot;0&quot; \| &quot;1&quot; \| &quot;2&quot; \| &quot;9&quot;;+Dsep?: string;+MAXMIND?: &quot;1&quot; \| &quot;2&quot;;+override_recur?: &quot;Y&quot;;;+RID?: string;+initial_amount?: string;+recur_times?: string;+OverRideRecureDay?: &quot;Y&quot; \| &quot;N&quot;|]
 [DirectAPI]  -  [TransactionType]
 [Options|+directApiFields: DirectApiOptionsFields|]
 [&lt;type&gt;OptionsFields|+emailCustomerReceipt?: boolean;+sendTransactionEmail?: boolean;+transactionType?: TransactionType;+transactionID?: string;+restrictKey?: string;+dataSeparator?: string;+maxMindOn?: boolean|]
@@ -311,7 +311,7 @@
 <text x="0.0" y="305.7" stroke="none" data-name="DirectAPI" data-compartment="1">+CVVtype?: &quot;0&quot; | &quot;1&quot; | &quot;2&quot; | &quot;9&quot;</text>
 <text x="0.0" y="321.9" stroke="none" data-name="DirectAPI" data-compartment="1">+Dsep?: string</text>
 <text x="0.0" y="338.1" stroke="none" data-name="DirectAPI" data-compartment="1">+MAXMIND?: &quot;1&quot; | &quot;2&quot;</text>
-<text x="0.0" y="354.3" stroke="none" data-name="DirectAPI" data-compartment="1">+override_recur?: &quot;Y&quot; | &quot;N&quot;</text>
+<text x="0.0" y="354.3" stroke="none" data-name="DirectAPI" data-compartment="1">+override_recur?: &quot;Y&quot;</text>
 <text x="0.0" y="370.5" stroke="none" data-name="DirectAPI" data-compartment="1">+RID?: string</text>
 <text x="0.0" y="386.7" stroke="none" data-name="DirectAPI" data-compartment="1">+initial_amount?: string</text>
 <text x="0.0" y="402.9" stroke="none" data-name="DirectAPI" data-compartment="1">+recur_times?: string</text>

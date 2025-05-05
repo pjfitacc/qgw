@@ -42,7 +42,7 @@
  *           - trans_type value is an enum, TransactionType, but the enum's values are essentially strings.
  *           - Set string values:
  *               - some values are still type string but are restricted to specific types according to Quantum Gateway's interface.
- *               - ex: trans_method is only a "CC" or "EFT", override_email_customer is only "Y" or "N", override_recur is only "1" or "2", etc.
+ *               - ex: trans_method is only a "CC" or "EFT", override_email_customer is only "Y" or "N", override_recur is only "Y", etc.
  *
  *     DIFFERENCES:
  *       Where this Library's DirectAPI becomes opinionated and diverges from the official Document API.
@@ -221,7 +221,7 @@ export type DirectAPI = {
    *
    * TODO: BUG: We assumed that this value could take N, but quantum Gateway's API only accepts Y.
    */
-  override_recur?: "Y" | "N";
+  override_recur?: "Y";
 
   /**
    * The recurring recipe ID that this transaction will be associated with. Recurring Recipe IDs are something that you create in the Quantum Gateway website under Processing Tools =\> Recurring Billing =\> New Recipe. Or you can use an existing recipe ID.
