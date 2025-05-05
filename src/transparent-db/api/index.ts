@@ -86,34 +86,165 @@
  *         7. MAXMIND = "1" Use Maxmind (default if not sent).
  **/
 export type DirectAPI = {
-  gwlogin: string;
-  trans_method?: "CC" | "EFT";
-  trans_type?: TransactionType;
-  transID?: string;
-  ccnum?: string;
-  ccmo?: string;
-  ccyr?: string;
-  aba?: string;
-  checkacct?: string;
-  amount: string;
-  BADDR1?: string;
-  BZIP1?: string;
-  BCUST_EMAIL?: string;
-  override_email_customer?: "Y" | "N";
-  override_trans_email?: "Y" | "N";
-  RestrictKey?: string;
-  BNAME?: string;
-  CVV2?: string;
-  CVVtype?: "0" | "1" | "2" | "9";
-  Dsep?: string;
-  MAXMIND?: "1" | "2";
   /**
+   * The login name for your official or developer Quantum Gateway account.
+   * This is the same login name you use to log into the Quantum Gateway website.
+   */
+  gwlogin: string;
+
+  /**
+   * The transaction's payment method: either credit card (CC) or electronic funds transfer (EFT).
+   */
+  trans_method?: "CC" | "EFT";
+
+  /**
+   * How Quantum Gateway processes transaction requests.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Processing Mode.
+   */
+  trans_type?: TransactionType;
+
+  /**
+   * An already existing / processed transaction ID. Can only be applied to the following transaction types: VOID, PREVIOUS_SALE.
+   */
+  transID?: string;
+
+  /**
+   * The transaction's credit card number. Required if the transaction method is CC.
+   */
+  ccnum?: string;
+
+  /**
+   * The transaction's credit card month. Required if the transaction method is CC.
+   */
+  ccmo?: string;
+
+  /**
+   * The transaction's credit card year. Required if the transaction method is CC.
+   */
+  ccyr?: string;
+
+  /**
+   * The transaction's Electronic Funds Transfer aba number. Required if the transaction method is EFT.
+   */
+  aba?: string;
+
+  /**
+   * The transaction's Electronic Funds Transfer checking account. Required if the transaction method is EFT.
+   */
+  checkacct?: string;
+
+  /**
+   * The transaction's purchase amount.
+   */
+  amount: string;
+
+  /**
+   * The billing address.
+   */
+  BADDR1?: string;
+
+  /**
+   * The billing zip code.
+   */
+  BZIP1?: string;
+
+  /**
+   * The billing's contact email address.
+   */
+  BCUST_EMAIL?: string;
+
+  /**
+   * Whether to send an email receipt to the customer.
+   * - "Y" - Yes
+   * - "N" - No
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
+   */
+  override_email_customer?: "Y" | "N";
+
+  /**
+   * Whether to send an email receipt to the merchant.
+   * - "Y" - Yes
+   * - "N" - No
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
+   */
+  override_trans_email?: "Y" | "N";
+
+  /**
+   * Your key if use Restrict Key is enabled in the Quantum Gateway settings.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> RestrictKey.
+   */
+  RestrictKey?: string;
+
+  /**
+   * The billing contact's name.
+   */
+  BNAME?: string;
+
+  /**
+   * The credit card's security code.
+   * Not required, but recommended.
+   * You can see this in the Quantum Gateway website under Settings =\> Processing Settings =\> Required Form Items =\> Require CVV2.
+   */
+  CVV2?: string;
+
+  /**
+   * CVV options.
+   * 0 - Not Passing CVV2
+   * 1 - CVV2 is being passed
+   * 2 - CVV2 on card is unreadable
+   * 9 - Card does not have CVV2 imprint
+   */
+  CVVtype?: "0" | "1" | "2" | "9";
+
+  /**
+   * How items in the transaction response are separated.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Default Data Separator.
+   */
+  Dsep?: string;
+
+  /**
+   * Whether to use Maxmind for fraud detection.
+   * - "1" - Use Maxmind
+   * - "2" - Do not use Maxmind
+   * - Default: Settings =\> Processing Settings =\> Max Mind Fraud Control =\> Use Maxmind: Yes or No
+   */
+  MAXMIND?: "1" | "2";
+
+  /**
+   * Whether to override a transaction recipe id's recurring amount.
+   * This setting only applies to recurring recipes with the "Honor Trans Amount" amount setting set to "N".
+   * You can see this in the quantum gateway settings under Processing Tools =\> Recurring Billing =\> View Recipes
+   *    - You'll then see a table of all of the recipes you've created and a column with header Honor Trans Amount.
+   *    - If Honor Trans Amount is "Y" then the transaction (tx) will ALWAYS use the transaction's set amount, regardless of override_recur.
+   *    - If the value is "N," then the tx will only use the tx's set amount if override_recur is set to "Y". Otherwise, it will use the recipe's default recurring amount in its settings.
+   * You can change a specific recipe's value by going to the recipe's edit page and clicking the checkbox "Honor Transaction Amount instead of Recurring Amount Above" on or off.
+   *
    * TODO: BUG: We assumed that this value could take N, but quantum Gateway's API only accepts Y.
    */
   override_recur?: "Y" | "N";
+
+  /**
+   * The recurring recipe ID that this transaction will be associated with. Recurring Recipe IDs are something that you create in the Quantum Gateway website under Processing Tools =\> Recurring Billing =\> New Recipe. Or you can use an existing recipe ID.
+   * This can be found in Processing Tools =\> Recurring Billing =\> View Recipes
+   */
   RID?: string;
+
+  /**
+   * If this is set to a number, then this is the first payment that will be charged. This number is separate from the recurring amount.
+   * The recurring amount will be either the amount set in the transaction or the amount set in the recipe.
+   * The choice for either is dependent on your settings and the value of override_recur.
+   */
   initial_amount?: string;
+
+  /**
+   * The amount of times this transaction will recur.
+   */
   recur_times?: string;
+
+  /**
+   * Override the default recurring day for the recipe id.
+   * If this is set to Y, then the recurring day will be set to the day of the month that this transaction is being processed.
+   */
   OverRideRecureDay?: "Y" | "N";
 };
 
