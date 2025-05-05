@@ -24,7 +24,7 @@ If using the qgw-test-consumer to try out new version features + fixes:
 
 # Generating Typedoc Documentation:
 
-`npx typedoc --out docs src`
+`npx typedoc --out docs`
 
 # Linting:
 
