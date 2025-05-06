@@ -19,6 +19,8 @@ export interface TransactionDeclinedIssue extends CustomIssue {
  *  whether that is formatting issues prior to the transaction or issues after the transaction's been sent
  *  The CustomIssues are used to provide more information about the error.
  *
+ * If this TransactionError has a code of ERR_SERVER_DECLINED, then it will contain a {@link TransactionDeclinedIssue} as an item in its issues array field.
+ *
  */
 class TransactionError extends CustomError<TransactionErrorCode> {}
 

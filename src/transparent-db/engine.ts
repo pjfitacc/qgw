@@ -27,16 +27,35 @@ import { TransactionResponse } from "./transaction/response";
  *
  *  One big difference between this class and the Official TransQGWDb Engine is that this class sends a better formatted response compared to POSTing directly.
  *
+ * @remarks
+ * We do not support using API Keys for now.
  */
 export class TransparentDbEngine {
   public gatewayLogin: string;
   static postURL: string = "https://secure.quantumgateway.com/cgi/tqgwdbe.php";
-  public strictMode: boolean = true; // Strict Mode set to true, makes library validate your input before sending it to the server.
 
+  /**
+   * if set to true, makes library validate your input before sending it to the server.
+   */
+  public strictMode: boolean = true;
+
+  /**
+   *
+   * @param gatewayLogin - The Quantum Gateway Account ID.
+   */
   constructor(gatewayLogin: string) {
     this.gatewayLogin = gatewayLogin;
   }
 
+  /**
+   * The main method that sends a transaction request to the Transparent DB Engine and updates your account's balance.
+   * @throws {@link transparent-db.TransactionError} - If the transaction request:
+   * - is formatted incorrectly
+   * - if the transaction was processed but the server declined it.
+   * - if there is an error in the server response.
+   *
+   * @returns The response from the Transparent DB Engine. Since this function throws errors on declined, the only way to get a successful response is if the transaction was approved.
+   */
   async send(
     transactionRequest: TransactionRequest | DirectAPI
   ): Promise<TransactionResponse> {
@@ -68,6 +87,7 @@ export class TransparentDbEngine {
     }
   }
 
+  /** @hidden */
   serverError(error: unknown): TransactionError {
     let errorMessage = "";
     let transactionIssues = [] as CustomIssue[];
@@ -101,6 +121,7 @@ export class TransparentDbEngine {
     });
   }
 
+  /** @hidden */
   validate(
     directAPI: DirectAPI
   ): { success: true; data: DirectAPI } | { success: false; error: ZodError } {
