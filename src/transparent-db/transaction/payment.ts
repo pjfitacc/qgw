@@ -3,7 +3,7 @@ import { DirectAPI } from "../api";
 /**
  * ### Description
  *  Different options to describe the CVV of a credit card to Quantum Gateway.
- *  This is used in the CreditCard class.
+ *  This is used in the {@link CreditCard} class.
  *
  * @privateRemarks
  * CvvType enum to DirectAPI mapping:
