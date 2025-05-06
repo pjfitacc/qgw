@@ -43,7 +43,7 @@ export class TransactionRequest {
     public recurringOptions?: RecurringOptions
   ) {}
 
-  /** @hidden TODO: custom typedoc tag. have to add it to tsdoc so it passes linting: https://typedoc.org/documents/Tags.html#defining-tags*/
+  /** @hidden */
   toAPI(): DirectAPI {
     const chunks = [
       this.payment.directApiFields,
