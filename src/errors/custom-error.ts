@@ -15,7 +15,7 @@ export interface CustomIssue {
  * The options for the {@link CustomError} class.
  *
  */
-interface ErrorOptions<C extends string> {
+export interface ErrorOptions<C extends string> {
   /**
    *  a human readable display for what error our library caught.
    */
