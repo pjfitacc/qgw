@@ -219,7 +219,6 @@ export type DirectAPI = {
    *    - If the value is "N," then the tx will only use the tx's set amount if override_recur is set to "Y". Otherwise, it will use the recipe's default recurring amount in its settings.
    * You can change a specific recipe's value by going to the recipe's edit page and clicking the checkbox "Honor Transaction Amount instead of Recurring Amount Above" on or off.
    *
-   * TODO: BUG: We assumed that this value could take N, but quantum Gateway's API only accepts Y.
    */
   override_recur?: "Y";
 
