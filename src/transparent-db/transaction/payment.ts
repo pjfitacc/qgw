@@ -67,7 +67,12 @@ export class ElectronicFundsTransfer {
  *
  */
 export class Payment {
+  /** @hidden */
   public directApiFields: CreditCardPaymentFields | EftPaymentFields;
+  /**
+   *
+   * @param amount - The transaction's purchase amount.
+   */
   constructor(
     public amount: number,
     public method: CreditCard | ElectronicFundsTransfer
