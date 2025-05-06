@@ -113,7 +113,7 @@ export class TransactionResponse {
   /**
    *
    *  @privateRemarks
-   *  The only supported response string delimiter for this library is the pipe: |.
+   *  TODO: The only supported response string delimiter for this library is the pipe: |.
    *  The response string is a single delimiter-separated string (default is the pipe: | ) that contains the following fields according to Transparent API:
    *  result,authcode,transID,AVRResponse,CVV Response,Max Score,decline_reason(if any),Error Code(if any)
    *  This string MUST be split into an array of strings before being passed to the constructor.
