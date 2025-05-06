@@ -10,10 +10,28 @@ export interface CustomIssue {
   path?: (string | number)[];
   message: string;
 }
+/**
+ * ### Description
+ * The options for the {@link CustomError} class.
+ *
+ */
+interface ErrorOptions<C extends string> {
+  /**
+   *  a human readable display for what error our library caught.
+   */
+  message: string;
 
-/*
+  /**
+   * specific information regarding the error that occurred.
+   */
+  issues: CustomIssue[];
 
-*/
+  /**
+   * the custom error code.
+   */
+  code?: C;
+}
+
 /**
  * ### Description
  *  The base error class for this library.
@@ -27,20 +45,9 @@ class CustomError<C extends string> extends Error {
   code?: C;
 
   /**
-   * @param options - The options for the error
-   * @param options.message - a human readable display for what error our library caught.
-   * @param options.issues - specific information regarding the error that occurred.
-   * @param options.code - the custom error code.
+   * @param options - The {@link ErrorOptions} object containing the error message, issues, and code.
    */
-  constructor({
-    message,
-    issues,
-    code,
-  }: {
-    message: string;
-    issues: CustomIssue[];
-    code?: C;
-  }) {
+  constructor({ message, issues, code }: ErrorOptions<C>) {
     super();
     this.message = message;
     this.code = code;
