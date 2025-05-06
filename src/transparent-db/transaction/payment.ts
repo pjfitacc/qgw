@@ -32,6 +32,12 @@ export enum CvvType {
  */
 export class CreditCard {
   readonly kind = "CC";
+
+  /**
+   *
+   * @param number - The transaction's credit card number.
+   * @param cvvType - How Quantum Gateway handles the CVV2 field.
+   */
   constructor(
     public number: string,
     public expirationMonth: string,
