@@ -14,6 +14,13 @@ import { DirectAPI } from "../api";
  */
 export class Payer {
   public directApiFields: PayerFields;
+  /**
+   *
+   * @param address - The billing address.
+   * @param zip - The billing zip code.
+   * @param email - The billing's contact email address.
+   * @param name - The billing contact's name.
+   */
   constructor(
     public address: string,
     public zip: string,
