@@ -34,7 +34,7 @@ import { RecurringOptions } from "./recurringOptions";
 export class TransactionRequest {
   /**
    *
-   * @param options - Transparent DB transaction settings not related to the payment, payer, or recurring options.
+   * @param options - Transparent DB transaction settings not related to the transaction's payment, payer, or recurring options.
    */
   constructor(
     public payment: Payment,
