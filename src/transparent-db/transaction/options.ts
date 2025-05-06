@@ -22,12 +22,45 @@ import {
  *
  */
 export type OptionsFields = {
+  /**
+   * Whether to send an email receipt to the customer.
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
+   */
   emailCustomerReceipt?: boolean;
+
+  /**
+   * Whether to send an email receipt to the merchant.
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
+   */
   sendTransactionEmail?: boolean;
+
+  /**
+   * How Quantum Gateway processes transaction requests.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Processing Mode.
+   */
   transactionType?: TransactionType;
+
+  /**
+   * An already existing / processed transaction ID. Can only be applied to the following transaction types ({@link TransactionType}): VOID, PREVIOUS_SALE.
+   */
   transactionID?: string;
+
+  /**
+   * Your key if use Restrict Key is enabled in the Quantum Gateway settings.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> RestrictKey.
+   */
   restrictKey?: string;
+
+  /**
+   * How items in the transaction response are separated.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Default Data Separator.
+   */
   dataSeparator?: string;
+
+  /**
+   * Whether to use Maxmind for fraud detection.
+   * - Default: Settings =\> Processing Settings =\> Max Mind Fraud Control =\> Use Maxmind: Yes or No
+   */
   maxMindOn?: boolean;
 };
 
@@ -37,7 +70,12 @@ export type OptionsFields = {
  *
  */
 export class Options {
+  /** @hidden */
   public directApiFields: DirectApiOptionsFields;
+
+  /**
+   * @param optionsFields - The fields to configure the transaction.
+   */
   constructor(optionsFields?: OptionsFields) {
     this.directApiFields = {
       override_email_customer: toggleYesOrNO(
