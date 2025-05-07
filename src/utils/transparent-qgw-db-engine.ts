@@ -119,6 +119,12 @@ type RemoveUndefined<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]: T[K];
 };
 
+/**
+ * Removes undefined properties from an object
+ *
+ * @param obj - The object to filter
+ * @returns A new object with undefined properties removed
+ */
 function filterUndefined<T extends object>(obj: T): RemoveUndefined<T> {
   const result: Partial<T> = {};
 
