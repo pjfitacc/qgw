@@ -1,39 +1,53 @@
-/*
-CustomIssue Interface (copies: https://zod.dev/ERROR_HANDLING?id=zodissue):
-
-code
-
-path?
-
-message
-*/
+/**
+ * ### Description
+ *  In depth information about the general error that occurred.
+ *
+ * @remarks
+ * inspired by ZodIssue https://zod.dev/ERROR_HANDLING?id=zodissue
+ */
 export interface CustomIssue {
-  code: any;
+  code: string;
   path?: (string | number)[];
   message: string;
 }
+/**
+ * ### Description
+ * The options for the {@link CustomError} class.
+ *
+ */
+export interface ErrorOptions<C extends string> {
+  /**
+   *  a human readable display for what error our library caught.
+   */
+  message: string;
 
-/*
-message - a human readable display for what error our library caught.
+  /**
+   * specific information regarding the error that occurred.
+   */
+  issues: CustomIssue[];
 
-code - the custom error code. can be ERR_PARSE which is a library error or ERR_SERVER_RESPONSE which is an error from outside the library coming from Transparent Quantum Gateway.
+  /**
+   * the custom error code.
+   */
+  code?: C;
+}
 
-Issues = an Array of class CustomIssue related to the overall message + error code.
-*/
+/**
+ * ### Description
+ *  The base error class for this library.
+ *
+ * @remarks
+ * Inspired by ZodError: https://zod.dev/ERROR_HANDLING?id=zoderror
+ */
 class CustomError<C extends string> extends Error {
   message: string;
   issues: CustomIssue[];
   code?: C;
 
-  constructor({
-    message,
-    issues,
-    code,
-  }: {
-    message: string;
-    issues: CustomIssue[];
-    code?: C;
-  }) {
+  /**
+   * @param options - The {@link ErrorOptions} object containing the error message, issues, and code.
+   */
+  constructor({ message, issues, code }: ErrorOptions<C>) {
     super();
     this.message = message;
     this.code = code;
@@ -41,4 +55,4 @@ class CustomError<C extends string> extends Error {
   }
 }
 
-export default CustomError;
+export { CustomError };

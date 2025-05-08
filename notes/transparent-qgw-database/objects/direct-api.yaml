@@ -1,0 +1,55 @@
+DirectAPI:
+Hierarchy: Flat
+Fields:
+  required:
+    gwlogin: string
+    amount: string
+    BADDR1: string
+    BZIP1: string
+    BCUST_EMAIL: string
+    override_email_customer:
+      - "Y"
+      - "N"
+    override_trans_email:
+      - "Y"
+      - "N"
+  trans_method:
+    - "CC"
+    - "EFT"
+  trans_type: TransactionType
+  transID: string
+  ccnum: string
+  ccmo: string
+  ccyr: string
+  aba: string
+  checkacct: string
+
+  RestrictKey: string
+  BNAME: string
+  CVV2: string
+  CVVtype:
+    - "0"
+    - "1"
+    - "2"
+    - "9"
+  Dsep: string
+  MAXMIND:
+    - "1"
+    - "2"
+  override_recur:
+    - "Y"
+  RID: string
+  initial_amount: string
+  recur_times: string
+  OverRideRecureDay:
+    - "Y"
+    - "N"
+
+TransactionType enum:
+  "CREDIT": "CREDIT"
+  "SALE": "SALE"
+  "AUTH_CAPTURE": "AUTH_CAPTURE"
+  "AUTH_ONLY": "AUTH_ONLY"
+  "RETURN": "RETURN"
+  "VOID": "VOID"
+  "PREVIOUS_SALE": "PREVIOUS_SALE"

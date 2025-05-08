@@ -1,9 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { DirectAPI } from "../transparent-qgw-database/api";
-import TransactionError, {
+import { DirectAPI } from "../transparent-db/api";
+import {
   TransactionDeclinedIssue,
+  TransactionError,
 } from "../errors/transaction-error";
-import { TransactionResponse } from "../transparent-qgw-database/transaction/response";
+import { TransactionResponse } from "../transparent-db/transaction/response";
 
 export function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
   if (boolean === undefined) return undefined;
@@ -16,14 +17,8 @@ export function toggle1or2(boolean?: boolean): "1" | "2" | undefined {
 }
 
 /**
- * Expected response structure from the Quantum Gateway API
- */
-interface QuantumGatewayResponse {
-  quantumGatewayTransactionResponse: string[];
-}
-
-/**
  * Configuration options for the HTTP client
+ *
  */
 interface HttpClientConfig {
   baseURL: string;
@@ -92,7 +87,7 @@ function toFormUrlEncoded(data: Record<string, unknown>): string {
  * - Strips outer quotation marks from each value
  * - Trims whitespace from resulting values
  *
- * @param htmlResponse The raw response string from the server
+ * @param htmlResponse - The raw response string from the server
  * @returns Array of cleaned string values
  * @throws Error if no pipe delimiter is found in the response
  */
@@ -124,6 +119,12 @@ type RemoveUndefined<T> = {
   [K in keyof T as T[K] extends undefined ? never : K]: T[K];
 };
 
+/**
+ * Removes undefined properties from an object
+ *
+ * @param obj - The object to filter
+ * @returns A new object with undefined properties removed
+ */
 function filterUndefined<T extends object>(obj: T): RemoveUndefined<T> {
   const result: Partial<T> = {};
 
@@ -141,9 +142,9 @@ function filterUndefined<T extends object>(obj: T): RemoveUndefined<T> {
  *
  * @param directAPI - The DirectAPI payload to send
  * @returns Promise containing the parsed response array
- * @throws {AxiosError} When the request fails
- * @throws {Error} When response parsing fails
- * @throws {TransactionError} When the transaction is declined
+ * @throws {@link AxiosError} When the request fails
+ * @throws {@link Error} When response parsing fails
+ * @throws {@link TransactionError} When the transaction is declined
  */
 export async function postToServer(directAPI: DirectAPI): Promise<string[]> {
   const httpClient = createHttpClient();
