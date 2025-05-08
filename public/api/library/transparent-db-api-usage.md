@@ -14,7 +14,7 @@ import {
   Payment,
   TransactionRequest,
   TransparentDbEngine,
-} from "qgw";
+} from "qgw/transparent-db";
 
 // Quantum Gateway Dummy Data
 const myQuantumGatewayLogin = "gwlogin";
