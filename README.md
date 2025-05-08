@@ -6,7 +6,7 @@ This library offers Javascript modules and functionality into the [Quantum Gatew
 
 #### Supported APIs
 
-- [Transparent QGWdatabase Engine](./public/api/library/transparent-db-api.md)
+- [Transparent QGWdatabase Engine](./public/api/library/transparent-db-api-usage.md)
 
 #### Contributions
 
