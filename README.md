@@ -1,5 +1,9 @@
 ## Quantum Gateway Library (qgw)
 
+### Documentation
+
+available at: https://pjfitacc.github.io/qgw/
+
 #### Description
 
 This library offers Javascript modules and functionality into the [Quantum Gateway Integration APIs](https://www.quantumgateway.com/developer.php). This is a third party library; the author does not work for Quantum Gateway.
