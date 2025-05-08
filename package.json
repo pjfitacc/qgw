@@ -32,7 +32,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc"
   },
   "repository": {
     "type": "git",
