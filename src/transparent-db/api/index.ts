@@ -1,16 +1,8 @@
 /**
- * ### Description
- *   DirectAPI clones Quantum Gateway's API for the Transparent Database Engine.
- *   The "Direct" in DirectAPI is because we're porting a "direct" copy of the Transparent API into Typescript.
- *
- *   Quantum Gateway (QGW) Transparent Database Engine API Documentation:
- *   https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
- *
- *   Since QGW does not give their API a version number, we will version it ourselves.
- *
  * ### Transparent Database Engine API Version (Library's Version)
  *   - v1.0
- *
+ *   Since QGW does not give their API a version number, we will version it ourselves.
+ * 
  * ### Terminology
  * - Transparent API - short hand for Quantum Gateway's Transparent Database Engine API
  * - DirectAPI - Transparent API's library clone / implementation
@@ -83,7 +75,18 @@
  *         4. override_trans_email = settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
  *         5. RestrictKey = key if use Restrict Key is enabled \@ settings =\> RestrictKey
  *         6. Dsep = settings =\> Default Data Separator
- *         7. MAXMIND = "1" Use Maxmind (default if not sent).
+ *         7. MAXMIND = "1" Use Maxmind (default if not sent). 
+ *  @module
+ */
+
+/**
+ * ### Description
+ *   DirectAPI clones Quantum Gateway's API for the Transparent Database Engine.
+ *   The "Direct" in DirectAPI is because we're porting a "direct" copy of the Transparent API into Typescript.
+ *
+ *   Quantum Gateway (QGW) Transparent Database Engine API Documentation:
+ *   https://www.quantumgateway.com/files/QGW-Non-Interactive_API.pdf
+ *
  **/
 export type DirectAPI = {
   /**

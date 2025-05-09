@@ -6,12 +6,19 @@ For Developers interested in the inner workings or modifying this package.
 
 # Publishing a new version to github and npm
 
+Github:
+
 1. go to main branch
 2. change version number in package.json and package-lock.json
-3. git tag -a vMajor_Minor_Patch -m "message"
-4. git push origin vMajor_Minor_Patch (same tag version as step above)
-5. npm run build
-6. npm publish
+3. git commit changes
+4. git tag -a vMajor_Minor_Patch -m "message"
+5. git push origin vMajor_Minor_Patch (same tag version as step above)
+
+NPM:
+
+1. npm run build
+2. npm login
+3. npm publish
 
 If using the qgw-test-consumer to try out new version features + fixes:
 
@@ -24,7 +31,7 @@ If using the qgw-test-consumer to try out new version features + fixes:
 
 # Generating Typedoc Documentation:
 
-`npx typedoc --out docs`
+`npm run docs`
 
 # Linting:
 
