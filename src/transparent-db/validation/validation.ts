@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DirectAPI, TransactionType } from ".";
+import { DirectAPI, TransactionType } from "../api";
 
 // Helper validators
 const isAmex = (cardNum: string) => /^3[47][0-9]{13}$/.test(cardNum);
