@@ -6,23 +6,24 @@ For Developers interested in the inner workings or modifying this package.
 
 # Publishing a new version to github and npm
 
-Github:
+Strategy: When publishing a new package version, the commit for the new version number should NOT include features. It should only have the bumped version number.
 
-1. go to main branch
-2. change version number in package.json and package-lock.json
-3. git commit changes
-4. git tag -a vMajor_Minor_Patch -m "message"
-5. git push origin vMajor_Minor_Patch (same tag version as step above)
+### Publishing a Package (subsequent releases)
 
-NPM:
+1. Go to `main branch`
+2. Run `npm version <change> -m "Summary of what changed"`
 
-1. npm run build
-2. npm login
-3. npm publish
+- \<change> can be: `major`, `minor`, or `patch` based on [semver](https://semver.org/)
 
-If using the qgw-test-consumer to try out new version features + fixes:
+3. Run `npm publish`
+4. Run:
 
-- npm update
+```
+git push
+git push --tags
+```
+
+For explanations on the commands please read: [Publishing npm Packages](https://nearform.com/digital-community/publish-npm-packages/#publishing-a-package-subsequent-releases) by Kadi Kraman which I got the commands from
 
 # Deleting a version tag:
 
