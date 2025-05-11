@@ -1,6 +1,13 @@
 // typedoc.json
 {
     "projectDocuments": ["public/**/*.md"],
-    "entryPoints": ["src/errors/*.ts", "src/transparent-db/engine.ts", "src/transparent-db/transaction/*.ts", "src/transparent-db/api/index.ts"],
+    "entryPoints": [
+        "src/errors/*.ts", 
+        "src/transparent-db/api/index.ts",
+        "src/transparent-db/engine.ts",
+        "src/transparent-db/transaction/*.ts",
+        "src/transparent-db/validation/api.ts",
+        "src/transparent-db/validation/transactionRequest.ts"
+    ],
     "exclude": ["src/**/*.test.ts", "src/index.ts"],
 }

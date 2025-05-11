@@ -1,4 +1,8 @@
-import { apiSchema } from "./validation";
+import { Payer } from "../transaction/payer";
+import { CreditCard, CvvType, Payment } from "../transaction/payment";
+import { TransactionRequest } from "../transaction/request";
+import { apiSchema } from "./api";
+import { transactionRequestSchema } from "./transactionRequest";
 
 // Zod helpers for clean debugging
 function expectZodSuccess(parsed: ReturnType<typeof apiSchema.safeParse>) {
@@ -155,5 +159,43 @@ describe("apiSchema validation", () => {
   it("accepts recur_times >= 0", () => {
     const parsed = apiSchema.safeParse({ ...baseCC, recur_times: "0" });
     expectZodSuccess(parsed);
+  });
+});
+
+describe("transactionRequestSchema validation", () => {
+  it("accepts basic Credit Card TransactionRequest object", () => {
+    const creditCard = new CreditCard(
+      "123123123123",
+      "02",
+      "21",
+      "123",
+      CvvType["Not Passing CVV2"]
+    );
+    const payment = new Payment(10, creditCard);
+    const payer = new Payer("123", "123", "email@email.com");
+    const transationRequest = new TransactionRequest(payment, payer);
+
+    const parsed = transactionRequestSchema.safeParse(transationRequest);
+
+    expect(parsed.success).toBe(true);
+  });
+
+  it("should throw an error for invalid email", () => {
+    const creditCard = new CreditCard(
+      "123123123123",
+      "02",
+      "21",
+      "123",
+      CvvType["Not Passing CVV2"]
+    );
+    const payment = new Payment(10, creditCard);
+    const payer = new Payer("123", "123", "123email");
+    const transationRequest = new TransactionRequest(payment, payer);
+
+    const parsed = transactionRequestSchema.safeParse(transationRequest);
+
+    expect(parsed.success).toBe(false);
+    // TODO: What kind of error field and message should we be expecting on any of the TransactionRequests?
+    // Should there be some standard error format?
   });
 });

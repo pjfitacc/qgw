@@ -1,5 +1,4 @@
 import { ZodError } from "zod";
-import { apiSchema } from "./api/validation";
 import { DirectAPI } from "./api";
 import { TransactionError } from "../errors/transaction-error";
 import { postToServer } from "../utils/transparent-qgw-db-engine";
@@ -8,6 +7,7 @@ import { CustomIssue } from "../errors/custom-error";
 import { TransactionErrorCode } from "../errors/types";
 import { TransactionRequest } from "./transaction/request";
 import { TransactionResponse } from "./transaction/response";
+import { apiSchema } from "./validation/api";
 
 /**
  * ### Description

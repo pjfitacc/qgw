@@ -33,7 +33,8 @@
   "scripts": {
     "build": "tsup",
     "test": "jest",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "tempDocs": "typedoc --out tempDocs"
   },
   "repository": {
     "type": "git",

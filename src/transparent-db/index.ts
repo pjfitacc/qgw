@@ -7,5 +7,7 @@ export * from "./transaction/request";
 export * from "./transaction/response";
 export * from "./engine";
 export * from "../errors/transaction-error";
+export * from "./validation/api";
+export * from "./validation/transactionRequest";
 
 // Need to add utilities to this file in the future
