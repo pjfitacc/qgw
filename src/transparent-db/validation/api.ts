@@ -1,3 +1,8 @@
+/**
+ * This module contains the validation schema for the DirectAPI found in the apiSchema variable.
+ * It includes custom error messages for various validation failures.
+ * @module
+ */
 import { z } from "zod";
 import { DirectAPI, TransactionType } from "../api";
 
@@ -131,6 +136,11 @@ function validateEFTFields(data: DirectAPI, ctx: z.RefinementCtx) {
 
 // === Main Schema ===
 
+/**
+ * This schema validates the input for the DirectAPI.
+ * It checks for required fields, valid formats, and custom validation rules.
+ * To use this schema, pass your input data to the `apiSchema.parse(data)` method.
+ */
 export const apiSchema = z
   .object({
     gwlogin: z.string(),
