@@ -11,7 +11,7 @@ Strategy: When publishing a new package version, the commit for the new version 
 ### Publishing a Package (subsequent releases)
 
 1. Go to `main branch`
-2. Run `npm version <change>`
+2. Run `npm version <change> -m "Summary of what changed"`
 
 - \<change> can be: `major`, `minor`, or `patch` based on [semver](https://semver.org/)
 
