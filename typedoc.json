@@ -6,7 +6,8 @@
         "src/transparent-db/api/index.ts",
         "src/transparent-db/engine.ts",
         "src/transparent-db/transaction/*.ts",
-        "src/transparent-db/validation/*.ts"
+        "src/transparent-db/validation/api.ts",
+        "src/transparent-db/validation/transactionRequest.ts"
     ],
     "exclude": ["src/**/*.test.ts", "src/index.ts"],
 }
