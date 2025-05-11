@@ -7,7 +7,7 @@ import { CustomIssue } from "../errors/custom-error";
 import { TransactionErrorCode } from "../errors/types";
 import { TransactionRequest } from "./transaction/request";
 import { TransactionResponse } from "./transaction/response";
-import { apiSchema } from "./validation/validation";
+import { apiSchema } from "./validation/api";
 
 /**
  * ### Description
