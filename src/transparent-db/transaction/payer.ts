@@ -1,4 +1,6 @@
+import { Expose, plainToInstance, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
+import { plainToNonArrayInstance } from "../../utils/serialization";
 
 /**
  * ### Description
@@ -13,7 +15,21 @@ import { DirectAPI } from "../api";
  *
  */
 export class Payer {
+  /** @hidden */
   public directApiFields: PayerFields;
+
+  @Expose()
+  address!: string;
+
+  @Expose()
+  zip!: string;
+
+  @Expose()
+  email!: string;
+
+  @Expose()
+  name!: string;
+
   /**
    *
    * @param address - The billing address.
@@ -22,17 +38,30 @@ export class Payer {
    * @param name - The billing contact's name.
    */
   constructor(
-    public address: string,
-    public zip: string,
-    public email: string,
-    public name: string = "anonymous"
+    address: string,
+    zip: string,
+    email: string,
+    name: string = "anonymous"
   ) {
+    this.address = address;
+    this.zip = zip;
+    this.email = email;
+    this.name = name;
+
     this.directApiFields = {
       BADDR1: address,
       BZIP1: zip,
       BCUST_EMAIL: email,
       BNAME: name,
     };
+  }
+
+  static fromJSON(json: any): Payer {
+    return plainToNonArrayInstance(Payer, json);
+  }
+
+  toJSON(): any {
+    return instanceToPlain(this);
   }
 }
 
