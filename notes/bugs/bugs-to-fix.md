@@ -36,3 +36,64 @@ Snapshots: 0 total
 Time: 0.841 s, estimated 1 s
 Ran all test suites matching /tests\/serialization.test.ts/i.
 developer@developers-MacBook-Pro qgw %
+
+#### Solution: Separate class construction from DirectAPI construction. Separate Data Layout from Functionality.
+
+It originates when we first call fromJSON from the TransactionRequest Object.
+
+fromJSON will create instances of TransactionRequest's classes fields: payment, payer, options, recurringoptions.
+
+When these classes are instantiated, we call its empty constructor. ex: new Payment().
+Since our classes don't have a no arg constructor, for some reason, it defaults to our constructor with arguments.
+
+So we call our payment constructor that relies on args, but no arguments are provided, then an undefined issue arises.
+
+We need a class redesign.
+
+When constructing our TransactionRequest subclasses, do not introduce conditional functionality that would require the existence of some parameter, value to exist.
+
+For our cases, it just means that for the classes:
+
+- Options
+- Payer
+- Payment
+- RecurringOptions
+
+we don't do any mapping from the Class's native fields to their corresponding DirectAPI fields.
+
+For example in Payer:
+constructor(
+address: string,
+zip: string,
+email: string,
+name: string = "anonymous"
+) {
+this.address = address;
+this.zip = zip;
+this.email = email;
+this.name = name;
+
+    this.directApiFields = {
+      BADDR1: address,
+      BZIP1: zip,
+      BCUST_EMAIL: email,
+      BNAME: name,
+    };
+
+}
+
+The constructor should not be mapping its data values to this.directApiFields.
+Because this mapping is considered conditional functionality.
+
+We have to move directApiFields to its own method that can be called later AFTER the data construction is set.
+
+Make an interface: MapsToApiFields
+which has the function:
+toDirectApiFields()
+
+These classes will implement MapsToApiFields:
+
+- Options
+- Payer
+- Payment
+- RecurringOptions
