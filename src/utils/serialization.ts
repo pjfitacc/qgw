@@ -1,0 +1,20 @@
+import { ClassConstructor, plainToInstance } from "class-transformer";
+
+/**
+ * class-transformer's plainToInstance function but it never returns an
+ * array of that instance.
+ *
+ * @param c The
+ * @param json
+ * @returns
+ */
+export function plainToNonArrayInstance<I>(
+  c: ClassConstructor<I>,
+  json: any
+): I {
+  const instance = plainToInstance(c, json);
+  if (Array.isArray(instance)) {
+    throw new Error("fromJSON expected a single object, but got an array");
+  }
+  return instance;
+}

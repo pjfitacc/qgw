@@ -1,4 +1,6 @@
+import { Expose, Type, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
+import { plainToNonArrayInstance } from "../../utils/serialization";
 
 /**
  * ### Description
@@ -31,7 +33,23 @@ export enum CvvType {
  *
  */
 export class CreditCard {
+  @Expose()
   readonly kind = "CC";
+
+  @Expose()
+  number!: string;
+
+  @Expose()
+  expirationMonth!: string;
+
+  @Expose()
+  expirationYear!: string;
+
+  @Expose()
+  cvv2?: string;
+
+  @Expose()
+  cvvType?: CvvType;
 
   /**
    *
@@ -39,12 +57,26 @@ export class CreditCard {
    * @param cvvType - How Quantum Gateway handles the CVV2 field.
    */
   constructor(
-    public number: string,
-    public expirationMonth: string,
-    public expirationYear: string,
-    public cvv2?: string,
-    public cvvType?: CvvType
-  ) {}
+    number: string,
+    expirationMonth: string,
+    expirationYear: string,
+    cvv2?: string,
+    cvvType?: CvvType
+  ) {
+    this.number = number;
+    this.expirationMonth = expirationMonth;
+    this.expirationYear = expirationYear;
+    this.cvv2 = cvv2;
+    this.cvvType = cvvType;
+  }
+
+  static fromJSON(json: any): CreditCard {
+    return plainToNonArrayInstance(CreditCard, json);
+  }
+
+  toJSON(): any {
+    return instanceToPlain(this);
+  }
 }
 
 /**
@@ -58,8 +90,27 @@ export class CreditCard {
  *
  */
 export class ElectronicFundsTransfer {
+  @Expose()
   readonly kind = "EFT";
-  constructor(public aba: string, public checkingAccountNumber: string) {}
+
+  @Expose()
+  aba!: string;
+
+  @Expose()
+  checkingAccountNumber!: string;
+
+  constructor(aba: string, checkingAccountNumber: string) {
+    this.aba = aba;
+    this.checkingAccountNumber = checkingAccountNumber;
+  }
+
+  static fromJSON(json: any): ElectronicFundsTransfer {
+    return plainToNonArrayInstance(ElectronicFundsTransfer, json);
+  }
+
+  toJSON(): any {
+    return instanceToPlain(this);
+  }
 }
 
 /**
@@ -75,14 +126,31 @@ export class ElectronicFundsTransfer {
 export class Payment {
   /** @hidden */
   public directApiFields: CreditCardPaymentFields | EftPaymentFields;
+
+  @Expose()
+  amount!: number;
+
+  @Expose()
+  @Type(() => Object, {
+    discriminator: {
+      property: "kind",
+      subTypes: [
+        { value: CreditCard, name: "CC" },
+        { value: ElectronicFundsTransfer, name: "EFT" },
+      ],
+    },
+    keepDiscriminatorProperty: true,
+  })
+  method!: CreditCard | ElectronicFundsTransfer;
+
   /**
    *
    * @param amount - The transaction's purchase amount.
    */
-  constructor(
-    public amount: number,
-    public method: CreditCard | ElectronicFundsTransfer
-  ) {
+  constructor(amount: number, method: CreditCard | ElectronicFundsTransfer) {
+    this.amount = amount;
+    this.method = method;
+
     switch (method.kind) {
       case "CC":
         this.directApiFields = {
@@ -106,6 +174,14 @@ export class Payment {
       default:
         throw Error("unaccepted payment method");
     }
+  }
+
+  static fromJSON(json: any): Payment {
+    return plainToNonArrayInstance(Payment, json);
+  }
+
+  toJSON(): any {
+    return instanceToPlain(this);
   }
 }
 

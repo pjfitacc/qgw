@@ -4,6 +4,7 @@ import { Options } from "./options";
 import { Payer } from "./payer";
 import { Payment } from "./payment";
 import { RecurringOptions } from "./recurringOptions";
+import { plainToNonArrayInstance } from "../../utils/serialization";
 
 /**
  * ### Description
@@ -66,11 +67,7 @@ export class TransactionRequest {
   }
 
   static fromJSON(json: any): TransactionRequest {
-    const instance = plainToInstance(TransactionRequest, json);
-    if (Array.isArray(instance)) {
-      throw new Error("fromJSON expected a single object, but got an array");
-    }
-    return instance;
+    return plainToNonArrayInstance(TransactionRequest, json);
   }
 
   /** @hidden */
