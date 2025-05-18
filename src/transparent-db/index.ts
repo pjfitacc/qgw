@@ -1,3 +1,4 @@
+import "reflect-metadata";
 export * from "./api/index";
 export * from "./transaction/options";
 export * from "./transaction/payer";
