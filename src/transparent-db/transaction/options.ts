@@ -1,3 +1,9 @@
+import {
+  Expose,
+  Type,
+  plainToInstance,
+  instanceToPlain,
+} from "class-transformer";
 import { DirectAPI, TransactionType } from "../api";
 import {
   toggle1or2,
@@ -21,48 +27,52 @@ import {
  *  - maxMindOn: MAXMIND "1" | "2";
  *
  */
-export type OptionsFields = {
+export class OptionsFieldsModel {
   /**
    * Whether to send an email receipt to the customer.
-   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
+   * - Default: Settings => Processing Settings => Email Receipts => Send Email Receipts To Customers: Yes or No
    */
+  @Expose()
   emailCustomerReceipt?: boolean;
 
   /**
    * Whether to send an email receipt to the merchant.
-   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
+   * - Default: Settings => Processing Settings => Email Receipts => Receive Merchant Receipts: Yes or No
    */
+  @Expose()
   sendTransactionEmail?: boolean;
 
   /**
    * How Quantum Gateway processes transaction requests.
-   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Processing Mode.
+   * This can be accessed in the Quantum Gateway website under Settings => Processing Settings => Processing Mode.
    */
+  @Expose()
   transactionType?: TransactionType;
 
   /**
-   * An already existing / processed transaction ID. Can only be applied to the following transaction types ({@link TransactionType}): VOID, PREVIOUS_SALE.
+   * An already existing / processed transaction ID. Can only be applied to the following transaction types: VOID, PREVIOUS_SALE.
    */
+  @Expose()
   transactionID?: string;
 
   /**
    * Your key if use Restrict Key is enabled in the Quantum Gateway settings.
-   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> RestrictKey.
    */
+  @Expose()
   restrictKey?: string;
 
   /**
    * How items in the transaction response are separated.
-   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Default Data Separator.
    */
+  @Expose()
   dataSeparator?: string;
 
   /**
    * Whether to use Maxmind for fraud detection.
-   * - Default: Settings =\> Processing Settings =\> Max Mind Fraud Control =\> Use Maxmind: Yes or No
    */
+  @Expose()
   maxMindOn?: boolean;
-};
+}
 
 /**
  * ### Description
@@ -73,10 +83,16 @@ export class Options {
   /** @hidden */
   public directApiFields: DirectApiOptionsFields;
 
+  @Type(() => OptionsFieldsModel)
+  @Expose()
+  public optionsFields?: OptionsFieldsModel;
+
   /**
    * @param optionsFields - The fields to configure the transaction.
    */
-  constructor(optionsFields?: OptionsFields) {
+  constructor(optionsFields?: OptionsFieldsModel) {
+    this.optionsFields = optionsFields;
+
     this.directApiFields = {
       override_email_customer: toggleYesOrNO(
         optionsFields?.emailCustomerReceipt
@@ -89,7 +105,18 @@ export class Options {
       MAXMIND: toggle1or2(optionsFields?.maxMindOn),
     };
   }
+
+  static fromJSON(json: any): Options {
+    const fields = plainToInstance(OptionsFieldsModel, json);
+    return new Options(fields);
+  }
+
+  toJSON(): any {
+    return instanceToPlain(this.optionsFields);
+  }
 }
+
+export type OptionsFields = OptionsFieldsModel;
 
 export type DirectApiOptionsFields = Pick<
   DirectAPI,
