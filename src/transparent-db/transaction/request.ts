@@ -1,3 +1,4 @@
+import { instanceToPlain, plainToInstance, Type } from "class-transformer";
 import { DirectAPI } from "../api";
 import { Options } from "./options";
 import { Payer } from "./payer";
@@ -37,11 +38,40 @@ export class TransactionRequest {
    * @param options - Transparent DB transaction settings not related to the transaction's payment, payer, or recurring options.
    */
   constructor(
-    public payment: Payment,
-    public payer: Payer,
-    public options?: Options,
-    public recurringOptions?: RecurringOptions
-  ) {}
+    payment: Payment,
+    payer: Payer,
+    options?: Options,
+    recurringOptions?: RecurringOptions
+  ) {
+    this.payment = payment;
+    this.payer = payer;
+    this.options = options;
+    this.recurringOptions = recurringOptions;
+  }
+
+  @Type(() => Payment)
+  payment!: Payment;
+
+  @Type(() => Payer)
+  payer!: Payer;
+
+  @Type(() => Options)
+  options?: Options;
+
+  @Type(() => RecurringOptions)
+  recurringOptions?: RecurringOptions;
+
+  toJSON(): any {
+    return instanceToPlain(this);
+  }
+
+  static fromJSON(json: any): TransactionRequest {
+    const instance = plainToInstance(TransactionRequest, json);
+    if (Array.isArray(instance)) {
+      throw new Error("fromJSON expected a single object, but got an array");
+    }
+    return instance;
+  }
 
   /** @hidden */
   toAPI(): DirectAPI {
