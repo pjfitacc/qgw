@@ -120,6 +120,9 @@ export class Options implements KeyMappable<DirectAPI, OptionsDirectApiFields> {
   }
 }
 
+/**
+ * @internal
+ */
 export type OptionsFields = OptionsFieldsModel;
 
 /**
