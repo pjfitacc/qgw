@@ -1,4 +1,4 @@
-import { Expose, plainToInstance, instanceToPlain } from "class-transformer";
+import { Expose, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
 import { plainToNonArrayInstance } from "../../utils/serialization";
 import { KeyMappable } from "../../utils/mapping";
@@ -56,11 +56,11 @@ export class Payer implements KeyMappable<DirectAPI, PayerDirectApiFields> {
     };
   }
 
-  static fromJSON(json: any): Payer {
+  static fromJSON(json: unknown): Payer {
     return plainToNonArrayInstance(Payer, json);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this);
   }
 }

@@ -63,9 +63,9 @@ export class TransactionResponse {
    * Empty	Transaction failed because wrong CVV2 number was entered or no CVV2 number was entered
    * Y      ?
    *
-   * More detailed responses can be found in: https://secure.quantumgateway.com/merchant/processing_config.php => Processing Mode
+   * More detailed responses can be found in: https://secure.quantumgateway.com/merchant/processing_config.php =\> Processing Mode
    *
-   * The CVV2 responses that you receive depend on the {@link transparent-db/api.TransactionType} you are using. This can be also found in the link above.
+   * The CVV2 responses that you receive depend on the {@link transparent-db#api.TransactionType} you are using. This can be also found in the link above.
    *
    * @privateRemarks CVV Response
    */
@@ -74,7 +74,7 @@ export class TransactionResponse {
   /**
    * Max Mind Fraud Control Score.
    *
-   * You can tweak the score to your liking in QGW: https://secure.quantumgateway.com/merchant/processing_config.php =>  Max Mind Fraud Control
+   * You can tweak the score to your liking in QGW: https://secure.quantumgateway.com/merchant/processing_config.php =\>  Max Mind Fraud Control
    * @privateRemarks Max Score
    */
   maxScore: string;

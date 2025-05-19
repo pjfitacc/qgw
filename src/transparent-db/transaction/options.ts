@@ -31,21 +31,21 @@ import { KeyMappable } from "../../utils/mapping";
 export class OptionsFieldsModel {
   /**
    * Whether to send an email receipt to the customer.
-   * - Default: Settings => Processing Settings => Email Receipts => Send Email Receipts To Customers: Yes or No
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Send Email Receipts To Customers: Yes or No
    */
   @Expose()
   emailCustomerReceipt?: boolean;
 
   /**
    * Whether to send an email receipt to the merchant.
-   * - Default: Settings => Processing Settings => Email Receipts => Receive Merchant Receipts: Yes or No
+   * - Default: Settings =\> Processing Settings =\> Email Receipts =\> Receive Merchant Receipts: Yes or No
    */
   @Expose()
   sendTransactionEmail?: boolean;
 
   /**
    * How Quantum Gateway processes transaction requests.
-   * This can be accessed in the Quantum Gateway website under Settings => Processing Settings => Processing Mode.
+   * This can be accessed in the Quantum Gateway website under Settings =\> Processing Settings =\> Processing Mode.
    */
   @Expose()
   transactionType?: TransactionType;
@@ -107,12 +107,12 @@ export class Options implements KeyMappable<DirectAPI, OptionsDirectApiFields> {
     };
   }
 
-  static fromJSON(json: any): Options {
+  static fromJSON(json: unknown): Options {
     const fields = plainToInstance(OptionsFieldsModel, json);
     return new Options(fields);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this.optionsFields);
   }
 }

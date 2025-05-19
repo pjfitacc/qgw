@@ -38,7 +38,7 @@ export interface TwoStateMappable<
 
 /**
  * A flexible interface for objects that map to different subsets of fields based on their internal state.
- * enables an object to dynamically expose different subsets of properties (Pick<T, Keys>) depending on its internal state.
+ * enables an object to dynamically expose different subsets of properties (Pick\<T, Keys\>) depending on its internal state.
  *
  * This is useful when:
  * - A class needs to serialize/deserialize different fields based on runtime conditions.
@@ -47,27 +47,27 @@ export interface TwoStateMappable<
  * @remarks
  * This does not work at the moment. Do not use.
  */
-interface StateDependentMappable<
-  T,
-  States extends { kind: string },
-  Subsets extends Record<string, keyof T>
-> {
-  /**
-   * Returns a subset of T's fields based on the current state.
-   */
-  toPartial(): Pick<T, Subsets[this["state"]["kind"]]>;
+// interface StateDependentMappable<
+//   T,
+//   States extends { kind: string },
+//   Subsets extends Record<string, keyof T>
+// > {
+//   /**
+//    * Returns a subset of T's fields based on the current state.
+//    */
+//   toPartial(): Pick<T, Subsets[this["state"]["kind"]]>;
 
-  /**
-   * The current state object (must have a `kind` discriminator).
-   */
-  state: States;
+//   /**
+//    * The current state object (must have a `kind` discriminator).
+//    */
+//   state: States;
 
-  /**
-   * Type guard to check if the current state matches a given kind.
-   * @param kind - The state kind to check (e.g., "A", "B", "Admin", "User").
-   * @returns `true` if the current state matches the kind.
-   */
-  isState<K extends States["kind"]>(
-    kind: K
-  ): this is { state: Extract<States, { kind: K }> };
-}
+//   /**
+//    * Type guard to check if the current state matches a given kind.
+//    * @param kind - The state kind to check (e.g., "A", "B", "Admin", "User").
+//    * @returns `true` if the current state matches the kind.
+//    */
+//   isState<K extends States["kind"]>(
+//     kind: K
+//   ): this is { state: Extract<States, { kind: K }> };
+// }

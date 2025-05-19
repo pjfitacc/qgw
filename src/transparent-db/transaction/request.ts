@@ -1,4 +1,4 @@
-import { instanceToPlain, plainToInstance, Type } from "class-transformer";
+import { instanceToPlain, Type } from "class-transformer";
 import { DirectAPI } from "../api";
 import { Options } from "./options";
 import { Payer } from "./payer";
@@ -64,11 +64,11 @@ export class TransactionRequest {
   @Type(() => RecurringOptions)
   recurringOptions?: RecurringOptions;
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this);
   }
 
-  static fromJSON(json: any): TransactionRequest {
+  static fromJSON(json: unknown): TransactionRequest {
     const parsedRequest: TransactionRequest = plainToNonArrayInstance(
       TransactionRequest,
       parseJson(json)
@@ -94,11 +94,6 @@ export class TransactionRequest {
     return Object.assign({}, ...chunks);
   }
 
-  /**
-   *
-   * @param transactionRequest
-   * @returns
-   */
   private static validate(transactionRequest: TransactionRequest) {
     return transactionRequestSchema.safeParse(transactionRequest);
   }

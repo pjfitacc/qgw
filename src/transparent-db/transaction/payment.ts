@@ -71,11 +71,11 @@ export class CreditCard {
     this.cvvType = cvvType;
   }
 
-  static fromJSON(json: any): CreditCard {
+  static fromJSON(json: unknown): CreditCard {
     return plainToNonArrayInstance(CreditCard, json);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this);
   }
 }
@@ -105,19 +105,14 @@ export class ElectronicFundsTransfer {
     this.checkingAccountNumber = checkingAccountNumber;
   }
 
-  static fromJSON(json: any): ElectronicFundsTransfer {
+  static fromJSON(json: unknown): ElectronicFundsTransfer {
     return plainToNonArrayInstance(ElectronicFundsTransfer, json);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this);
   }
 }
-
-type PaymentMethodDirectApiFields = {
-  CreditCard: CreditCardDirectApiFields;
-  ElectronicFundsTransfer: ElectronicFundsTransferDirectApiFields;
-};
 
 /**
  * ### Description
@@ -147,9 +142,9 @@ type PaymentMethodDirectApiFields = {
  * - aba
  *
  * if our Payment instance is CreditCard,
- * we must map its "number" field => "cc" DirectAPI field
+ * we must map its "number" field =\> "cc" DirectAPI field
  * otherwise if the instance is EFT,
- * we must map its "abaNumber" => "aba" DirectAPI field
+ * we must map its "abaNumber" =\> "aba" DirectAPI field
  */
 export class Payment
   implements
@@ -237,11 +232,11 @@ export class Payment
     return this.isStateB();
   }
 
-  static fromJSON(json: any): Payment {
+  static fromJSON(json: unknown): Payment {
     return plainToNonArrayInstance(Payment, json);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this);
   }
 }

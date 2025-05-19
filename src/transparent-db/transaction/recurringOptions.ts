@@ -91,12 +91,12 @@ export class RecurringOptions
     return directApiFields;
   }
 
-  static fromJSON(json: any): RecurringOptions {
+  static fromJSON(json: unknown): RecurringOptions {
     const fields = plainToInstance(RecurringOptionsFieldsModel, json);
     return new RecurringOptions(fields);
   }
 
-  toJSON(): any {
+  toJSON(): unknown {
     return instanceToPlain(this.recurringOptionsFields);
   }
 }
