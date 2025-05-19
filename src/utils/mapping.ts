@@ -12,9 +12,11 @@ export interface KeyMappable<T, K extends keyof T> {
  * This is useful when:
  * - A class needs to serialize/deserialize different fields based on runtime conditions.
  * - Different states require different subsets of data (e.g., "Admin mode" vs. "User mode").
- * 0 You want compile-time safety while keeping runtime flexibility.
+ * - You want compile-time safety while keeping runtime flexibility.
+ * @remarks
+ * This does not work at the moment. Do not use.
  */
-export interface StateDependentMappable<
+interface StateDependentMappable<
   T,
   States extends { kind: string },
   Subsets extends Record<string, keyof T>
