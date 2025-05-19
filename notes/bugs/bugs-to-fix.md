@@ -95,7 +95,7 @@ These classes will implement Mappable to type DirectAPI:
 
 Todo:
 
-- Options
-- Payer
-- Payment
-- RecurringOptions
+- [ ] Options
+- [ ] Payer
+- [ ] Payment
+- [ ] RecurringOptions
