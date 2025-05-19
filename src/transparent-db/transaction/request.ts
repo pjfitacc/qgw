@@ -73,10 +73,10 @@ export class TransactionRequest {
   /** @hidden */
   toAPI(): DirectAPI {
     const chunks = [
-      this.payment.directApiFields,
-      this.payer.directApiFields,
-      this.options?.directApiFields,
-      this.recurringOptions?.directApiFields,
+      this.payment.toPartial(),
+      this.payer.toPartial(),
+      this.options?.toPartial(),
+      this.recurringOptions?.toPartial(),
     ];
     return Object.assign({}, ...chunks);
   }
