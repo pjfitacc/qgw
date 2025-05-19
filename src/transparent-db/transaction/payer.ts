@@ -1,6 +1,7 @@
 import { Expose, plainToInstance, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
 import { plainToNonArrayInstance } from "../../utils/serialization";
+import { Mappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -14,10 +15,7 @@ import { plainToNonArrayInstance } from "../../utils/serialization";
  *  - name: BNAME
  *
  */
-export class Payer {
-  /** @hidden */
-  public directApiFields: PayerFields;
-
+export class Payer implements Mappable<DirectAPI, PayerDirectApiFields> {
   @Expose()
   address!: string;
 
@@ -47,12 +45,14 @@ export class Payer {
     this.zip = zip;
     this.email = email;
     this.name = name;
+  }
 
-    this.directApiFields = {
-      BADDR1: address,
-      BZIP1: zip,
-      BCUST_EMAIL: email,
-      BNAME: name,
+  toPartial(): Pick<DirectAPI, PayerDirectApiFields> {
+    return {
+      BADDR1: this.address,
+      BZIP1: this.zip,
+      BCUST_EMAIL: this.email,
+      BNAME: this.name,
     };
   }
 
@@ -65,7 +65,4 @@ export class Payer {
   }
 }
 
-export type PayerFields = Pick<
-  DirectAPI,
-  "BADDR1" | "BZIP1" | "BCUST_EMAIL" | "BNAME"
->;
+type PayerDirectApiFields = "BADDR1" | "BZIP1" | "BCUST_EMAIL" | "BNAME";
