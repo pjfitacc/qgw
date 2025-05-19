@@ -87,11 +87,13 @@ Because this mapping is considered conditional functionality.
 
 We have to move directApiFields to its own method that can be called later AFTER the data construction is set.
 
-Make an interface: MapsToApiFields
-which has the function:
-toDirectApiFields()
+TODO:
 
-These classes will implement MapsToApiFields:
+- [x] Make an interface: Mappable
+
+These classes will implement Mappable to type DirectAPI:
+
+Todo:
 
 - Options
 - Payer
