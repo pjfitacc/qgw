@@ -68,4 +68,7 @@ export class Payer implements KeyMappable<DirectAPI, PayerDirectApiFields> {
   }
 }
 
-type PayerDirectApiFields = "BADDR1" | "BZIP1" | "BCUST_EMAIL" | "BNAME";
+/**
+ * @ignore
+ */
+export type PayerDirectApiFields = "BADDR1" | "BZIP1" | "BCUST_EMAIL" | "BNAME";
