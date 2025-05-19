@@ -5,6 +5,8 @@ import { Payer } from "./payer";
 import { Payment } from "./payment";
 import { RecurringOptions } from "./recurringOptions";
 import { plainToNonArrayInstance } from "../../utils/serialization";
+import { transactionRequestSchema } from "../validation/transactionRequest";
+import { parseJson } from "../../utils/parsing";
 
 /**
  * ### Description
@@ -67,7 +69,18 @@ export class TransactionRequest {
   }
 
   static fromJSON(json: any): TransactionRequest {
-    return plainToNonArrayInstance(TransactionRequest, json);
+    const parsedRequest: TransactionRequest = plainToNonArrayInstance(
+      TransactionRequest,
+      parseJson(json)
+    );
+
+    const validationResult = this.validate(parsedRequest);
+
+    if (validationResult.success) {
+      return parsedRequest;
+    } else {
+      throw validationResult.error;
+    }
   }
 
   /** @hidden */
@@ -79,5 +92,14 @@ export class TransactionRequest {
       this.recurringOptions?.toPartial(),
     ];
     return Object.assign({}, ...chunks);
+  }
+
+  /**
+   *
+   * @param transactionRequest
+   * @returns
+   */
+  private static validate(transactionRequest: TransactionRequest) {
+    return transactionRequestSchema.safeParse(transactionRequest);
   }
 }
