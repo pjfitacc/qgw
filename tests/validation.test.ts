@@ -1,8 +1,13 @@
-import { Payer } from "../transaction/payer";
-import { CreditCard, CvvType, Payment } from "../transaction/payment";
-import { TransactionRequest } from "../transaction/request";
-import { apiSchema } from "./api";
-import { transactionRequestSchema } from "./transactionRequest";
+import "reflect-metadata";
+import { Payer } from "../src/transparent-db/transaction/payer";
+import {
+  CreditCard,
+  CvvType,
+  Payment,
+} from "../src/transparent-db/transaction/payment";
+import { TransactionRequest } from "../src/transparent-db/transaction/request";
+import { apiSchema } from "../src/transparent-db/validation/api";
+import { transactionRequestSchema } from "../src/transparent-db/validation/transactionRequest";
 
 // Zod helpers for clean debugging
 function expectZodSuccess(parsed: ReturnType<typeof apiSchema.safeParse>) {

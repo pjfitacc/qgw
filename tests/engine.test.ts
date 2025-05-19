@@ -1,13 +1,14 @@
-import { TransactionError } from "../errors/transaction-error";
-import { DirectAPI } from "./api";
-import { TransparentDbEngine } from "./engine";
-import { Payer } from "./transaction/payer";
-import { CreditCard, Payment } from "./transaction/payment";
-import { TransactionType } from "./api";
-import { TransactionErrorCode } from "../errors/types";
-import { Options } from "./transaction/options";
-import { TransactionRequest } from "./transaction/request";
-import { RecurringOptions } from "./transaction/recurringOptions";
+import "reflect-metadata";
+import { TransactionError } from "../src/errors/transaction-error";
+import { DirectAPI } from "../src/transparent-db/api";
+import { TransparentDbEngine } from "../src/transparent-db/engine";
+import { Payer } from "../src/transparent-db/transaction/payer";
+import { CreditCard, Payment } from "../src/transparent-db/transaction/payment";
+import { TransactionType } from "../src/transparent-db/api";
+import { TransactionErrorCode } from "../src/errors/types";
+import { Options } from "../src/transparent-db/transaction/options";
+import { TransactionRequest } from "../src/transparent-db/transaction/request";
+import { RecurringOptions } from "../src/transparent-db/transaction/recurringOptions";
 
 async function expectEngineTransactionError(
   transaction: DirectAPI | TransactionRequest,

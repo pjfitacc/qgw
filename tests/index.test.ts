@@ -1,12 +1,15 @@
 // Set up
 // Execute
 // Expect
-
-import { Options } from "./options";
-import { Payer } from "./payer";
-import { ElectronicFundsTransfer, Payment } from "./payment";
-import { RecurringOptions } from "./recurringOptions";
-import { TransactionRequest } from "./request";
+import "reflect-metadata";
+import { Options } from "../src/transparent-db/transaction/options";
+import { Payer } from "../src/transparent-db/transaction/payer";
+import {
+  ElectronicFundsTransfer,
+  Payment,
+} from "../src/transparent-db/transaction/payment";
+import { RecurringOptions } from "../src/transparent-db/transaction/recurringOptions";
+import { TransactionRequest } from "../src/transparent-db/transaction/request";
 
 describe("TransactionRequest: Default TransQGW Options field values", () => {
   it("If TransactionRequest has blank options, the optional variables that it creates with the toAPI() method should be undefined", () => {
