@@ -10,4 +10,5 @@
         "src/transparent-db/validation/transactionRequest.ts"
     ],
     "exclude": ["src/**/*.test.ts", "src/index.ts"],
+    "excludeInternal": true
 }
