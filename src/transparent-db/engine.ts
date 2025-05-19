@@ -49,7 +49,7 @@ export class TransparentDbEngine {
 
   /**
    * The main method that sends a transaction request to the Transparent DB Engine and updates your account's balance.
-   * @throws {@link errors/transaction-error#TransactionError} - If the transaction request:
+   * @throws a {@link TransactionError} - If the transaction request:
    * - is formatted incorrectly
    * - if the transaction was processed but the server declined it.
    * - if there is an error in the server response.
