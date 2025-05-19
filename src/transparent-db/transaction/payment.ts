@@ -128,6 +128,28 @@ type PaymentMethodDirectApiFields = {
  *  - amount: amount
  *  - method: CreditCard | ElectronicFundsTransfer
  *
+ * Payment is a special case because it's method can be one of two states / classes based on its  method field:
+ * 1. CreditCard
+ * 2. ElectronicFundsTransfer
+ *
+ * So when we map Payment's fields to DirectAPI fields, depending on which kind of payment method the instance of Payment is,
+ * We will map different sets of fields to their corresponding set of DirectAPI fields.
+ *
+ * ex:
+ * CreditCard payment fields:
+ * - number
+ *
+ * EFT payment fields:
+ * - abaNumber
+ *
+ * DirectAPI fields:
+ * - cc
+ * - aba
+ *
+ * if our Payment instance is CreditCard,
+ * we must map its "number" field => "cc" DirectAPI field
+ * otherwise if the instance is EFT,
+ * we must map its "abaNumber" => "aba" DirectAPI field
  */
 export class Payment
   implements
