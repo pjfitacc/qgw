@@ -54,6 +54,9 @@ export class RecurringOptionsFieldsModel {
   overrideRecurringDay?: boolean;
 }
 
+/**
+ * @internal
+ */
 export type RecurringOptionsFields = RecurringOptionsFieldsModel;
 
 /**
@@ -105,6 +108,9 @@ export class RecurringOptions
   }
 }
 
+/**
+ * @internal
+ */
 export type RecurringDirectApiFields =
   | "RID"
   | "override_recur"
