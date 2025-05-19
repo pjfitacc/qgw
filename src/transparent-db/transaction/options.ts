@@ -122,7 +122,10 @@ export class Options implements KeyMappable<DirectAPI, OptionsDirectApiFields> {
 
 export type OptionsFields = OptionsFieldsModel;
 
-type OptionsDirectApiFields =
+/**
+ * @ignore
+ */
+export type OptionsDirectApiFields =
   | "override_email_customer"
   | "override_trans_email"
   | "trans_type"
