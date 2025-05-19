@@ -244,6 +244,9 @@ export class Payment
   }
 }
 
+/**
+ * @internal
+ */
 export type CreditCardDirectApiFields =
   | "amount"
   | "trans_method"
@@ -253,6 +256,9 @@ export type CreditCardDirectApiFields =
   | "CVV2"
   | "CVVtype";
 
+/**
+ * @internal
+ */
 export type ElectronicFundsTransferDirectApiFields =
   | "amount"
   | "trans_method"
