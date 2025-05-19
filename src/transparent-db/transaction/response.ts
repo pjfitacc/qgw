@@ -1,4 +1,6 @@
 import { TransactionError } from "../../errors/transaction-error";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { TransactionType } from "../api";
 
 /**
  * @privateRemarks
@@ -65,7 +67,7 @@ export class TransactionResponse {
    *
    * More detailed responses can be found in: https://secure.quantumgateway.com/merchant/processing_config.php =\> Processing Mode
    *
-   * The CVV2 responses that you receive depend on the {@link transparent-db#api.TransactionType} you are using. This can be also found in the link above.
+   * The CVV2 responses that you receive depend on the {@link TransactionType} you are using. This can be also found in the link above.
    *
    * @privateRemarks CVV Response
    */
