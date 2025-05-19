@@ -6,6 +6,7 @@ import {
 } from "class-transformer";
 import { DirectAPI } from "../api";
 import { toggleYesOrNO } from "../../utils/transparent-qgw-db-engine";
+import { KeyMappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -59,10 +60,9 @@ export type RecurringOptionsFields = RecurringOptionsFieldsModel;
  * ### Description
  *  Used to set quantum gateway's recurring options for a transaction.
  */
-export class RecurringOptions {
-  /** @hidden */
-  public directApiFields: DirectApiRecurringFields;
-
+export class RecurringOptions
+  implements KeyMappable<DirectAPI, RecurringDirectApiFields>
+{
   @Type(() => RecurringOptionsFieldsModel)
   @Expose()
   public recurringOptionsFields: RecurringOptionsFieldsModel;
@@ -71,8 +71,11 @@ export class RecurringOptions {
     recurringOptionsFields: RecurringOptionsFieldsModel = new RecurringOptionsFieldsModel()
   ) {
     this.recurringOptionsFields = recurringOptionsFields;
+  }
+  toPartial(): Pick<DirectAPI, RecurringDirectApiFields> {
+    const recurringOptionsFields = this.recurringOptionsFields;
 
-    this.directApiFields = {
+    let directApiFields: Pick<DirectAPI, RecurringDirectApiFields> = {
       RID: recurringOptionsFields.rid,
       initial_amount: recurringOptionsFields.initialAmount?.toString(),
       recur_times: recurringOptionsFields.recurCycles?.toString(),
@@ -82,8 +85,10 @@ export class RecurringOptions {
     };
 
     if (recurringOptionsFields.overrideRecurringPrice) {
-      this.directApiFields.override_recur = "Y";
+      directApiFields.override_recur = "Y";
     }
+
+    return directApiFields;
   }
 
   static fromJSON(json: any): RecurringOptions {
@@ -96,11 +101,9 @@ export class RecurringOptions {
   }
 }
 
-export type DirectApiRecurringFields = Pick<
-  DirectAPI,
+export type RecurringDirectApiFields =
   | "RID"
   | "override_recur"
   | "initial_amount"
   | "recur_times"
-  | "OverRideRecureDay"
->;
+  | "OverRideRecureDay";
