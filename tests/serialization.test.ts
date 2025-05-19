@@ -53,6 +53,6 @@ describe("TransactionRequest (TR) Serialization", () => {
     const deserialized = TransactionRequest.fromJSON(serialized);
 
     expect(deserialized.toAPI()).toEqual(originalDirectApi);
-    expect(deserialized.payment.isStateB());
+    expect(deserialized.payment.isElectronicFundsTransfer());
   });
 });

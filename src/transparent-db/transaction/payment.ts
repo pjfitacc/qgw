@@ -229,6 +229,14 @@ export class Payment
     return this.method instanceof ElectronicFundsTransfer;
   }
 
+  isCreditCard(): this is { getState(): CreditCard } {
+    return this.isStateA();
+  }
+
+  isElectronicFundsTransfer(): this is { getState(): ElectronicFundsTransfer } {
+    return this.isStateB();
+  }
+
   static fromJSON(json: any): Payment {
     return plainToNonArrayInstance(Payment, json);
   }
