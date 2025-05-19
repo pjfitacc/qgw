@@ -92,6 +92,9 @@ export class Options implements KeyMappable<DirectAPI, OptionsDirectApiFields> {
     this.optionsFields = optionsFields;
   }
 
+  /**
+   * @hidden
+   */
   toPartial(): Pick<DirectAPI, OptionsDirectApiFields> {
     const optionsFields = this.optionsFields;
     return {

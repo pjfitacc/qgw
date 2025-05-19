@@ -72,6 +72,10 @@ export class RecurringOptions
   ) {
     this.recurringOptionsFields = recurringOptionsFields;
   }
+
+  /**
+   * @hidden
+   */
   toPartial(): Pick<DirectAPI, RecurringDirectApiFields> {
     const recurringOptionsFields = this.recurringOptionsFields;
 

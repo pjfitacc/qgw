@@ -47,6 +47,9 @@ export class Payer implements KeyMappable<DirectAPI, PayerDirectApiFields> {
     this.name = name;
   }
 
+  /**
+   * @hidden
+   */
   toPartial(): Pick<DirectAPI, PayerDirectApiFields> {
     return {
       BADDR1: this.address,

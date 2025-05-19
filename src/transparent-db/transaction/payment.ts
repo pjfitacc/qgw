@@ -191,6 +191,9 @@ export class Payment
     throw new Error("This Payment Method State does not exist");
   }
 
+  /**
+   * @hidden
+   */
   toPartial():
     | Pick<DirectAPI, CreditCardDirectApiFields>
     | Pick<DirectAPI, ElectronicFundsTransferDirectApiFields> {
