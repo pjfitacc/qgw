@@ -7,7 +7,8 @@
         "src/transparent-db/engine.ts",
         "src/transparent-db/transaction/*.ts",
         "src/transparent-db/validation/api.ts",
-        "src/transparent-db/validation/transactionRequest.ts"
+        "src/transparent-db/validation/transactionRequest.ts",
+        "src/utils/mapping.ts"
     ],
     "exclude": ["src/**/*.test.ts", "src/index.ts"],
     "excludeInternal": true

@@ -1,3 +1,6 @@
+/**
+ * @internal
+ */
 export interface KeyMappable<T, K extends keyof T> {
   /**
    * Function that maps the instance's fields to a subset of T's fields
@@ -5,7 +8,10 @@ export interface KeyMappable<T, K extends keyof T> {
   toPartial(): Pick<T, K>;
 }
 
-// Mappable interface with conditional return type
+/**
+ * Mappable interface with conditional return type
+ * @internal
+ */
 export interface TwoStateMappable<
   T,
   StateA,
