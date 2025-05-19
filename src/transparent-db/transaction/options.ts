@@ -9,6 +9,7 @@ import {
   toggle1or2,
   toggleYesOrNO,
 } from "../../utils/transparent-qgw-db-engine";
+import { Mappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -79,10 +80,7 @@ export class OptionsFieldsModel {
  *  Wrapper class for the DirectAPI Options. TransactionRequest class uses this class to set the options for the transaction.
  *
  */
-export class Options {
-  /** @hidden */
-  public directApiFields: DirectApiOptionsFields;
-
+export class Options implements Mappable<DirectAPI, OptionsDirectApiFields> {
   @Type(() => OptionsFieldsModel)
   @Expose()
   public optionsFields?: OptionsFieldsModel;
@@ -92,8 +90,11 @@ export class Options {
    */
   constructor(optionsFields?: OptionsFieldsModel) {
     this.optionsFields = optionsFields;
+  }
 
-    this.directApiFields = {
+  toPartial(): Pick<DirectAPI, OptionsDirectApiFields> {
+    const optionsFields = this.optionsFields;
+    return {
       override_email_customer: toggleYesOrNO(
         optionsFields?.emailCustomerReceipt
       ),
@@ -118,13 +119,11 @@ export class Options {
 
 export type OptionsFields = OptionsFieldsModel;
 
-export type DirectApiOptionsFields = Pick<
-  DirectAPI,
+type OptionsDirectApiFields =
   | "override_email_customer"
   | "override_trans_email"
   | "trans_type"
   | "transID"
   | "RestrictKey"
   | "Dsep"
-  | "MAXMIND"
->;
+  | "MAXMIND";
