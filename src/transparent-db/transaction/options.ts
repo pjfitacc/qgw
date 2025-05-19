@@ -9,7 +9,7 @@ import {
   toggle1or2,
   toggleYesOrNO,
 } from "../../utils/transparent-qgw-db-engine";
-import { Mappable } from "../../utils/mapping";
+import { KeyMappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -80,7 +80,7 @@ export class OptionsFieldsModel {
  *  Wrapper class for the DirectAPI Options. TransactionRequest class uses this class to set the options for the transaction.
  *
  */
-export class Options implements Mappable<DirectAPI, OptionsDirectApiFields> {
+export class Options implements KeyMappable<DirectAPI, OptionsDirectApiFields> {
   @Type(() => OptionsFieldsModel)
   @Expose()
   public optionsFields?: OptionsFieldsModel;

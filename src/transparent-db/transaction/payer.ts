@@ -1,7 +1,7 @@
 import { Expose, plainToInstance, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
 import { plainToNonArrayInstance } from "../../utils/serialization";
-import { Mappable } from "../../utils/mapping";
+import { KeyMappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -15,7 +15,7 @@ import { Mappable } from "../../utils/mapping";
  *  - name: BNAME
  *
  */
-export class Payer implements Mappable<DirectAPI, PayerDirectApiFields> {
+export class Payer implements KeyMappable<DirectAPI, PayerDirectApiFields> {
   @Expose()
   address!: string;
 
