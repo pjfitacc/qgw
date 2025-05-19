@@ -75,7 +75,7 @@ export class RecurringOptions
   toPartial(): Pick<DirectAPI, RecurringDirectApiFields> {
     const recurringOptionsFields = this.recurringOptionsFields;
 
-    let directApiFields: Pick<DirectAPI, RecurringDirectApiFields> = {
+    const directApiFields: Pick<DirectAPI, RecurringDirectApiFields> = {
       RID: recurringOptionsFields.rid,
       initial_amount: recurringOptionsFields.initialAmount?.toString(),
       recur_times: recurringOptionsFields.recurCycles?.toString(),
