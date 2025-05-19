@@ -97,5 +97,5 @@ Todo:
 
 - [x] Options
 - [x] Payer
-- [ ] Payment
+- [x] Payment
 - [ ] RecurringOptions
