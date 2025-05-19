@@ -1,6 +1,7 @@
 import { Expose, Type, instanceToPlain } from "class-transformer";
 import { DirectAPI } from "../api";
 import { plainToNonArrayInstance } from "../../utils/serialization";
+import { TwoStateMappable } from "../../utils/mapping";
 
 /**
  * ### Description
@@ -113,6 +114,11 @@ export class ElectronicFundsTransfer {
   }
 }
 
+type PaymentMethodDirectApiFields = {
+  CreditCard: CreditCardDirectApiFields;
+  ElectronicFundsTransfer: ElectronicFundsTransferDirectApiFields;
+};
+
 /**
  * ### Description
  *  TransactionRequest needs to be able to take in a payment amount and method.
@@ -123,10 +129,16 @@ export class ElectronicFundsTransfer {
  *  - method: CreditCard | ElectronicFundsTransfer
  *
  */
-export class Payment {
-  /** @hidden */
-  public directApiFields: CreditCardPaymentFields | EftPaymentFields;
-
+export class Payment
+  implements
+    TwoStateMappable<
+      DirectAPI,
+      CreditCard,
+      ElectronicFundsTransfer,
+      CreditCardDirectApiFields,
+      ElectronicFundsTransferDirectApiFields
+    >
+{
   @Expose()
   amount!: number;
 
@@ -150,30 +162,49 @@ export class Payment {
   constructor(amount: number, method: CreditCard | ElectronicFundsTransfer) {
     this.amount = amount;
     this.method = method;
+  }
 
-    switch (method.kind) {
-      case "CC":
-        this.directApiFields = {
-          amount: amount.toString(),
-          trans_method: method.kind,
-          ccnum: method.number,
-          ccmo: method.expirationMonth,
-          ccyr: method.expirationYear,
-          CVV2: method.cvv2,
-          CVVtype: method.cvvType,
-        };
-        return;
-      case "EFT":
-        this.directApiFields = {
-          amount: amount.toString(),
-          trans_method: method.kind,
-          aba: method.aba,
-          checkacct: method.checkingAccountNumber,
-        };
-        return;
-      default:
-        throw Error("unaccepted payment method");
+  getState(): CreditCard | ElectronicFundsTransfer {
+    if (this.method?.kind == "CC") {
+      return this.method as CreditCard;
     }
+    if (this.method?.kind == "EFT") {
+      return this.method as ElectronicFundsTransfer;
+    }
+    throw new Error("This Payment Method State does not exist");
+  }
+
+  toPartial():
+    | Pick<DirectAPI, CreditCardDirectApiFields>
+    | Pick<DirectAPI, ElectronicFundsTransferDirectApiFields> {
+    switch (this.method.kind) {
+      case "CC":
+        return {
+          amount: this.amount.toString(),
+          trans_method: this.method.kind,
+          ccnum: this.method.number,
+          ccmo: this.method.expirationMonth,
+          ccyr: this.method.expirationYear,
+          CVV2: this.method.cvv2,
+          CVVtype: this.method.cvvType,
+        };
+      case "EFT":
+        return {
+          amount: this.amount.toString(),
+          trans_method: this.method.kind,
+          aba: this.method.aba,
+          checkacct: this.method.checkingAccountNumber,
+        };
+      default:
+        throw new Error("Unsupported Payment type");
+    }
+  }
+
+  isStateA(): this is { getState(): CreditCard } {
+    return this.method instanceof CreditCard;
+  }
+  isStateB(): this is { getState(): ElectronicFundsTransfer } {
+    return this.method instanceof ElectronicFundsTransfer;
   }
 
   static fromJSON(json: any): Payment {
@@ -185,12 +216,17 @@ export class Payment {
   }
 }
 
-export type CreditCardPaymentFields = Pick<
-  DirectAPI,
-  "amount" | "trans_method" | "ccnum" | "ccmo" | "ccyr" | "CVV2" | "CVVtype"
->;
+export type CreditCardDirectApiFields =
+  | "amount"
+  | "trans_method"
+  | "ccnum"
+  | "ccmo"
+  | "ccyr"
+  | "CVV2"
+  | "CVVtype";
 
-export type EftPaymentFields = Pick<
-  DirectAPI,
-  "amount" | "trans_method" | "aba" | "checkacct"
->;
+export type ElectronicFundsTransferDirectApiFields =
+  | "amount"
+  | "trans_method"
+  | "aba"
+  | "checkacct";

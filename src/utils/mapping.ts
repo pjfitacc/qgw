@@ -5,6 +5,37 @@ export interface KeyMappable<T, K extends keyof T> {
   toPartial(): Pick<T, K>;
 }
 
+// Mappable interface with conditional return type
+export interface TwoStateMappable<
+  T,
+  StateA,
+  StateB,
+  SubsetA extends keyof T,
+  SubsetB extends keyof T
+> {
+  /**
+   * Gets the current state (must be either StateA or StateB)
+   */
+  getState(): StateA | StateB;
+
+  /**
+   * Returns a partial object with different fields based on current state
+   */
+  toPartial(): this extends { getState(): StateA }
+    ? Pick<T, SubsetA>
+    : Pick<T, SubsetB>;
+
+  /**
+   * Type guard for StateA
+   */
+  isStateA(): this is { getState(): StateA };
+
+  /**
+   * Type guard for StateB
+   */
+  isStateB(): this is { getState(): StateB };
+}
+
 /**
  * A flexible interface for objects that map to different subsets of fields based on their internal state.
  * enables an object to dynamically expose different subsets of properties (Pick<T, Keys>) depending on its internal state.
