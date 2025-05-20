@@ -68,6 +68,14 @@ export class TransactionRequest {
     return instanceToPlain(this);
   }
 
+  /**
+   * Parses and Validates a JSON that's in a TranasctionRequest schema.
+   *
+   * @param json - json object or json string that has a TransactionRequest shcema.
+   * @returns the parsed TransactionRequest object
+   *
+   * @throws ZodError
+   */
   static fromJSON(json: unknown): TransactionRequest {
     const parsedRequest: TransactionRequest = plainToNonArrayInstance(
       TransactionRequest,
