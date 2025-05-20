@@ -10,6 +10,7 @@ Strategy: When publishing a new package version, the commit for the new version 
 
 ### Publishing a Package (subsequent releases)
 
+0. BUILD THE PACKAGE FIRST: `npm run build`
 1. Go to `main branch`
 2. Run `npm version <change> -m "Summary of what changed"`
 
