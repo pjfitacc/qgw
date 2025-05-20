@@ -23,6 +23,10 @@ git push
 git push --tags
 ```
 
+Finally, create the documentation for that new version:
+`npm run docs`
+Note: This will be pushed to the github repository.
+
 For explanations on the commands please read: [Publishing npm Packages](https://nearform.com/digital-community/publish-npm-packages/#publishing-a-package-subsequent-releases) by Kadi Kraman which I got the commands from
 
 # Deleting a version tag:
