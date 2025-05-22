@@ -162,4 +162,29 @@ export class TransactionResponse {
         responseString?.[ServerResponseFieldIndexes.MAX_SCORE + 2] ?? "";
     }
   }
+
+  toString(): string {
+    const baseFields = [
+      `result: ${this.result}`,
+      `authCode: ${this.authCode}`,
+      `transID: ${this.transID}`,
+      `avrResponse: ${this.avrResponse}`,
+      `cvvResponse: ${this.cvvResponse}`,
+      `maxScore: ${this.maxScore}`,
+    ];
+
+    if (this.result === "DECLINED") {
+      baseFields.push(
+        `declineReason: ${this.declineReason}`,
+        `errorCode: ${this.errorCode}`
+      );
+    } else {
+      baseFields.push(
+        `last4Digits: ${this.last4Digits}`,
+        `creditCardProvider: ${this.creditCardProvider}`
+      );
+    }
+
+    return `TransactionResponse { ${baseFields.join(", ")} }`;
+  }
 }
