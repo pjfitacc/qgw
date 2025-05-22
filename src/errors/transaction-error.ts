@@ -22,6 +22,38 @@ export interface TransactionDeclinedIssue extends CustomIssue {
  * If this TransactionError has a code of ERR_SERVER_DECLINED, then it will contain a {@link TransactionDeclinedIssue} as an item in its issues array field.
  *
  */
-class TransactionError extends CustomError<TransactionErrorCode> {}
+class TransactionError extends CustomError<TransactionErrorCode> {
+  toString(): string {
+    let issuesStr = "";
+
+    if (this.issues.length > 0) {
+      issuesStr = this.issues
+        .map((issue) => {
+          let issueStr = `{ code: ${issue.code}, message: "${issue.message}"`;
+
+          // Handle TransactionDeclinedIssue case
+          if ("serverResponse" in issue) {
+            const declinedIssue = issue as TransactionDeclinedIssue;
+            issueStr += `, serverResponse: ${declinedIssue.serverResponse.toString()}`;
+          }
+
+          // Add path if it exists
+          if (issue.path && issue.path.length > 0) {
+            issueStr += `, path: [${issue.path.join(", ")}]`;
+          }
+
+          issueStr += " }";
+          return issueStr;
+        })
+        .join(", ");
+    }
+
+    return `TransactionError {
+      code: ${this.code || "undefined"},
+      message: "${this.message}",
+      issues: [${issuesStr}]
+    }`;
+  }
+}
 
 export { TransactionError };
