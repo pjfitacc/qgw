@@ -50,6 +50,9 @@ export class TransparentDbEngine {
 
   /**
    * The main method that sends a transaction request to the Transparent DB Engine and updates your account's balance.
+   *
+   * @param options - additional fields that you can append to your transaction request that QGW will also look at.
+   *
    * @throws a {@link TransactionError} - If the transaction request:
    * - is formatted incorrectly
    * - if the transaction was processed but the server declined it.
@@ -58,7 +61,8 @@ export class TransparentDbEngine {
    * @returns The response from the Transparent DB Engine. Since this function throws errors on declined, the only way to get a successful response is if the transaction was approved.
    */
   async send(
-    transactionRequest: TransactionRequest | DirectAPI
+    transactionRequest: TransactionRequest | DirectAPI,
+    options: Record<string, string> = {}
   ): Promise<TransactionResponse> {
     if (transactionRequest instanceof TransactionRequest) {
       transactionRequest = transactionRequest.toAPI();
@@ -78,7 +82,8 @@ export class TransparentDbEngine {
       });
     }
 
-    const form = validTransaction.data;
+    /** options must go first so that the transaction values override options */
+    const form = { ...options, ...validTransaction.data };
 
     try {
       const serverResponse = await postToServer(form);

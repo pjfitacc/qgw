@@ -154,4 +154,16 @@ describe("TransparentQGW Db Engine", () => {
       })
     );
   });
+
+  it("Should have a successful response when sending a transactionrequest with additional options.", async () => {
+    const additionalOptions = {
+      phone: "1231231234",
+    };
+
+    const engine = new TransparentDbEngine("phimar11Dev");
+
+    await expect(
+      engine.send(baseCC, additionalOptions)
+    ).resolves.toHaveProperty("result", "APPROVED");
+  });
 });
