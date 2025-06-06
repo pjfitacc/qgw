@@ -5,7 +5,7 @@ import {
   TransactionError,
 } from "../errors/transaction-error";
 import { TransactionResponse } from "../transparent-db/transaction/response";
-import { TransparentDbEngine } from "../transparent-db";
+import { postURL } from "../transparent-db/constants";
 
 export function toggleYesOrNO(boolean?: boolean): "Y" | "N" | undefined {
   if (boolean === undefined) return undefined;
@@ -31,7 +31,7 @@ interface HttpClientConfig {
  * Default configuration for the Quantum Gateway API client
  */
 const DEFAULT_CONFIG: HttpClientConfig = {
-  baseURL: TransparentDbEngine.postURL,
+  baseURL: postURL,
   timeout: 10000, // 10 second timeout
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",

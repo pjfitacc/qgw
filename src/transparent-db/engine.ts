@@ -8,6 +8,7 @@ import { TransactionErrorCode } from "../errors/types";
 import { TransactionRequest } from "./transaction/request";
 import { TransactionResponse } from "./transaction/response";
 import { apiSchema } from "./validation/api";
+import { postURL } from "./constants";
 
 /**
  * ### Description
@@ -32,7 +33,7 @@ import { apiSchema } from "./validation/api";
  */
 export class TransparentDbEngine {
   public gatewayLogin: string;
-  static postURL: string = "https://secure.quantumgateway.com/cgi/tqgwdbe.php";
+  static postURL: string = postURL;
 
   /**
    * if set to true, makes library validate your input before sending it to the server.
